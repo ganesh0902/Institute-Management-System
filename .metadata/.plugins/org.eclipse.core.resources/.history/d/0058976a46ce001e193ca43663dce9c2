@@ -1,0 +1,7 @@
+package com.batch.service;
+
+public interface batchService {
+
+	public Batch getBatch(int bId);
+}
+

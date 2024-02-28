@@ -1,0 +1,14 @@
+package com.course.dao;
+
+import java.util.List;
+
+import com.course.entity.Course;
+
+public interface CourseDao {
+
+	public List<Course> get(int id);
+	
+	public Course saveCourse(Course course);
+	public Course findById(int cid);
+	public void delete(int cid)
+}

@@ -1,0 +1,18 @@
+package com.course.entity;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+public class Course {
+
+	private int cid;
+	private String courseName;
+	private String description;
+	private String skills;
+	private String fees;
+	
+}

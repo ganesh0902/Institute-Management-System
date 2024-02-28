@@ -1,0 +1,8 @@
+package com.course.dao;
+
+import com.course.entity.Course;
+
+public interface CourseDao {
+
+	public List<Course> get(int id);
+}

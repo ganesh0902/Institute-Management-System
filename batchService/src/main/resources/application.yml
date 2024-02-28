@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: batch-service
+    
+eureka:
+  instance:
+    hostname: localhost

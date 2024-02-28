@@ -1,0 +1,6 @@
+package com.course.dao;
+
+public interface CourseDao {
+
+	public void get(int id);
+}

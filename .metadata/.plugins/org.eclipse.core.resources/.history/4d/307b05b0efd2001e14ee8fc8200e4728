@@ -1,0 +1,5 @@
+package com.teach.dto;
+
+public class BatchDto {
+
+}

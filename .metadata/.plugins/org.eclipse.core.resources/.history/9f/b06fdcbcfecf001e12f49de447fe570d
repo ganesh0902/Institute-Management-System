@@ -1,0 +1,5 @@
+package com.batch.repository;
+
+public interface BatchRepository {
+
+}

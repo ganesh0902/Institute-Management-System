@@ -1,0 +1,5 @@
+package com.teach.exception;
+
+public class ApiResponse {
+
+}

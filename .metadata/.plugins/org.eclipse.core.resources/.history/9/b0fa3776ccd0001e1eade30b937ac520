@@ -1,0 +1,13 @@
+package com.batch.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.batch.entities.Batch;
+
+public interface BatchRepository extends JpaRepository<Batch,Integer>{
+
+	 @Query("SELECT t FROM Teacher t WHERE t.teacherId = :teacherId")
+	    List<Batch> findAllByTeacherId(Long teacherId);
+}

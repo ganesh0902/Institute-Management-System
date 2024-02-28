@@ -1,0 +1,10 @@
+server:
+  port: 9004
+  
+spring:
+  application:
+    name: student-service
+    
+eureka:
+  instance:
+    hostname: localhost
