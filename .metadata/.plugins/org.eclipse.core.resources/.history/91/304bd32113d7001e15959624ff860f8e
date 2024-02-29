@@ -1,0 +1,31 @@
+package com.std.controller;
+import com.std.serviceImpl.*;
+import com.std.entities.*;.
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class StudentController {
+
+	@Autowired
+	private StudentImpl service;
+	
+	@PostMapping("/")
+	public ResponseEntity<Student> saveStudent(@RequestBody Student student)
+	{		
+		Student saveStudent = this.service.saveStudent(student);		
+		return new ResponseEntity<Student>(saveStudent,HttpStatus.OK);
+	}
+	
+	public ResponseEntity<Student> updateStudent(@PathVariable("stdId") int stdId,@RequestBody Student student)
+	{
+		Student updateStudent = this.service.updateStudent(stdId, student);		
+		return new ResponseEntity<Student>(updateStudent,HttpStatus.OK);
+		
+	}
+}

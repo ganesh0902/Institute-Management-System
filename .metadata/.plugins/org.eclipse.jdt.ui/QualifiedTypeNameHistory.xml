@@ -1,26 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.springframework.data.repository.query.Param"/>
-    <fullyQualifiedTypeName name="com.course.exception.ResourceNotFoundException"/>
-    <fullyQualifiedTypeName name="jakarta.validation.constraints.NotNull"/>
-    <fullyQualifiedTypeName name="org.springframework.validation.annotation.Validated"/>
     <fullyQualifiedTypeName name="jakarta.validation.constraints.NotEmpty"/>
     <fullyQualifiedTypeName name="com.batch.repository.BatchRepository"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PutMapping"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.DeleteMapping"/>
     <fullyQualifiedTypeName name="com.batch.exception.ApiResponse"/>
     <fullyQualifiedTypeName name="com.batch.exception.ResourceNotFoundException"/>
     <fullyQualifiedTypeName name="jakarta.persistence.Table"/>
     <fullyQualifiedTypeName name="jakarta.persistence.Entity"/>
     <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
-    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
     <fullyQualifiedTypeName name="com.teach.dto.Batch"/>
     <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
     <fullyQualifiedTypeName name="com.teach.dto.Course"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestController"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
     <fullyQualifiedTypeName name="jakarta.persistence.Id"/>
     <fullyQualifiedTypeName name="jakarta.persistence.GeneratedValue"/>
     <fullyQualifiedTypeName name="com.teach.dto.CourseDto"/>
@@ -30,7 +21,6 @@
     <fullyQualifiedTypeName name="org.springframework.http.HttpStatusCode"/>
     <fullyQualifiedTypeName name="org.modelmapper.ModelMapper"/>
     <fullyQualifiedTypeName name="com.batch.dto.BatchsDto"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
     <fullyQualifiedTypeName name="com.batch.entities.Course"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="com.batch.dto.BatchDto"/>
@@ -40,18 +30,12 @@
     <fullyQualifiedTypeName name="com.teach.repository.TeacherRepository"/>
     <fullyQualifiedTypeName name="com.teach.entities.Teacher"/>
     <fullyQualifiedTypeName name="com.teach.service.TeacherService"/>
-    <fullyQualifiedTypeName name="com.teach.exception.ResourceNotFoundException"/>
     <fullyQualifiedTypeName name="com.teach.serviceimpl.TeacherServiceImpl"/>
     <fullyQualifiedTypeName name="org.springframework.web.client.RestTemplate"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="org.springframework.context.annotation.Bean"/>
     <fullyQualifiedTypeName name="org.springframework.cloud.client.loadbalancer.LoadBalanced"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
     <fullyQualifiedTypeName name="org.apache.http.HttpStatus"/>
-    <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
     <fullyQualifiedTypeName name="com.teach.dto.TeacherDto"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
     <fullyQualifiedTypeName name="com.teach.dto.BatchDto"/>
     <fullyQualifiedTypeName name="lombok.Getter"/>
@@ -60,4 +44,20 @@
     <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
     <fullyQualifiedTypeName name="lombok.ToString"/>
     <fullyQualifiedTypeName name="com.batch.dto.SingleBatchDto"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.std.serviceImpl.StudentImpl"/>
+    <fullyQualifiedTypeName name="org.springframework.boot.context.config.ConfigDataResourceNotFoundException"/>
+    <fullyQualifiedTypeName name="com.teach.exception.ResourceNotFoundException"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestController"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+    <fullyQualifiedTypeName name="com.std.controller.StudentController"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PutMapping"/>
+    <fullyQualifiedTypeName name="lombok.Delegate"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.DeleteMapping"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
+    <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
+    <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
 </qualifiedTypeNameHistroy>

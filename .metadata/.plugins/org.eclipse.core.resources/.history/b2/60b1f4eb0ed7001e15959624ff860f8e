@@ -1,0 +1,7 @@
+package com.std.service;
+import com.std.entities.*;
+public interface Service {
+
+	public Student saveStudent(Student student);
+	public Student updateStudent(int id,Student std);
+}

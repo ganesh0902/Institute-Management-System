@@ -1,9 +1,6 @@
 package com.teach.serviceimpl;
 
 import java.util.ArrayList;
-
-
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +30,7 @@ public class TeacherServiceImpl implements TeacherService{
 		return this.repository.save(teacher);				
 	}
 	@Override
-	public TeacherDto getTeacherById(int id) throws ResourceNotFoundException {
+	public TeacherDto getTeacherById(int id) throws ResourceNotFoundException  {
 				
 		TeacherDto teacherDto = new TeacherDto();		
 		Teacher teacher = this.repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Teacher","Id",String.valueOf(id)));		

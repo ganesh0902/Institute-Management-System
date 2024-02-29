@@ -1,0 +1,12 @@
+package com.std.service;
+import java.util.List;
+
+import com.std.entities.*;
+public interface Service {
+
+	public Student saveStudent(Student student);
+	public Student updateStudent(int stdId,Student std);
+	public Student getStudent(int stdId);
+	public boolean delete(int stdId);
+	public List<Student> getAll();	
+}
