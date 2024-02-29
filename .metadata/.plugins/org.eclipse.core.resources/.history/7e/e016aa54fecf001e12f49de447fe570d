@@ -1,9 +1,0 @@
-package com.batch.service;
-
-import com.batch.entities.Batch;
-
-public interface batchService {
-
-	public Batch getBatch(int bId);
-}
-

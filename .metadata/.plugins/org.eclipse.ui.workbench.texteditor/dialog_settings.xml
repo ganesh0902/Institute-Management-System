@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="getBatch"/>
+		<item key="selection" value="getAllBatchByTeacherId"/>
 		<list key="findhistory">
+			<item value="getAllBatchByTeacherId"/>
 			<item value="getBatch"/>
 			<item value="    &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;"/>
 		</list>
