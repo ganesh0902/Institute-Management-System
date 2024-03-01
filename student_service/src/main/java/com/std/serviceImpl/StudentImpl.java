@@ -1,7 +1,67 @@
 package com.std.serviceImpl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.std.entities.Student;
+import com.std.exception.ResourceNotFoundException;
+import com.std.repository.StudentRepository;
 import com.std.service.Service;
 
+@org.springframework.stereotype.Service
 public class StudentImpl implements Service{
 
+	@Autowired
+	private StudentRepository repo;
+	
+	@Override
+	public Student saveStudent(Student std) {
+	
+		return this.repo.save(std);
+	}
+
+	@Override
+	public Student updateStudent(int stdId, Student std) throws ResourceNotFoundException {
+		
+		Student student = this.repo.findById(stdId).orElseThrow(()-> new ResourceNotFoundException("Student","Id",String.valueOf(stdId)));
+				
+		student.setBatchId(std.getBatchId());
+		student.setCourseName(std.getCourseName());
+		student.setFirstName(std.getFirstName());
+		student.setLastName(std.getLastName());
+		student.setLastEducation(std.getLastEducation());
+		student.setPassoutYear(std.getPassoutYear());			
+		return this.repo.save(student);
+	}
+
+	@Override
+	public Student findById(int stdId) throws ResourceNotFoundException {
+
+		return this.repo.findById(stdId).orElseThrow(()-> new ResourceNotFoundException("Student","Id",String.valueOf(stdId)));
+		
+	}
+
+	@Override
+	public List<Student> getAll() {
+		
+		return repo.findAll();
+	}
+
+	@Override
+	public boolean delete(int stdId) throws ResourceNotFoundException {
+		
+		boolean status=false;
+		
+		Student student = this.repo.findById(stdId).orElseThrow(()-> new ResourceNotFoundException("Student","Id", String.valueOf(stdId)));
+		
+		if(student!=null)
+		{
+			status=true;
+			
+			this.repo.deleteById(stdId);
+		}		
+		return status;
+				
+	}
 }

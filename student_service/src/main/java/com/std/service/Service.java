@@ -1,5 +1,15 @@
 package com.std.service;
 
-public interface Service {
+import java.util.List;
 
+import com.std.entities.Student;
+import com.std.exception.ResourceNotFoundException;
+
+public interface Service {
+	
+	public Student saveStudent(Student std);
+	public Student updateStudent(int stdId,Student std) throws ResourceNotFoundException;
+	public Student findById(int stdId) throws ResourceNotFoundException;
+	public List<Student> getAll();
+	public boolean delete(int stdId) throws ResourceNotFoundException;
 }

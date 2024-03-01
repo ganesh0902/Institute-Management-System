@@ -1,0 +1,44 @@
+package com.std.serviceImpl;
+
+import java.util.List;
+
+import com.std.entities.Student;
+import com.std.repository.StudentRepository;
+import com.std.service.Service;
+
+public class StudentImpl implements Service{
+
+	private StudentRepository repo;
+	
+	@Override
+	public Student saveStudent(Student std) {
+	
+		return this.repo.save(std);
+	}
+
+	@Override
+	public Student updateStudent(int stdId, Student std) {
+		
+		this.repo.findById(std);
+		return null;
+	}
+
+	@Override
+	public Student findById(int stdId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Student> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean delete(int stdId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}
