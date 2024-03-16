@@ -32,5 +32,7 @@ public class Course {
 		
 	private String skills;
 		
-	private String fees;		
+	private String fees;	
+	
+	private String lastUpdatedDate;
 }

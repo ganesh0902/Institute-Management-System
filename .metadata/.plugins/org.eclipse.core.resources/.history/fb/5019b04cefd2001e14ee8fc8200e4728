@@ -1,5 +1,0 @@
-package com.teach.repository;
-
-public interface TeacherRepository {
-
-}

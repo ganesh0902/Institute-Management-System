@@ -1,5 +1,0 @@
-package com.teach.exception;
-
-public class ResourceNotFoundException {
-
-}

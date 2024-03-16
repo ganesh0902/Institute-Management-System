@@ -1,5 +1,7 @@
 package com.course.daoImpl;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collector;
@@ -22,14 +24,17 @@ public class CourseDaoImpl implements CourseDao{
 	@Override
 	public Course saveCourse(Course course) {
 		
+		LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String current = currentDate.format(formatter);        
+        course.setLastUpdatedDate(current);        
 		return this.repository.save(course);						
 	}
 
 	@Override
 	public Course findById(int cid) throws ResourceNotFoundException {
 		
-		return this.repository.findById(cid).orElseThrow(() -> new ResourceNotFoundException("course","Id",String.valueOf(cid)));		
-		
+		return this.repository.findById(cid).orElseThrow(() -> new ResourceNotFoundException("course","Id",String.valueOf(cid)));				
 	}
 
 	@Override
