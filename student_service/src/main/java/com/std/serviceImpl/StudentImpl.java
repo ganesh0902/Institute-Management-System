@@ -3,6 +3,7 @@ package com.std.serviceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.client.RestTemplate;
 
 import com.std.entities.Student;
 import com.std.exception.ResourceNotFoundException;
@@ -14,6 +15,9 @@ public class StudentImpl implements Service{
 
 	@Autowired
 	private StudentRepository repo;
+	
+	@Autowired
+	private RestTemplate restTemplate;
 	
 	@Override
 	public Student saveStudent(Student std) {
@@ -37,7 +41,7 @@ public class StudentImpl implements Service{
 
 	@Override
 	public Student findById(int stdId) throws ResourceNotFoundException {
-
+	
 		return this.repo.findById(stdId).orElseThrow(()-> new ResourceNotFoundException("Student","Id",String.valueOf(stdId)));
 		
 	}
