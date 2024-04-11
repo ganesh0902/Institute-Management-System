@@ -1,0 +1,85 @@
+package com.course.daoImpl;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.course.dao.CourseDao;
+import com.course.entity.Course;
+import com.course.exception.ResourceNotFoundException;
+import com.course.repository.CourseRepository;
+
+@Service
+public class CourseDaoImpl implements CourseDao{
+
+	@Autowired
+	private CourseRepository repository;
+		
+	@Override
+	public Course saveCourse(Course course) {
+		
+		LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String current = currentDate.format(formatter);        
+        course.setLastUpdatedDate(current);        
+		return this.repository.save(course);						
+	}
+
+	@Override
+	public Course findById(int cid) throws ResourceNotFoundException {
+		
+		return this.repository.findById(cid).orElseThrow(() -> new ResourceNotFoundException("course","Id",String.valueOf(cid)));				
+	}
+
+	@Override
+	public boolean delete(int cid) throws ResourceNotFoundException {
+
+		boolean status=true;
+		Course course = this.repository.findById(cid).orElseThrow(() -> new ResourceNotFoundException("Course","Id",String.valueOf(cid)));
+						
+		if(course==null)
+		{
+			status=false;
+		}
+		
+		return status;
+		
+	}
+
+	@Override
+	public List<Course> getAll() {
+		
+		return this.repository.findAll();
+				
+	}
+
+	@Override
+	public HashMap<Integer, String> getAllCourseIdAndName() {
+		
+		List<Object[]> courseIdAndName = this.repository.getCourseIdAndName();
+		
+		HashMap<Integer,String> courses = new HashMap<>();
+		
+//		for (Object[] course : courseIdAndName) {
+//			
+//			Object courseId = course[0];
+//			Object CourseName=course[1];
+//			
+//			int courseid=(int)courseId;
+//			String courseNames = CourseName.toString();
+//			
+//			courses.put(courseid, courseNames);
+//		}
+		
+		
+		courseIdAndName.stream().collect(Collectors.toMap(course->(Integer)course[0], course->(String)course[1]));
+		return null;
+	}
+}

@@ -1,9 +1,11 @@
 package com.teach.controller;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 import com.teach.dto.BatchDto;
 import com.teach.dto.CourseDto;
 import com.teach.dto.TeacherDto;
+import com.teach.dto.TeacherIdAndName;
 import com.teach.entities.Teacher;
 import com.teach.exception.ResourceNotFoundException;
 import com.teach.serviceimpl.TeacherServiceImpl;
@@ -51,5 +54,13 @@ public class TeacherController {
 		List<TeacherDto> all = this.teacherServiceImpl.getAll();		
 		return new ResponseEntity<List<TeacherDto>>(all,HttpStatus.OK);
 	}
-	
+	@GetMapping("/getTeachers")
+	public ResponseEntity<List<TeacherIdAndName>> getTeacherIdAndName()
+	{
+		
+		List<TeacherIdAndName> teacherIdAndName = this.teacherServiceImpl.getTeacherIdAndName();
+		
+		System.out.println(teacherIdAndName);
+		return new ResponseEntity<List<TeacherIdAndName>>(teacherIdAndName,teacherIdAndName.isEmpty() ? HttpStatus.NOT_FOUND : HttpStatus.OK);			
+	}	
 }

@@ -2,6 +2,8 @@ package com.course.daoImpl;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collector;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.course.dao.CourseDao;
+import com.course.dto.CourseIdAndName;
 import com.course.entity.Course;
 import com.course.exception.ResourceNotFoundException;
 import com.course.repository.CourseRepository;
@@ -42,8 +45,7 @@ public class CourseDaoImpl implements CourseDao{
 
 		boolean status=true;
 		Course course = this.repository.findById(cid).orElseThrow(() -> new ResourceNotFoundException("Course","Id",String.valueOf(cid)));
-				
-		
+						
 		if(course==null)
 		{
 			status=false;
@@ -57,6 +59,28 @@ public class CourseDaoImpl implements CourseDao{
 	public List<Course> getAll() {
 		
 		return this.repository.findAll();
+				
+	}
+
+	@Override
+	public List<CourseIdAndName> getAllCourseIdAndName() {
+		
+		List<Object[]> courseIdAndName = this.repository.getCourseIdAndName();
+				
+		return courseIdAndName.stream().map(course->{
+			
+			CourseIdAndName c = new CourseIdAndName();
+			Object courseId=course[0];
+			Object courseName = course[1];
+			
+			int courseid=(int) courseId;
+			String coursename=courseName.toString();
+			
+			c.setCourseId(courseid);
+			c.setCourseName(coursename);
+			
+			return c;						
+		}).collect(Collectors.toList());
 				
 	}
 }

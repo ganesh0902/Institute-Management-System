@@ -1,10 +1,9 @@
 package com.teach.serviceimpl;
 
 import java.util.ArrayList;
-
-
-
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.teach.dto.BatchDto;
 import com.teach.dto.TeacherDto;
+import com.teach.dto.TeacherIdAndName;
 import com.teach.entities.Teacher;
 import com.teach.exception.ResourceNotFoundException;
 import com.teach.repository.TeacherRepository;
@@ -84,5 +84,26 @@ public class TeacherServiceImpl implements TeacherService{
 		}		
 		return status;
 	}
-	
+	@Override
+	public List<TeacherIdAndName> getTeacherIdAndName() {
+		
+		List<Object[]> teacherIdAndName = this.repository.getTeacherIdAndName();		
+					
+						
+		return teacherIdAndName.stream().map(teacher->{
+			
+			TeacherIdAndName teacherr = new TeacherIdAndName();			
+			Object teacherId=teacher[0];
+			Object teacherName = teacher[1];
+			
+			int teacherid=(int)teacherId;
+			String teachername=teacherName.toString();
+			
+			teacherr.setTeacherId(teacherid);
+			teacherr.setTeacherName(teachername);
+			
+			return teacherr;
+		}).collect(Collectors.toList());
+				
+	}
 }
