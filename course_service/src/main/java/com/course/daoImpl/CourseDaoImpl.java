@@ -83,4 +83,12 @@ public class CourseDaoImpl implements CourseDao{
 		}).collect(Collectors.toList());
 				
 	}
+
+	@Override
+	public List<Course> getCourseByName(String courseName) {
+		
+		List<Course> findByCourseName = this.repository.findByCourseNameContaining(courseName);
+		 
+		return findByCourseName ;		
+	}
 }

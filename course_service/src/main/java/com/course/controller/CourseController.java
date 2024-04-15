@@ -1,6 +1,7 @@
 package com.course.controller;
 
 import java.util.List;
+
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.course.dao.CourseDao;
 import com.course.daoImpl.CourseDaoImpl;
 import com.course.dto.CourseIdAndName;
 import com.course.entity.Course;
@@ -63,5 +65,11 @@ public class CourseController {
 		 List<CourseIdAndName> allCourseIdAndName = this.courseService.getAllCourseIdAndName();
 		
 		return new ResponseEntity<List<CourseIdAndName>>(allCourseIdAndName,allCourseIdAndName.isEmpty() ? HttpStatus.NOT_FOUND :HttpStatus.OK);
+	}
+	@GetMapping("/getCourseByName/{courseName}")
+	public ResponseEntity<List<Course>> getCourseByName(@PathVariable("courseName") String courseName)
+	{
+		List<Course> courseByName = this.courseService.getCourseByName(courseName);
+		return new ResponseEntity<List<Course>>(courseByName,HttpStatus.OK);					
 	}
 }

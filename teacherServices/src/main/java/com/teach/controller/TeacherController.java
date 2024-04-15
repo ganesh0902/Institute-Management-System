@@ -56,11 +56,10 @@ public class TeacherController {
 	}
 	@GetMapping("/getTeachers")
 	public ResponseEntity<List<TeacherIdAndName>> getTeacherIdAndName()
-	{
-		
-		List<TeacherIdAndName> teacherIdAndName = this.teacherServiceImpl.getTeacherIdAndName();
-		
+	{		
+		List<TeacherIdAndName> teacherIdAndName = this.teacherServiceImpl.getTeacherIdAndName();		
 		System.out.println(teacherIdAndName);
 		return new ResponseEntity<List<TeacherIdAndName>>(teacherIdAndName,teacherIdAndName.isEmpty() ? HttpStatus.NOT_FOUND : HttpStatus.OK);			
-	}	
+	}
+	
 }
