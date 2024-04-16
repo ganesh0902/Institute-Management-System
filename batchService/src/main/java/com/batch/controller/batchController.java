@@ -74,4 +74,11 @@ public class batchController {
 		ApiResponse apiResponse = new ApiResponse("Record deleted Successfully",status);		
 		return new ResponseEntity<ApiResponse>(apiResponse,HttpStatus.OK);
 	}	
+	@GetMapping("/batchTitle/{batchTitle}")
+	public ResponseEntity<List<BatchDto>> findByBatchTitle(@PathVariable("batchTitle") String batchTitle){
+		
+		List<BatchDto> findByBatchTitleContaining = this.serviceImpl.findByBatchTitleContaining(batchTitle);
+						
+		return new ResponseEntity<List<BatchDto>>(findByBatchTitleContaining,HttpStatus.OK);				
+	}
 }

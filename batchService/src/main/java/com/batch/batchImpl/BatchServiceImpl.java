@@ -23,10 +23,7 @@ public class BatchServiceImpl implements com.batch.service.batchService{
 	private RestTemplate restTemplate;
 	
 	@Autowired
-	private BatchRepository repository;		
-	
-	@Autowired
-	private ModelMapper modelMaper;
+	private BatchRepository repository;			
 	
 	@Override
 	public BatchDto getBatch(int bId) throws ResourceNotFoundException {							
@@ -122,8 +119,7 @@ public class BatchServiceImpl implements com.batch.service.batchService{
 	public List<BatchDto> getAllBatchByTeacherId(int tId) {
 		
 		List<Batch> findAllByTeacherId = this.repository.findAllByTeacherId(tId);		
-		
-		System.out.println("==============================This is Teacher Id ");
+				
 		List<BatchDto> batchDtoList=new ArrayList<>();
 		for (Batch batch : findAllByTeacherId) {
 			
@@ -147,6 +143,35 @@ public class BatchServiceImpl implements com.batch.service.batchService{
 		return batchDtoList;
 	}
 
-	
-	
+	@Override
+	public List<BatchDto> findByBatchTitleContaining(String batchTitle) {
+		
+		List<BatchDto> batchDtoList=new ArrayList<>();		
+		List<Batch> batches = this.repository.findByBatchTitleContaining(batchTitle);
+		
+		for (Batch batch : batches) {
+			
+			BatchDto batchDto = new BatchDto();			
+			
+			batchDto.setBId(batch.getBId());
+			batchDto.setBatchTitle(batch.getBatchTitle());
+			batchDto.setStartDate(batch.getStartDate());
+			batchDto.setEndDate(batch.getEndDate());
+			batchDto.setDuration(batch.getDuration());
+			batchDto.setStatus(batch.getStatus());
+			batchDto.setLocation(batch.getLocation());
+			
+			TeacherDto teacher = this.restTemplate.getForObject("http://teacher-service/teacher/"+batch.getTeacherId(),TeacherDto.class);
+			System.out.println("Course Id is "+batch.getCourseId());
+			
+			Course course = this.restTemplate.getForObject("http://course-service/course/"+batch.getCourseId(),Course.class);
+			
+			System.out.println(course);
+			batchDto.setTeacherDto(teacher);
+			batchDto.setCourse(course);			
+			batchDtoList.add(batchDto);
+			
+		}				
+		return batchDtoList;
+	}	
 }

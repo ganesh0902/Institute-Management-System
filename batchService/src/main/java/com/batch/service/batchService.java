@@ -15,4 +15,5 @@ public interface batchService {
 	public boolean delete(int bId) throws ResourceNotFoundException;
 	public List<BatchDto> getAllBatch();
 	public List<BatchDto> getAllBatchByTeacherId(int tId);
+	public List<BatchDto> findByBatchTitleContaining(String batchTitle);	
 }

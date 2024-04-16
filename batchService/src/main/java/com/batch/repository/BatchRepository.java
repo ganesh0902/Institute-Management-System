@@ -13,5 +13,7 @@ public interface BatchRepository extends JpaRepository<Batch,Integer>{
 	    List<Batch> findAllByTeacherId(int teacherId);
 	 	
 	 	@Query("SELECT b FROM Batch b WHERE b.teacherId = :teacherId")
-	    Batch findByTeacherId(int teacherId);	 
+	    Batch findByTeacherId(int teacherId);	
+	 	
+	 	List<Batch> findByBatchTitleContaining(String batchName);
 }
