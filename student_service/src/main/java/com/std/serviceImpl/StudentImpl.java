@@ -65,7 +65,14 @@ public class StudentImpl implements Service{
 			
 			this.repo.deleteById(stdId);
 		}		
-		return status;
+		return status;				
+	}
+
+	@Override
+	public List<Student> getStudentByFilter(String studentName) {
 				
+		List<Student> studentFilter = this.repo.findByFirstNameContaining(studentName);			
+				
+		return studentFilter;
 	}
 }

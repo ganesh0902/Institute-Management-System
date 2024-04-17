@@ -59,5 +59,12 @@ public class Controller {
 			boolean status = this.service.delete(stdId);			
 			ApiResponse apiResponse = new ApiResponse("",status);			
 			return new ResponseEntity<ApiResponse>(apiResponse,HttpStatus.OK);						
-	}	
+	}
+	@GetMapping("/filter/{username}")
+	public ResponseEntity<List<Student>> getStudentByFilter(@PathVariable("username") String username)
+	{
+		List<Student> studentByFilter = this.service.getStudentByFilter(username);	
+		
+		return new ResponseEntity<List<Student>>(studentByFilter,HttpStatus.OK);	
+	}
 }
