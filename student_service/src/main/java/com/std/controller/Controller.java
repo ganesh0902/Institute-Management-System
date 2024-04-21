@@ -31,7 +31,7 @@ public class Controller {
 	public ResponseEntity<Student> saveStudent(@RequestBody Student student)
 	{
 		Student saveStudent = this.service.saveStudent(student);		
-		return new ResponseEntity<Student>(saveStudent,HttpStatus.OK);
+		return new ResponseEntity<Student>(saveStudent,HttpStatus.OK);		
 	}
 	
 	@PutMapping("/{stdId}")
@@ -63,8 +63,7 @@ public class Controller {
 	@GetMapping("/filter/{username}")
 	public ResponseEntity<List<Student>> getStudentByFilter(@PathVariable("username") String username)
 	{
-		List<Student> studentByFilter = this.service.getStudentByFilter(username);	
-		
+		List<Student> studentByFilter = this.service.getStudentByFilter(username);			
 		return new ResponseEntity<List<Student>>(studentByFilter,HttpStatus.OK);	
 	}
 }

@@ -20,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.batch.batchImpl.BatchServiceImpl;
 import com.batch.dto.BatchDto;
+import com.batch.dto.BatchTitleAndDate;
 import com.batch.dto.TeacherDto;
 import com.batch.entities.Batch;
 import com.batch.entities.Course;
@@ -80,5 +81,12 @@ public class batchController {
 		List<BatchDto> findByBatchTitleContaining = this.serviceImpl.findByBatchTitleContaining(batchTitle);
 						
 		return new ResponseEntity<List<BatchDto>>(findByBatchTitleContaining,HttpStatus.OK);				
+	}
+	@GetMapping("/batchTitleAndDate")
+	public ResponseEntity<List<BatchTitleAndDate>> getBatchTitleAndDate()
+	{
+		List<BatchTitleAndDate> batchTitleAndDate = this.serviceImpl.getBatchTitleAndDate();
+		
+		return new ResponseEntity<List<BatchTitleAndDate>>(batchTitleAndDate,HttpStatus.OK);
 	}
 }

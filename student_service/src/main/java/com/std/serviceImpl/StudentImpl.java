@@ -42,8 +42,7 @@ public class StudentImpl implements Service{
 	@Override
 	public Student findById(int stdId) throws ResourceNotFoundException {
 	
-		return this.repo.findById(stdId).orElseThrow(()-> new ResourceNotFoundException("Student","Id",String.valueOf(stdId)));
-		
+		return this.repo.findById(stdId).orElseThrow(()-> new ResourceNotFoundException("Student","Id",String.valueOf(stdId)));		
 	}
 
 	@Override
@@ -75,4 +74,5 @@ public class StudentImpl implements Service{
 				
 		return studentFilter;
 	}
+
 }

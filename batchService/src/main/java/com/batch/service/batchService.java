@@ -3,6 +3,7 @@ package com.batch.service;
 import java.util.List;
 
 import com.batch.dto.BatchDto;
+import com.batch.dto.BatchTitleAndDate;
 import com.batch.dto.SingleBatchDto;
 import com.batch.entities.Batch;
 import com.batch.exception.ResourceNotFoundException;
@@ -16,4 +17,5 @@ public interface batchService {
 	public List<BatchDto> getAllBatch();
 	public List<BatchDto> getAllBatchByTeacherId(int tId);
 	public List<BatchDto> findByBatchTitleContaining(String batchTitle);	
+	public List<BatchTitleAndDate> getBatchTitleAndDate();
 }
