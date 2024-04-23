@@ -75,4 +75,10 @@ public class StudentImpl implements Service{
 		return studentFilter;
 	}
 
+	@Override
+	public Long courseStudent() {
+		
+		return this.repo.countStudent();
+		
+	}
 }

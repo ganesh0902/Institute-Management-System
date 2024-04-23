@@ -16,4 +16,5 @@ public interface CourseDao {
 	public boolean delete(int cid) throws ResourceNotFoundException;
 	public List<CourseIdAndName> getAllCourseIdAndName();
 	public List<Course> getCourseByName(String courseName);	
+	public long getCountOfCourseAvailable();
 }

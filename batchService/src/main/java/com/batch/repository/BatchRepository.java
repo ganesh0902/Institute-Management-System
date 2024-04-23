@@ -19,5 +19,8 @@ public interface BatchRepository extends JpaRepository<Batch,Integer>{
 	 	List<Batch> findByBatchTitleContaining(String batchName);
 	 	
 	 	@Query("SELECT new com.batch.dto.BatchTitleAndDate(b.bId, b.batchTitle, b.startDate) FROM Batch b")
-	 	List<BatchTitleAndDate> getBatchTitleAndStartDate();	 
+	 	List<BatchTitleAndDate> getBatchTitleAndStartDate();
+	 	
+	 	@Query("select count(b) from Batch b")
+	 	long countBatchAvailable();
 } 

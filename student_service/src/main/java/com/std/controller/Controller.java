@@ -66,4 +66,10 @@ public class Controller {
 		List<Student> studentByFilter = this.service.getStudentByFilter(username);			
 		return new ResponseEntity<List<Student>>(studentByFilter,HttpStatus.OK);	
 	}
+	@GetMapping("/studentCount")
+	public ResponseEntity<Long> countStudents()
+	{
+		Long courseStudent = this.service.courseStudent();		
+		return new ResponseEntity<Long>(courseStudent,HttpStatus.OK);
+	}
 }

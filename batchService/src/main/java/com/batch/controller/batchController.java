@@ -89,4 +89,10 @@ public class batchController {
 		
 		return new ResponseEntity<List<BatchTitleAndDate>>(batchTitleAndDate,HttpStatus.OK);
 	}
+	@GetMapping("/countBatch")
+	public ResponseEntity<Long> countBatchAvailable()
+	{
+		Long countBatchAvailable = this.serviceImpl.countBatchAvailable();
+		return new ResponseEntity<Long>(countBatchAvailable,HttpStatus.OK); 		
+	}
 }

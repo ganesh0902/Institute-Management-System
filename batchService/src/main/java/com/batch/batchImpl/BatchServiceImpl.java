@@ -180,5 +180,11 @@ public class BatchServiceImpl implements com.batch.service.batchService{
 	public List<BatchTitleAndDate> getBatchTitleAndDate() {
 		
 		return this.repository.getBatchTitleAndStartDate();		
+	}
+
+	@Override
+	public Long countBatchAvailable() {
+		
+		return this.repository.countBatchAvailable();		
 	}	
 }

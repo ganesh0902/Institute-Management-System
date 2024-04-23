@@ -10,6 +10,8 @@ import com.std.entities.Student;
 
 public interface StudentRepository extends JpaRepository<Student,Integer>{
 
-	
 	List<Student> findByFirstNameContaining(String firstName);
+	
+	@Query("select count(*) from Student")
+	Long countStudent();
 }

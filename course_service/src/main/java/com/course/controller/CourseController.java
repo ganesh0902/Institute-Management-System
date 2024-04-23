@@ -1,9 +1,5 @@
 package com.course.controller;
-
 import java.util.List;
-
-import java.util.Map;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.course.dao.CourseDao;
 import com.course.daoImpl.CourseDaoImpl;
 import com.course.dto.CourseIdAndName;
 import com.course.entity.Course;
@@ -49,7 +43,7 @@ public class CourseController {
 	{
 		Course saveCourse = courseService.saveCourse(course);		
 		return new ResponseEntity<Course>(saveCourse,HttpStatus.OK);
-	}
+	}	
 	
 	@DeleteMapping("/{cId}")
 	public ResponseEntity<ApiResponse> deleteCourse(@PathVariable("cId") int cId) throws ResourceNotFoundException
@@ -71,5 +65,11 @@ public class CourseController {
 	{
 		List<Course> courseByName = this.courseService.getCourseByName(courseName);
 		return new ResponseEntity<List<Course>>(courseByName,HttpStatus.OK);					
+	}	
+	@GetMapping("/courseCount")
+	public ResponseEntity<Long> getCountOfCourseAvailable() {
+				
+	    long countOfCourseAvailable = this.courseService.getCountOfCourseAvailable();
+	    return new ResponseEntity<Long>(countOfCourseAvailable, HttpStatus.OK);
 	}
 }

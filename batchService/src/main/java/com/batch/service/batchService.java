@@ -18,4 +18,5 @@ public interface batchService {
 	public List<BatchDto> getAllBatchByTeacherId(int tId);
 	public List<BatchDto> findByBatchTitleContaining(String batchTitle);	
 	public List<BatchTitleAndDate> getBatchTitleAndDate();
+	public Long countBatchAvailable();
 }
