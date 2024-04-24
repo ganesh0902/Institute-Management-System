@@ -61,5 +61,11 @@ public class TeacherController {
 		System.out.println(teacherIdAndName);
 		return new ResponseEntity<List<TeacherIdAndName>>(teacherIdAndName,teacherIdAndName.isEmpty() ? HttpStatus.NOT_FOUND : HttpStatus.OK);			
 	}
+	@GetMapping("/teacherCount")	
+	public ResponseEntity<Long> getTeacherCount()
+	{
+		long teacherCount = this.teacherServiceImpl.getTeacherCount();
+		return new ResponseEntity<Long>(teacherCount,HttpStatus.OK);
+	}
 	
 }

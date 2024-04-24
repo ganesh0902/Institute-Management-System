@@ -11,4 +11,7 @@ public interface TeacherRepository extends JpaRepository<Teacher,Integer>{
 	
 	@Query("select e.tId, e.firstName, e.lastName from Teacher e")
 	List<Object[]> getTeacherIdAndName();
+	
+	@Query("select count(*) from Teacher")
+	long TeacherCount();
 }
