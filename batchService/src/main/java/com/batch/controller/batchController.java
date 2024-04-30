@@ -1,12 +1,17 @@
 package com.batch.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +20,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.batch.batchImpl.BatchServiceImpl;
 import com.batch.dto.BatchDto;
@@ -27,6 +34,7 @@ import com.batch.entities.Course;
 import com.batch.exception.ApiResponse;
 import com.batch.exception.ResourceNotFoundException;
 
+
 @RestController
 @RequestMapping("/batch")
 @CrossOrigin(origins = "http://localhost:3000")
@@ -35,8 +43,8 @@ public class batchController {
 	@Autowired
 	private BatchServiceImpl serviceImpl;
 	
-	@Autowired
-	private RestTemplate restTemplate;
+	   @Value("${image.upload.dir}")
+	   private String uploadDir;
 	
 	@GetMapping("/{batchId}")
 	public BatchDto getbatch(@PathVariable("batchId") int batchId) throws ResourceNotFoundException
@@ -50,6 +58,17 @@ public class batchController {
 		List<BatchDto> allBatch = this.serviceImpl.getAllBatch();		
 		return new ResponseEntity<List<BatchDto>>(allBatch,HttpStatus.OK);		
 	}
+	@PostMapping("image")
+	public ResponseEntity<String> saveImages(@RequestParam("file") MultipartFile file) throws IllegalStateException, IOException
+	{
+        String fileName = UUID.randomUUID().toString() + "_" + StringUtils.cleanPath(file.getOriginalFilename());
+
+		String filePath = System.getProperty("user.home") + File.separator + "uploads" + File.separator +fileName;
+		
+        file.transferTo(new File(filePath));
+        
+		return new ResponseEntity<String>(filePath,HttpStatus.OK);		
+	}	
 	@GetMapping("/teacher/{tId}")
 	public ResponseEntity<List<BatchDto>> getListOfBatch(@PathVariable("tId") int bId)
 	{		

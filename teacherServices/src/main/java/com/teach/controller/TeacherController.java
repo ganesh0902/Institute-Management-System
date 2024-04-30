@@ -53,7 +53,7 @@ public class TeacherController {
 		System.out.println("getAll Teachers");
 		List<TeacherDto> all = this.teacherServiceImpl.getAll();		
 		return new ResponseEntity<List<TeacherDto>>(all,HttpStatus.OK);
-	}
+	} 
 	@GetMapping("/getTeachers")
 	public ResponseEntity<List<TeacherIdAndName>> getTeacherIdAndName()
 	{		
