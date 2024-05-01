@@ -1,6 +1,4 @@
 package com.teach.entities;
-
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,5 +27,5 @@ public class Teacher {
 	private String education;
 	private String contact;
 	private String email;
-	
+	private String image;	
 }

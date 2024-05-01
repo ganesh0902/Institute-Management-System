@@ -61,13 +61,18 @@ public class batchController {
 	@PostMapping("image")
 	public ResponseEntity<String> saveImages(@RequestParam("file") MultipartFile file) throws IllegalStateException, IOException
 	{
-        String fileName = UUID.randomUUID().toString() + "_" + StringUtils.cleanPath(file.getOriginalFilename());
+        String fileName = UUID.randomUUID().toString() + "_" + StringUtils.cleanPath(file.getOriginalFilename());		           		
+        
+        String filePath = System.getProperty("user.home") + File.separator +
+                "Institute Management UI" + File.separator +
+                "institutemanagementsystem" + File.separator +
+                "public" + File.separator +
+                "uploader" + File.separator + fileName;
 
-		String filePath = System.getProperty("user.home") + File.separator + "uploads" + File.separator +fileName;
-		
+        
         file.transferTo(new File(filePath));
         
-		return new ResponseEntity<String>(filePath,HttpStatus.OK);		
+		return new ResponseEntity<String>(fileName,HttpStatus.OK);		
 	}	
 	@GetMapping("/teacher/{tId}")
 	public ResponseEntity<List<BatchDto>> getListOfBatch(@PathVariable("tId") int bId)

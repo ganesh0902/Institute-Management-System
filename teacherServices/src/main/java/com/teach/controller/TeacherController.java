@@ -1,20 +1,26 @@
 package com.teach.controller;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.teach.dto.BatchDto;
 import com.teach.dto.CourseDto;
@@ -41,6 +47,22 @@ public class TeacherController {
 		Teacher saveTeacher = this.teacherServiceImpl.saveTeacher(teacher);							
 		return new ResponseEntity<Teacher>(saveTeacher,HttpStatus.OK);
 	}
+	@PostMapping("/image")
+	public ResponseEntity<String> saveImages(@RequestParam("file") MultipartFile file) throws IllegalStateException, IOException
+	{
+        String fileName = UUID.randomUUID().toString() + "_" + StringUtils.cleanPath(file.getOriginalFilename());		           		
+        
+        String filePath = System.getProperty("user.home") + File.separator +
+                "Institute Management UI" + File.separator +
+                "institutemanagementsystem" + File.separator +
+                "public" + File.separator +
+                "teacher" + File.separator + fileName;
+
+        
+        file.transferTo(new File(filePath));
+        
+		return new ResponseEntity<String>(fileName,HttpStatus.OK);		
+	}	
 	@GetMapping("/{id}")
 	public ResponseEntity<TeacherDto> getTeacherById(@PathVariable("id") int id) throws ResourceNotFoundException
 	{							
