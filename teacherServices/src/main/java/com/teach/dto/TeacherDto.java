@@ -18,6 +18,7 @@ public class TeacherDto {
 	private String contact;
 	private String email;
 	private BatchDto batchDto;
+	private String image;
 		
 	public TeacherDto() {
 		super();

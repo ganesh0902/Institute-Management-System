@@ -65,6 +65,7 @@ public class TeacherServiceImpl implements TeacherService {
 			teacherDto.setEducation(teacher.getEducation());
 			teacherDto.setEmail(teacher.getEmail());
 			teacherDto.setTId(teacher.getTId());
+			teacherDto.setImage(teacher.getImage());
 			// this.restTemplate.getForObject("http://batch-service/batch/teacher/"+teacher.getTId(),BatchDto.class);
 			// teacherDto.setBatchDto(batchDto);
 			teacherDtoList.add(teacherDto);

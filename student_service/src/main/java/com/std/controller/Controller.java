@@ -21,7 +21,7 @@ import com.std.serviceImpl.StudentImpl;
 
 @RestController
 @RequestMapping("/student")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:9004"})
 public class Controller {
 
 	@Autowired
