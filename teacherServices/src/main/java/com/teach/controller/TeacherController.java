@@ -1,14 +1,13 @@
 package com.teach.controller;
 import java.io.File;
+
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,9 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.teach.dto.BatchDto;
-import com.teach.dto.CourseDto;
 import com.teach.dto.TeacherDto;
 import com.teach.dto.TeacherIdAndName;
 import com.teach.entities.Teacher;
@@ -36,10 +32,7 @@ import com.teach.serviceimpl.TeacherServiceImpl;
 public class TeacherController {
 
 	@Autowired
-	private TeacherServiceImpl teacherServiceImpl;
-		
-	@Autowired
-	private RestTemplate restTemplate;
+	private TeacherServiceImpl teacherServiceImpl;		
 	
 	@PostMapping("/")
 	public ResponseEntity<Teacher> saveTeacher(@RequestBody Teacher teacher)
