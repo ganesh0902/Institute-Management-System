@@ -29,5 +29,4 @@ public class Student {
 	private int batchId;
 	private String lastEducation;
 	private String courseName;	
-	private String image;
 }

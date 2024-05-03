@@ -47,9 +47,10 @@ public class Controller {
                 "Institute Management UI" + File.separator +
                 "institutemanagementsystem" + File.separator +
                 "public" + File.separator +
-                "student" + File.separator + fileName;
+                "teacher" + File.separator + fileName;
 
-		file.transferTo(new File(filePath));
+
+		file.transferTo(new File(filepath));
 		return new ResponseEntity<String>(fileName, HttpStatus.OK);
 	}
 

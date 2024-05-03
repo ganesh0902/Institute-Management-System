@@ -42,15 +42,15 @@ public class Controller {
 	public ResponseEntity<String> saveImage(@RequestParam("file") MultipartFile file)
 			throws IllegalStateException, IOException {
 		String fileName = UUID.randomUUID().toString() + "-" + StringUtils.cleanPath(file.getOriginalFilename());
-		
-        String filePath = System.getProperty("user.home") + File.separator +
-                "Institute Management UI" + File.separator +
-                "institutemanagementsystem" + File.separator +
-                "public" + File.separator +
-                "student" + File.separator + fileName;
 
-		file.transferTo(new File(filePath));
-		return new ResponseEntity<String>(fileName, HttpStatus.OK);
+		System.out.println("============================================================================");
+		String filepath = System.getProperty("user.home") + File.separator + 
+				"Institute Management UI" + File.separator + 
+				"public" + File.separator + 
+				"student" + File.separator + fileName;
+
+		file.transferTo(new File(filepath));
+		return new ResponseEntity<String>("fileName", HttpStatus.OK);
 	}
 
 	@PutMapping("/{stdId}")

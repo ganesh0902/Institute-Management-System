@@ -43,13 +43,12 @@ public class Controller {
 			throws IllegalStateException, IOException {
 		String fileName = UUID.randomUUID().toString() + "-" + StringUtils.cleanPath(file.getOriginalFilename());
 		
-        String filePath = System.getProperty("user.home") + File.separator +
-                "Institute Management UI" + File.separator +
-                "institutemanagementsystem" + File.separator +
-                "public" + File.separator +
-                "student" + File.separator + fileName;
+		String filepath = System.getProperty("user.home") + File.separator + 
+				"Institute Management UI" + File.separator + 
+				"public" + File.separator + 
+				"student" + File.separator + fileName;
 
-		file.transferTo(new File(filePath));
+		file.transferTo(new File(filepath));
 		return new ResponseEntity<String>(fileName, HttpStatus.OK);
 	}
 
