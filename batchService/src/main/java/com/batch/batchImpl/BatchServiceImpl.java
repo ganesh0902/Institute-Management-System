@@ -3,6 +3,7 @@ package com.batch.batchImpl;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.batch.dto.BatchDto;
 import com.batch.dto.BatchTitleAndDate;
+import com.batch.dto.StudentDto;
 import com.batch.dto.TeacherDto;
 import com.batch.entities.Batch;
 import com.batch.entities.Course;
@@ -187,5 +189,19 @@ public class BatchServiceImpl implements com.batch.service.batchService{
 	public Long countBatchAvailable() {
 		
 		return this.repository.countBatchAvailable();		
+	}
+
+	@Override
+	public Batch getSingleBatch(int studentId) throws ResourceNotFoundException {
+						  
+		 StudentDto student = this.restTemplate.getForObject("http://student-service/student/"+252,StudentDto.class);
+		
+		return  this.repository.findById(student.getBatchId()).orElseThrow(()-> new ResourceNotFoundException("Batch","Id",String.valueOf(student.getBatchId())));				
+	}
+
+	@Override
+	public List<Batch> getBatchesByTeacherId(int tId) {
+		
+		return  this.repository.findAllByTeacherId(tId);		
 	}	
 }

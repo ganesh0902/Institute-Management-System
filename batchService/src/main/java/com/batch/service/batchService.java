@@ -19,4 +19,6 @@ public interface batchService {
 	public List<BatchDto> findByBatchTitleContaining(String batchTitle);	
 	public List<BatchTitleAndDate> getBatchTitleAndDate();
 	public Long countBatchAvailable();
+	public Batch getSingleBatch(int studentId) throws ResourceNotFoundException;
+	public List<Batch> getBatchesByTeacherId(int tId);
 }

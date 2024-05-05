@@ -19,5 +19,6 @@ public class TeacherDto {
 	private String education;
 	private String contact;
 	private String email;	
+	private String image;
 	
 }

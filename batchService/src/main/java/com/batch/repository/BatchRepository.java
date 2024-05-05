@@ -23,4 +23,5 @@ public interface BatchRepository extends JpaRepository<Batch,Integer>{
 	 	
 	 	@Query("select count(b) from Batch b")
 	 	long countBatchAvailable();
+	 		 	
 } 

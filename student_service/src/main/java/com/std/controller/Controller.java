@@ -75,7 +75,7 @@ public class Controller {
 	@DeleteMapping("/{stdId}")
 	public ResponseEntity<ApiResponse> deleteById(@PathVariable("stdId") int stdId) throws ResourceNotFoundException {
 		boolean status = this.service.delete(stdId);
-		ApiResponse apiResponse = new ApiResponse("", status);
+		ApiResponse apiResponse = new ApiResponse("Record Deleted", status);
 		return new ResponseEntity<ApiResponse>(apiResponse, HttpStatus.OK);
 	}
 

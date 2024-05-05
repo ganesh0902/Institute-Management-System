@@ -52,6 +52,19 @@ public class batchController {
 		BatchDto batch = serviceImpl.getBatch(batchId);			
 		return batch;
 	}
+	
+	@GetMapping("/single/{studentId}")
+	public Batch getSinglebatchByStudentId(@PathVariable("studentId") int studentId) throws ResourceNotFoundException
+	{						
+		Batch singleBatch = serviceImpl.getSingleBatch(studentId);		
+		return singleBatch;
+	}
+	@GetMapping("/teacherId/{tId}")
+	public ResponseEntity<List<Batch>> getbatchByTeacherId(@PathVariable("tId") int tid)
+	{
+		List<Batch> batchesByTeacherId = this.serviceImpl.getBatchesByTeacherId(tid);
+		return new ResponseEntity<List<Batch>>(batchesByTeacherId,HttpStatus.OK);		
+	}
 	@GetMapping("/")
 	public ResponseEntity<List<BatchDto>> getAllBatch()
 	{		
@@ -67,7 +80,7 @@ public class batchController {
                 "Institute Management UI" + File.separator +
                 "institutemanagementsystem" + File.separator +
                 "public" + File.separator +
-                "uploader" + File.separator + fileName;
+                "batch" + File.separator + fileName;
 
         
         file.transferTo(new File(filePath));

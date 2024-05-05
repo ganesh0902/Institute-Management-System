@@ -1,27 +1,18 @@
-package com.std.entities;
+package com.batch.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity
-@Table(name="student")
-@Setter
 @Getter
-@ToString
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Student {
+@ToString
+public class StudentDto {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int stdId;
 	private String firstName;
 	private String lastName;
@@ -29,4 +20,5 @@ public class Student {
 	private int batchId;
 	private String lastEducation;
 	private String courseName;	
+	private String image;
 }
