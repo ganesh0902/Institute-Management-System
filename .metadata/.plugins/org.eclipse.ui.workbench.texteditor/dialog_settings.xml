@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="getAllBatch"/>
+		<item key="selection" value="findAllByTeacherId"/>
 		<list key="findhistory">
+			<item value="findAllByTeacherId"/>
 			<item value="getAllBatch"/>
 			<item value="uploadDir"/>
 			<item value="teacher"/>

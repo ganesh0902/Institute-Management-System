@@ -65,7 +65,7 @@ public class Controller {
 		Student student = this.service.findById(stdId);
 		return new ResponseEntity<Student>(student, HttpStatus.OK);
 	}
-
+	
 	@GetMapping("/")
 	public ResponseEntity<List<Student>> updateStudent() {
 		List<Student> all = this.service.getAll();
