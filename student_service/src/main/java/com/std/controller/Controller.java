@@ -44,12 +44,18 @@ public class Controller {
 		String fileName = UUID.randomUUID().toString() + "-" + StringUtils.cleanPath(file.getOriginalFilename());
 		
         String filePath = System.getProperty("user.home") + File.separator +
-                "Institute Management UI" + File.separator +
-                "institutemanagementsystem" + File.separator +
+        		"Institute Management System UI" + File.separator +
+                "institute" + File.separator +
                 "public" + File.separator +
-                "student" + File.separator + fileName;
-
-		file.transferTo(new File(filePath));
+                "student" + File.separator + fileName;          
+		try
+		{
+			file.transferTo(new File(filePath));
+		}
+		catch(IOException e)
+		{
+			System.out.println(e.getMessage());
+		}		
 		return new ResponseEntity<String>(fileName, HttpStatus.OK);
 	}
 

@@ -62,13 +62,13 @@ public class BatchServiceImpl implements com.batch.service.batchService{
 		
 		Batch batch = this.repository.findById(bId).orElseThrow(()-> new ResourceNotFoundException("Batch","Id",String.valueOf(bId)));		
 		batch.setBatchTitle(updateBatch.getBatchTitle());
-		batch.setCourseId(updateBatch.getCourseId());
+		//batch.setCourseId(updateBatch.getCourseId());
 		batch.setDuration(updateBatch.getDuration());
 		batch.setStartDate(updateBatch.getStartDate());
 		batch.setEndDate(updateBatch.getEndDate());
 		batch.setImage(updateBatch.getImage());
 		batch.setStatus(updateBatch.getStatus());		
-		batch.setTeacherId(updateBatch.getTeacherId());
+		//batch.setTeacherId(updateBatch.getTeacherId());
 		batch.setTime(updateBatch.getTime());				
 		return this.repository.save(batch);				
 	}

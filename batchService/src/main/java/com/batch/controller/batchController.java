@@ -77,11 +77,10 @@ public class batchController {
         String fileName = UUID.randomUUID().toString() + "_" + StringUtils.cleanPath(file.getOriginalFilename());		           		
         
         String filePath = System.getProperty("user.home") + File.separator +
-                "Institute Management UI" + File.separator +
-                "institutemanagementsystem" + File.separator +
+                "Institute Management System UI" + File.separator +
+                "institute" + File.separator +
                 "public" + File.separator +
                 "batch" + File.separator + fileName;
-
         
         file.transferTo(new File(filePath));
         

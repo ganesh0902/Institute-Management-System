@@ -46,13 +46,19 @@ public class TeacherController {
         String fileName = UUID.randomUUID().toString() + "_" + StringUtils.cleanPath(file.getOriginalFilename());		           		
         
         String filePath = System.getProperty("user.home") + File.separator +
-                "Institute Management UI" + File.separator +
-                "institutemanagementsystem" + File.separator +
+        		"Institute Management System UI" + File.separator +
+                "institute" + File.separator +
                 "public" + File.separator +
                 "teacher" + File.separator + fileName;
-
-        
-        file.transferTo(new File(filePath));
+                
+        try
+        {
+        	file.transferTo(new File(filePath));
+        }
+        catch(Exception e)
+        {
+        	System.out.println(e.getMessage());
+        }
         
 		return new ResponseEntity<String>(fileName,HttpStatus.OK);		
 	}	
