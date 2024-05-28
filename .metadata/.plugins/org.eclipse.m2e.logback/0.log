@@ -9414,3 +9414,6 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact org.antlr:str
 2024-05-28 21:51:06,267 [Worker-27: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
 2024-05-28 21:51:06,278 [Worker-27: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
 2024-05-28 21:51:06,282 [Worker-27: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\student_service\src\test\resources
+2024-05-28 22:46:34,082 [Stop Help Server] INFO  org.eclipse.jetty.server.Server - Stopped Server@33a93c48{STOPPING}[10.0.13,sto=0]
+2024-05-28 22:46:34,150 [Stop Help Server] INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@7abe778b{HTTP/1.1, (http/1.1)}{127.0.0.1:0}
+2024-05-28 22:46:34,228 [Stop Help Server] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@51b4306b{/help,null,STOPPED}
