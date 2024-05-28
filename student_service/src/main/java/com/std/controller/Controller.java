@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.std.dto.StudentDto;
 import com.std.entities.Student;
 import com.std.exception.ApiResponse;
 import com.std.exception.ResourceNotFoundException;
@@ -95,5 +97,11 @@ public class Controller {
 	public ResponseEntity<Long> countStudents() {
 		Long courseStudent = this.service.courseStudent();
 		return new ResponseEntity<Long>(courseStudent, HttpStatus.OK);
+	}
+	@GetMapping("/studentDetails/{sdtId}")
+	public ResponseEntity<StudentDto> getStudentDetails(@PathVariable("sdtId") int stdId) throws ResourceNotFoundException
+	{
+		 StudentDto studentDetails = this.service.getStudentDetails(stdId);			
+		return new ResponseEntity<StudentDto>(studentDetails,HttpStatus.OK);		
 	}
 }

@@ -1,0 +1,5 @@
+package com.std.dto;
+
+public class CourseDto {
+
+}

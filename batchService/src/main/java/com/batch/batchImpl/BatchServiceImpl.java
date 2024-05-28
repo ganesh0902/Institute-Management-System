@@ -42,7 +42,9 @@ public class BatchServiceImpl implements com.batch.service.batchService{
 		batchDto.setStatus(batch.getStatus());
 		batchDto.setTime(batch.getTime());
 		batchDto.setBId(batch.getBId());
-		batchDto.setLocation(batch.getLocation());						
+		batchDto.setLocation(batch.getLocation());		
+		batchDto.setCourseId(batch.getCourseId());
+		batchDto.setTeacherId(batch.getTeacherId());
 		
 		Course course = this.restTemplate.getForObject("http://course-service/course/"+batch.getCourseId(),Course.class);		
 		TeacherDto teacherDto = this.restTemplate.getForObject("http://teacher-service/teacher/"+batch.getTeacherId(),TeacherDto.class);

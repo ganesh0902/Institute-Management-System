@@ -24,6 +24,9 @@ public class BatchDto {
 	private String time;
 	private String image;
 	private Course course;
+	private int teacherId;
+	private int courseId;
+	
 	private TeacherDto teacherDto;
 	
 	public BatchDto(int bId, String batchTitle, String duration, String startDate, String endDate, String status,

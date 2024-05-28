@@ -2,6 +2,7 @@ package com.std.service;
 
 import java.util.List;
 
+import com.std.dto.StudentDto;
 import com.std.entities.Student;
 import com.std.exception.ResourceNotFoundException;
 
@@ -13,5 +14,7 @@ public interface Service {
 	public List<Student> getAll();
 	public boolean delete(int stdId) throws ResourceNotFoundException;
 	public List<Student> getStudentByFilter(String studentName);
-	public Long courseStudent();	
+	public Long courseStudent();
+	public StudentDto getStudentDetails(int stdId) throws ResourceNotFoundException;
+	
 }

@@ -1,10 +1,13 @@
 package com.std.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
-
+import com.std.dto.BatchDto;
+import com.std.dto.CourseDto;
+import com.std.dto.StudentDto;
+import com.std.dto.TeacherDto;
 import com.std.entities.Student;
 import com.std.exception.ResourceNotFoundException;
 import com.std.repository.StudentRepository;
@@ -28,8 +31,7 @@ public class StudentImpl implements Service{
 	@Override
 	public Student updateStudent(int stdId, Student std) throws ResourceNotFoundException {
 		
-		Student student = this.repo.findById(stdId).orElseThrow(()-> new ResourceNotFoundException("Student","Id",String.valueOf(stdId)));
-				
+		Student student = this.repo.findById(stdId).orElseThrow(()-> new ResourceNotFoundException("Student","Id",String.valueOf(stdId)));				
 		student.setBatchId(std.getBatchId());
 		student.setCourseName(std.getCourseName());
 		student.setFirstName(std.getFirstName());
@@ -74,11 +76,38 @@ public class StudentImpl implements Service{
 				
 		return studentFilter;
 	}
-
 	@Override
 	public Long courseStudent() {
-		
-		return this.repo.countStudent();
-		
+	
+		return this.repo.countStudent();	
 	}
+
+	@Override
+	public StudentDto getStudentDetails(int stdId) throws ResourceNotFoundException {
+
+		StudentDto studentDto = new StudentDto();
+		
+		Student student = this.repo.findById(stdId).orElseThrow(()-> new ResourceNotFoundException("Student","Id", String.valueOf(stdId)));
+		
+		//get batch details from it's service by batchId
+		BatchDto batch = this.restTemplate.getForObject("http://batch-service/batch/"+student.getBatchId(),BatchDto.class);
+
+		//get teacher details from it's service by teacherId
+		TeacherDto teacher = this.restTemplate.getForObject("http://teacher-service/teacher/"+batch.getTeacherId(),TeacherDto.class);
+
+		//get course details from it's service by course Id
+		CourseDto course = this.restTemplate.getForObject("http://course-service/course/"+batch.getCourseId(),CourseDto.class);
+		
+		studentDto.setStdId(student.getStdId());
+		studentDto.setFirstName(student.getFirstName());
+		studentDto.setLastName(student.getLastName());
+		studentDto.setPassoutYear(student.getPassoutYear());
+		studentDto.setLastEducation(student.getLastEducation());
+		studentDto.setCourseName(student.getCourseName());
+		studentDto.setImage(student.getImage());
+		studentDto.setTeacherDto(teacher);
+		batch.setCourseDto(course);
+		studentDto.setBatchDto(batch);							
+		return studentDto;
+	}		
 }
