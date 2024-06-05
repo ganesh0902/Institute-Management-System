@@ -1,9 +1,0 @@
-package com.std.dto;
-
-public class CourseDto {
-
-	private String courseName;
-	private String description;
-	private String skills;
-	private int fees;	
-}

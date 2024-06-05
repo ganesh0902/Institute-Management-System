@@ -32,7 +32,7 @@ public class StudentImpl implements Service{
 	public Student updateStudent(int stdId, Student std) throws ResourceNotFoundException {
 		
 		Student student = this.repo.findById(stdId).orElseThrow(()-> new ResourceNotFoundException("Student","Id",String.valueOf(stdId)));				
-		student.setBatchId(std.getBatchId());
+		//student.setBatchId(std.getBatchId());
 		student.setCourseName(std.getCourseName());
 		student.setFirstName(std.getFirstName());
 		student.setLastName(std.getLastName());

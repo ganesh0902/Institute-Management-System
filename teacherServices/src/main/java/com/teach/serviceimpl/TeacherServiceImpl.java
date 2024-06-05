@@ -113,4 +113,18 @@ public class TeacherServiceImpl implements TeacherService {
 	public long getTeacherCount() {
 		return this.repository.TeacherCount();
 	}
+
+	@Override
+	public Teacher updateTeacher(int tId, Teacher teacherDto) throws ResourceNotFoundException {
+		
+		Teacher teacher = this.repository.findById(tId).orElseThrow(()-> new ResourceNotFoundException("Teacher","Id",String.valueOf(tId)));
+		
+		teacher.setContact(teacherDto.getContact());
+		teacher.setEducation(teacherDto.getEducation());
+		teacher.setFirstName(teacherDto.getFirstName());
+		teacher.setLastName(teacherDto.getLastName());
+		teacher.setEmail(teacherDto.getEmail());
+		
+		return this.repository.save(teacher);		
+	}
 }

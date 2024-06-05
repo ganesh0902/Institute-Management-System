@@ -1,4 +1,5 @@
 package com.teach.controller;
+
 import java.io.File;
 
 import java.io.IOException;
@@ -8,12 +9,14 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,65 +31,68 @@ import com.teach.serviceimpl.TeacherServiceImpl;
 
 @RestController
 @RequestMapping("/teacher")
-@CrossOrigin(origins = {"http://localhost:3000","http://localhost:9002"})
+@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:9002" })
 public class TeacherController {
 
 	@Autowired
-	private TeacherServiceImpl teacherServiceImpl;		
-	
+	private TeacherServiceImpl teacherServiceImpl;
+
 	@PostMapping("/")
-	public ResponseEntity<Teacher> saveTeacher(@RequestBody Teacher teacher)
-	{
-		Teacher saveTeacher = this.teacherServiceImpl.saveTeacher(teacher);							
-		return new ResponseEntity<Teacher>(saveTeacher,HttpStatus.OK);
+	public ResponseEntity<Teacher> saveTeacher(@RequestBody Teacher teacher) {
+		Teacher saveTeacher = this.teacherServiceImpl.saveTeacher(teacher);
+		return new ResponseEntity<Teacher>(saveTeacher, HttpStatus.OK);
 	}
+
+	@PutMapping("/{tId}")
+	public ResponseEntity<Teacher> updateTeacher(@PathVariable("tId") int tId, @RequestBody Teacher teacher)
+			throws ResourceNotFoundException {
+		Teacher updateTeacher = this.teacherServiceImpl.updateTeacher(tId, teacher);
+
+		return new ResponseEntity<Teacher>(updateTeacher, HttpStatus.OK);
+	}
+
 	@PostMapping("/image")
-	public ResponseEntity<String> saveImages(@RequestParam("file") MultipartFile file) throws IllegalStateException, IOException
-	{
-        String fileName = UUID.randomUUID().toString() + "_" + StringUtils.cleanPath(file.getOriginalFilename());		           		
-        
-        String filePath = System.getProperty("user.home") + File.separator +
-        		"Institute Management System UI" + File.separator +
-                "institute" + File.separator +
-                "public" + File.separator +
-                "teacher" + File.separator + fileName;
-                
-        try
-        {
-        	file.transferTo(new File(filePath));
-        }
-        catch(Exception e)
-        {
-        	System.out.println(e.getMessage());
-        }
-        
-		return new ResponseEntity<String>(fileName,HttpStatus.OK);		
-	}	
+	public ResponseEntity<String> saveImages(@RequestParam("file") MultipartFile file)
+			throws IllegalStateException, IOException {
+		String fileName = UUID.randomUUID().toString() + "_" + StringUtils.cleanPath(file.getOriginalFilename());
+
+		String filePath = System.getProperty("user.home") + File.separator + "Institute Management System UI"
+				+ File.separator + "institute" + File.separator + "public" + File.separator + "teacher" + File.separator
+				+ fileName;
+
+		try {
+			file.transferTo(new File(filePath));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return new ResponseEntity<String>(fileName, HttpStatus.OK);
+	}
+
 	@GetMapping("/{id}")
-	public ResponseEntity<TeacherDto> getTeacherById(@PathVariable("id") int id) throws ResourceNotFoundException
-	{							
-		TeacherDto teacherDto = this.teacherServiceImpl.getTeacherById(id);									
-		return new ResponseEntity<TeacherDto>(teacherDto,HttpStatus.OK); 		
+	public ResponseEntity<TeacherDto> getTeacherById(@PathVariable("id") int id) throws ResourceNotFoundException {
+		TeacherDto teacherDto = this.teacherServiceImpl.getTeacherById(id);
+		return new ResponseEntity<TeacherDto>(teacherDto, HttpStatus.OK);
 	}
+
 	@GetMapping("/")
-	public ResponseEntity<List<TeacherDto>> getAll()
-	{	
+	public ResponseEntity<List<TeacherDto>> getAll() {
 		System.out.println("getAll Teachers");
-		List<TeacherDto> all = this.teacherServiceImpl.getAll();		
-		return new ResponseEntity<List<TeacherDto>>(all,HttpStatus.OK);
-	} 
+		List<TeacherDto> all = this.teacherServiceImpl.getAll();
+		return new ResponseEntity<List<TeacherDto>>(all, HttpStatus.OK);
+	}
+
 	@GetMapping("/getTeachers")
-	public ResponseEntity<List<TeacherIdAndName>> getTeacherIdAndName()
-	{		
-		List<TeacherIdAndName> teacherIdAndName = this.teacherServiceImpl.getTeacherIdAndName();		
+	public ResponseEntity<List<TeacherIdAndName>> getTeacherIdAndName() {
+		List<TeacherIdAndName> teacherIdAndName = this.teacherServiceImpl.getTeacherIdAndName();
 		System.out.println(teacherIdAndName);
-		return new ResponseEntity<List<TeacherIdAndName>>(teacherIdAndName,teacherIdAndName.isEmpty() ? HttpStatus.NOT_FOUND : HttpStatus.OK);			
+		return new ResponseEntity<List<TeacherIdAndName>>(teacherIdAndName,
+				teacherIdAndName.isEmpty() ? HttpStatus.NOT_FOUND : HttpStatus.OK);
 	}
-	@GetMapping("/teacherCount")	
-	public ResponseEntity<Long> getTeacherCount()
-	{
+
+	@GetMapping("/teacherCount")
+	public ResponseEntity<Long> getTeacherCount() {
 		long teacherCount = this.teacherServiceImpl.getTeacherCount();
-		return new ResponseEntity<Long>(teacherCount,HttpStatus.OK);
+		return new ResponseEntity<Long>(teacherCount, HttpStatus.OK);
 	}
-	
 }
