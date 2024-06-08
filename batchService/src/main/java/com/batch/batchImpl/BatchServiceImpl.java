@@ -20,116 +20,92 @@ import com.batch.exception.ResourceNotFoundException;
 import com.batch.repository.BatchRepository;
 
 @Service
-public class BatchServiceImpl implements com.batch.service.batchService{
+public class BatchServiceImpl implements com.batch.service.batchService {
 
 	@Autowired
 	private RestTemplate restTemplate;
-	
+
 	@Autowired
-	private BatchRepository repository;			
-	
+	private BatchRepository repository;
+
 	@Override
-	public BatchDto getBatch(int bId) throws ResourceNotFoundException {							
-		
+	public BatchDto getBatch(int bId) throws ResourceNotFoundException {
+
 		BatchDto batchDto = new BatchDto();
-		Batch batch = this.repository.findById(bId).orElseThrow(()-> new ResourceNotFoundException("Batch"," Id ",String.valueOf(bId)));
-		
-		batchDto.setBatchTitle(batch.getBatchTitle());		
+		Batch batch = this.repository.findById(bId)
+				.orElseThrow(() -> new ResourceNotFoundException("Batch", " Id ", String.valueOf(bId)));
+
+		batchDto.setBatchTitle(batch.getBatchTitle());
 		batchDto.setStartDate(batch.getStartDate());
 		batchDto.setEndDate(batch.getEndDate());
 		batchDto.setDuration(batch.getDuration());
-		batchDto.setImage(batch.getImage());		
+		batchDto.setImage(batch.getImage());
 		batchDto.setStatus(batch.getStatus());
 		batchDto.setTime(batch.getTime());
 		batchDto.setBId(batch.getBId());
-		batchDto.setLocation(batch.getLocation());		
+		batchDto.setLocation(batch.getLocation());
 		batchDto.setCourseId(batch.getCourseId());
 		batchDto.setTeacherId(batch.getTeacherId());
-		
-		Course course = this.restTemplate.getForObject("http://course-service/course/"+batch.getCourseId(),Course.class);		
-		TeacherDto teacherDto = this.restTemplate.getForObject("http://teacher-service/teacher/"+batch.getTeacherId(),TeacherDto.class);
+
+		Course course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
+				Course.class);
+		TeacherDto teacherDto = this.restTemplate.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(),
+				TeacherDto.class);
 		batchDto.setCourse(course);
-		batchDto.setTeacherDto(teacherDto);		
-		return  batchDto;
+		batchDto.setTeacherDto(teacherDto);
+		return batchDto;
 	}
 
 	@Override
 	public Batch saveBatch(Batch batch) {
-		
-		return this.repository.save(batch);						
+
+		return this.repository.save(batch);
 	}
 
 	@Override
 	public Batch updateBatch(int bId, Batch updateBatch) throws ResourceNotFoundException {
-		
-		Batch batch = this.repository.findById(bId).orElseThrow(()-> new ResourceNotFoundException("Batch","Id",String.valueOf(bId)));		
-		batch.setBatchTitle(updateBatch.getBatchTitle());
-		//batch.setCourseId(updateBatch.getCourseId());
-		batch.setDuration(updateBatch.getDuration());
-		batch.setStartDate(updateBatch.getStartDate());
-		batch.setEndDate(updateBatch.getEndDate());
-		batch.setImage(updateBatch.getImage());
-		batch.setStatus(updateBatch.getStatus());		
-		//batch.setTeacherId(updateBatch.getTeacherId());
-		batch.setTime(updateBatch.getTime());				
-		return this.repository.save(batch);				
+
+		Batch batch = this.repository.findById(bId)
+				.orElseThrow(() -> new ResourceNotFoundException("Batch", "Id", String.valueOf(bId)));
+
+		batch.setBatchTitle(updateBatch.getBatchTitle() == "" ? batch.getBatchTitle() : updateBatch.getBatchTitle());
+		// batch.setCourseId(updateBatch.getCourseId());
+		batch.setDuration(updateBatch.getDuration() == "" ? batch.getDuration() : updateBatch.getDuration());
+		batch.setStartDate(updateBatch.getStartDate() == "" ? batch.getStartDate() : updateBatch.getStartDate());
+		batch.setEndDate(updateBatch.getEndDate() == "" ? batch.getEndDate() : updateBatch.getEndDate());
+		// batch.setImage(updateBatch.getImage());
+		batch.setStatus(updateBatch.getStatus() == "" ? batch.getStatus() : updateBatch.getStatus());
+		batch.setTeacherId(updateBatch.getTeacherId() == 0 ? batch.getTeacherId() : updateBatch.getTeacherId());
+		batch.setTime(updateBatch.getTime() == "" ? batch.getTime() : updateBatch.getTime());
+		return this.repository.save(batch);
 	}
 
 	@Override
 	public boolean delete(int bId) throws ResourceNotFoundException {
-		
-		boolean status=false;		
-		Batch batch = this.repository.findById(bId).orElseThrow(()-> new ResourceNotFoundException("Batch","Id",String.valueOf(bId)));		
-		if(batch!=null)
-		{
+
+		boolean status = false;
+		Batch batch = this.repository.findById(bId)
+				.orElseThrow(() -> new ResourceNotFoundException("Batch", "Id", String.valueOf(bId)));
+		if (batch != null) {
 			this.repository.deleteById(bId);
-			status=true;
+			status = true;
 		}
 		return status;
 	}
 
 	@Override
 	public List<BatchDto> getAllBatch() {
-		
-		List<Batch> findAll = this.repository.findAll();
-		
-		List<BatchDto> batchDtoList=new ArrayList<>();
-		
-		for (Batch batch : findAll) {
-			BatchDto batchDto= new BatchDto();
-			
-			Course course = this.restTemplate.getForObject("http://course-service/course/"+batch.getCourseId(),Course.class);
-			
-			batchDto.setBId(batch.getBId());
-			batchDto.setBatchTitle(batch.getBatchTitle());
-			batchDto.setStartDate(batch.getStartDate());
-			batchDto.setEndDate(batch.getEndDate());
-			batchDto.setDuration(batch.getDuration());			
-			batchDto.setStatus(batch.getStatus());
-			batchDto.setLocation(batch.getLocation());
-			batchDto.setTime(batch.getTime());						
-			batchDto.setCourse(course);
-			batchDto.setImage(batch.getImage());			
-			TeacherDto teacher = this.restTemplate.getForObject("http://teacher-service/teacher/"+batch.getTeacherId(),TeacherDto.class);
-			
-			batchDto.setTeacherDto(teacher);
-			
-			batchDtoList.add(batchDto);
-			
-		}		
-		return batchDtoList;
-	}
 
-	@Override
-	public List<BatchDto> getAllBatchByTeacherId(int tId) {
-		
-		List<Batch> findAllByTeacherId = this.repository.findAllByTeacherId(tId);		
-				
-		List<BatchDto> batchDtoList=new ArrayList<>();
-		for (Batch batch : findAllByTeacherId) {
-			
-			BatchDto batchDto= new BatchDto();			
-			Course course = this.restTemplate.getForObject("http://course-service/course/"+batch.getCourseId(),Course.class);		
+		List<Batch> findAll = this.repository.findAll();
+
+		List<BatchDto> batchDtoList = new ArrayList<>();
+
+		for (Batch batch : findAll) {
+			BatchDto batchDto = new BatchDto();
+
+			Course course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
+					Course.class);
+
 			batchDto.setBId(batch.getBId());
 			batchDto.setBatchTitle(batch.getBatchTitle());
 			batchDto.setStartDate(batch.getStartDate());
@@ -137,27 +113,60 @@ public class BatchServiceImpl implements com.batch.service.batchService{
 			batchDto.setDuration(batch.getDuration());
 			batchDto.setStatus(batch.getStatus());
 			batchDto.setLocation(batch.getLocation());
-			batchDto.setTime(batch.getTime());						
-			batchDto.setCourse(course);			
-			
-			TeacherDto teacher = this.restTemplate.getForObject("http://teacher-service/teacher/"+batch.getTeacherId(),TeacherDto.class);			
+			batchDto.setTime(batch.getTime());
+			batchDto.setCourse(course);
+			batchDto.setImage(batch.getImage());
+			TeacherDto teacher = this.restTemplate
+					.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(), TeacherDto.class);
+
+			batchDto.setTeacherDto(teacher);
+
+			batchDtoList.add(batchDto);
+
+		}
+		return batchDtoList;
+	}
+
+	@Override
+	public List<BatchDto> getAllBatchByTeacherId(int tId) {
+
+		List<Batch> findAllByTeacherId = this.repository.findAllByTeacherId(tId);
+
+		List<BatchDto> batchDtoList = new ArrayList<>();
+		for (Batch batch : findAllByTeacherId) {
+
+			BatchDto batchDto = new BatchDto();
+			Course course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
+					Course.class);
+			batchDto.setBId(batch.getBId());
+			batchDto.setBatchTitle(batch.getBatchTitle());
+			batchDto.setStartDate(batch.getStartDate());
+			batchDto.setEndDate(batch.getEndDate());
+			batchDto.setDuration(batch.getDuration());
+			batchDto.setStatus(batch.getStatus());
+			batchDto.setLocation(batch.getLocation());
+			batchDto.setTime(batch.getTime());
+			batchDto.setCourse(course);
+
+			TeacherDto teacher = this.restTemplate
+					.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(), TeacherDto.class);
 			batchDto.setTeacherDto(teacher);
 			batchDtoList.add(batchDto);
-		}		
-		
+		}
+
 		return batchDtoList;
 	}
 
 	@Override
 	public List<BatchDto> findByBatchTitleContaining(String batchTitle) {
-		
-		List<BatchDto> batchDtoList=new ArrayList<>();		
+
+		List<BatchDto> batchDtoList = new ArrayList<>();
 		List<Batch> batches = this.repository.findByBatchTitleContaining(batchTitle);
-		
+
 		for (Batch batch : batches) {
-			
-			BatchDto batchDto = new BatchDto();			
-			
+
+			BatchDto batchDto = new BatchDto();
+
 			batchDto.setBId(batch.getBId());
 			batchDto.setBatchTitle(batch.getBatchTitle());
 			batchDto.setStartDate(batch.getStartDate());
@@ -166,44 +175,47 @@ public class BatchServiceImpl implements com.batch.service.batchService{
 			batchDto.setStatus(batch.getStatus());
 			batchDto.setLocation(batch.getLocation());
 			batchDto.setImage(batch.getImage());
-			
-			TeacherDto teacher = this.restTemplate.getForObject("http://teacher-service/teacher/"+batch.getTeacherId(),TeacherDto.class);
-			System.out.println("Course Id is "+batch.getCourseId());
-			
-			Course course = this.restTemplate.getForObject("http://course-service/course/"+batch.getCourseId(),Course.class);
-			
+
+			TeacherDto teacher = this.restTemplate
+					.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(), TeacherDto.class);
+			System.out.println("Course Id is " + batch.getCourseId());
+
+			Course course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
+					Course.class);
+
 			System.out.println(course);
 			batchDto.setTeacherDto(teacher);
-			batchDto.setCourse(course);			
+			batchDto.setCourse(course);
 			batchDtoList.add(batchDto);
-			
-		}				
+
+		}
 		return batchDtoList;
 	}
 
 	@Override
 	public List<BatchTitleAndDate> getBatchTitleAndDate() {
-		
-		return this.repository.getBatchTitleAndStartDate();		
+
+		return this.repository.getBatchTitleAndStartDate();
 	}
 
 	@Override
 	public Long countBatchAvailable() {
-		
-		return this.repository.countBatchAvailable();		
+
+		return this.repository.countBatchAvailable();
 	}
 
 	@Override
 	public Batch getSingleBatch(int studentId) throws ResourceNotFoundException {
-						  
-		 StudentDto student = this.restTemplate.getForObject("http://student-service/student/"+252,StudentDto.class);
-		
-		return  this.repository.findById(student.getBatchId()).orElseThrow(()-> new ResourceNotFoundException("Batch","Id",String.valueOf(student.getBatchId())));				
+
+		StudentDto student = this.restTemplate.getForObject("http://student-service/student/" + 252, StudentDto.class);
+
+		return this.repository.findById(student.getBatchId())
+				.orElseThrow(() -> new ResourceNotFoundException("Batch", "Id", String.valueOf(student.getBatchId())));
 	}
 
 	@Override
 	public List<Batch> getBatchesByTeacherId(int tId) {
-		
-		return  this.repository.findAllByTeacherId(tId);		
-	}	
+
+		return this.repository.findAllByTeacherId(tId);
+	}
 }
