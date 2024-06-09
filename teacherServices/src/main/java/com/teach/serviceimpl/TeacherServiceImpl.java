@@ -119,11 +119,10 @@ public class TeacherServiceImpl implements TeacherService {
 		
 		Teacher teacher = this.repository.findById(tId).orElseThrow(()-> new ResourceNotFoundException("Teacher","Id",String.valueOf(tId)));
 		
-		teacher.setContact(teacherDto.getContact());
-		teacher.setEducation(teacherDto.getEducation());
-		teacher.setFirstName(teacherDto.getFirstName());
-		teacher.setLastName(teacherDto.getLastName());
-		teacher.setEmail(teacherDto.getEmail());
+		teacher.setContact(teacherDto.getContact() =="" ? teacher.getContact() : teacherDto.getContact());
+		teacher.setEducation(teacherDto.getEducation() =="" ? teacher.getEducation() : teacherDto.getEducation());
+		teacher.setFirstName(teacherDto.getFirstName() ==""? teacher.getFirstName() : teacherDto.getFirstName());
+		teacher.setLastName(teacherDto.getLastName() =="" ? teacher.getLastName() : teacherDto.getLastName());		
 		
 		return this.repository.save(teacher);		
 	}
