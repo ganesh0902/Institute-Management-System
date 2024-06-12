@@ -1,18 +1,16 @@
 server:
   port: 8999
-  
-  
+
 eureka:
   instance:
     hostname: localhost
-    
+
 spring:
   application:
     name: API GATEWAY
   cloud:
     gateway:
-      mvc:
-        routes:
+      routes:
         - id: batch-service
           uri: lb://batch-service
           predicates:
@@ -24,14 +22,8 @@ spring:
         - id: teacher-service
           uri: lb://teacher-service
           predicates:
-            - Path=/teacher/** 
+            - Path=/teacher/**
         - id: student-service
-          uri: lb://teacher-service
+          uri: lb://student-service
+          predicates:
             - Path=/student/**
-            
-          
-          
-             
-            
-             
-  
