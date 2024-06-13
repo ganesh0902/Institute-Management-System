@@ -1,7 +1,6 @@
 server:
   port: 9096
   
-  
 spring:
   application:
     name: identity-service
