@@ -27,3 +27,8 @@ spring:
           uri: lb://student-service
           predicates:
             - Path=/student/**
+        - id: identity-service
+          uri: lb://identity-service
+          predicates:
+            - Path=/auth/**             
+            
