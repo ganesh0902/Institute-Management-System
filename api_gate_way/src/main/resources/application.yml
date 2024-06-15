@@ -19,16 +19,25 @@ spring:
           uri: lb://course-service
           predicates:
             - Path=/course/**
+          filters:
+            - AuthenticationFilter
         - id: teacher-service
           uri: lb://teacher-service
           predicates:
             - Path=/teacher/**
+          filters:
+            - AuthenticationFilter
+                        
         - id: student-service
           uri: lb://student-service
           predicates:
             - Path=/student/**
+          filters:
+            - AuthenticationFilter	         
+            
         - id: identity-service
           uri: lb://identity-service
           predicates:
             - Path=/auth/**             
-            
+          filters:
+            - AuthenticationFilter
