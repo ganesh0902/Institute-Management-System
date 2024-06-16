@@ -18,7 +18,7 @@ public class CustomeUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		 Optional<UserCredential>  user = this.repo.findByName(username);
+		 Optional<UserCredential>  user = this.repo.findByEmail(username);
 				 
 		return user.map(CustomeUserDetails::new).orElseThrow(()-> new UsernameNotFoundException("User Not Found with name "+username));
 	}
