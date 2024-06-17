@@ -4,12 +4,21 @@ server:
 eureka:
   instance:
     hostname: localhost
-
+        
 spring:
   application:
     name: API GATEWAY
   cloud:
     gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]': 
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE 
       routes:
         - id: batch-service
           uri: lb://batch-service
@@ -40,4 +49,7 @@ spring:
           predicates:
             - Path=/auth/**             
           filters:
-            - AuthenticationFilter
+            - AuthenticationFilter                        
+
+
+    
