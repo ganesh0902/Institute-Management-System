@@ -18,7 +18,11 @@ spring:
               - GET
               - POST
               - PUT
-              - DELETE 
+              - DELETE
+            allowedHeaders:
+              - Content-Type
+              - Authorization
+            allowCredentials: true                       
       routes:
         - id: batch-service
           uri: lb://batch-service

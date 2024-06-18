@@ -29,7 +29,6 @@ import org.springframework.util.StringUtils;
 
 @RestController
 @RequestMapping("/student")
-@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:9004" })
 public class Controller {
 
 	@Autowired
