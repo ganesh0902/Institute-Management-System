@@ -31,7 +31,7 @@ import com.teach.serviceimpl.TeacherServiceImpl;
 
 @RestController
 @RequestMapping("/teacher")
-@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:9002" })
+//@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:9002" })
 public class TeacherController {
 
 	@Autowired
