@@ -15,21 +15,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 
-
 @Configuration
 @EnableWebSecurity
 public class AuthConfig {
 
 	@Bean
-	public UserDetailsService userDetailsService()
-	{
+	public UserDetailsService userDetailsService() {
 		return new CustomeUserDetailsService();
 	}
-	
+
 	@Bean
 	public SecurityFilterChain filter(HttpSecurity http) throws Exception {
 		return http.csrf().disable().authorizeHttpRequests()
-				.requestMatchers("/auth/register", "/auth/token", "/auth/validate").permitAll().and().build();
+				.requestMatchers("/auth/register", "/auth/token", "/auth/validate", "/auth/user").permitAll().and()
+				.build();
 	}
 
 	@Bean
@@ -38,14 +37,14 @@ public class AuthConfig {
 		return new BCryptPasswordEncoder();
 	}
 
-    @Bean
-    public AuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider authenticationProvider=new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userDetailsService());
-        authenticationProvider.setPasswordEncoder(encoder());
-        return authenticationProvider;
-    }
-    
+	@Bean
+	public AuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+		authenticationProvider.setUserDetailsService(userDetailsService());
+		authenticationProvider.setPasswordEncoder(encoder());
+		return authenticationProvider;
+	}
+
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration manager) throws Exception {
 		return manager.getAuthenticationManager();

@@ -46,6 +46,8 @@ public class TeacherController {
 	@PutMapping("/{tId}")
 	public ResponseEntity<Teacher> updateTeacher(@PathVariable("tId") int tId, @RequestBody Teacher teacher)
 			throws ResourceNotFoundException {
+		
+		System.out.println("Teacher Id is "+tId+""+teacher);
 		Teacher updateTeacher = this.teacherServiceImpl.updateTeacher(tId, teacher);
 
 		return new ResponseEntity<Teacher>(updateTeacher, HttpStatus.OK);

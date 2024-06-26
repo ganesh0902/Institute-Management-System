@@ -26,7 +26,6 @@ public class InstituteServiceImpl implements InstituteServices {
 
 		return this.repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Institute", "Id", String.valueOf(id)));
-
 	}
 
 	@Override

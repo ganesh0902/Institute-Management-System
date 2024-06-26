@@ -1,5 +1,7 @@
 package com.identity.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,9 +27,9 @@ public class AuthService {
 		return jwtService.generateToken(username);
 	}
 	
-	public void validateToken(String username)
+	public Map<String,Object> validateToken(String username)
 	{
-		jwtService.validateToken(username);
+		return jwtService.validateToken(username);
 	}
 
 	public UserCredential saveUser(UserCredential credential)
