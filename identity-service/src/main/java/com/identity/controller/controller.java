@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.identity.dto.AuthRequest;
 import com.identity.entity.UserCredential;
+import com.identity.exception.ResourceNotFoundException;
 import com.identity.service.AuthService;
 import com.identity.service.UserService;
 
@@ -41,7 +42,35 @@ public class controller {
 	}
 
 	@PostMapping("/token")
-	public Map<String, Object> generateToken(@RequestBody AuthRequest user) {
+	public String generateToken(@RequestBody AuthRequest user) {
+
+		String response = "";
+		
+		try {
+			System.out.println("User is " + user);
+			Authentication authenticate = authenticationManager
+					.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+
+			if (authenticate.isAuthenticated()) {
+				response = this.authService.generateToken(user.getUsername());
+				
+			} else {
+				response = "Invalid Authentication";
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return response;
+	}
+
+	@GetMapping("/validate")
+	public Map<String, Object> validateToken(@RequestParam("token") String token) {
+
+		return this.authService.validateToken(token);
+	}
+
+	@GetMapping("/login")
+	public Map<String, Object> login(@RequestBody AuthRequest user) {
 
 		String response = "";
 		Map<String, Object> userInformation = null;
@@ -62,17 +91,11 @@ public class controller {
 		}
 		return userInformation;
 	}
-
-	@GetMapping("/validate")
-	public Map<String, Object> validateToken(@RequestParam("token") String token) {
-
-		return this.authService.validateToken(token);
-	}
-
 	@GetMapping("/user")
-	public ResponseEntity<UserCredential> getUserInformation(@RequestParam("email") String email) {
+	public ResponseEntity<UserCredential> user(@RequestParam("email") String email) throws ResourceNotFoundException {
+		
 		UserCredential user = this.service.getUser(email);
-
-		return new ResponseEntity<UserCredential>(user, HttpStatus.OK);
-	}
+		
+		return new ResponseEntity<UserCredential>(user,HttpStatus.OK);				
+	}	
 }
