@@ -27,5 +27,6 @@ public class Teacher {
 	private String education;
 	private String contact;
 	private String email;
-	private String image;	
+	private String image;
+	private Long instituteId;
 }

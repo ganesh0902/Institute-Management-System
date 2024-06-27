@@ -32,10 +32,9 @@ public class controller {
 		Institute save = this.service.save(institute);
 
 		return new ResponseEntity<String>("Record Save Successfully", HttpStatus.OK);
-
 	}
 
-	@PutMapping("/")
+	@PutMapping("/{id}")
 	public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Institute institute)
 			throws ResourceNotFoundException {
 		Institute update = this.service.update(id, institute);

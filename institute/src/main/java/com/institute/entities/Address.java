@@ -39,7 +39,5 @@ public class Address {
 	
 	private String landMark;
 	
-	private String phoneNumber;
-	
-	private String emailAddress;
+	private String phoneNumber;		
 }

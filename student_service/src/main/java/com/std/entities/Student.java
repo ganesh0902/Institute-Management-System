@@ -30,4 +30,5 @@ public class Student {
 	private String lastEducation;
 	private String courseName;	
 	private String image;
+	private Long instituteId;
 }

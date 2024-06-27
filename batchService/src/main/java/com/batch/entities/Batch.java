@@ -13,7 +13,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
-@Table(name="batch")
+@Table(name = "batch")
 public class Batch {
 
 	@Id
@@ -29,10 +29,15 @@ public class Batch {
 	private String image;
 	private int teacherId;
 	private int courseId;
-	
-	
+	private Long instituteId;
+
+	public Batch() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public Batch(int bId, String batchTitle, String duration, String startDate, String endDate, String status,
-			String location, String time, String image, int teacherId, int courseId,Course course) {
+			String location, String time, String image, int teacherId, int courseId, Long instituteId) {
 		super();
 		this.bId = bId;
 		this.batchTitle = batchTitle;
@@ -45,11 +50,7 @@ public class Batch {
 		this.image = image;
 		this.teacherId = teacherId;
 		this.courseId = courseId;
-		
+		this.instituteId = instituteId;
 	}
-	public Batch() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
+
 }

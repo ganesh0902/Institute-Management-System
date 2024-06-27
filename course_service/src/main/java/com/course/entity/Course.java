@@ -32,4 +32,6 @@ public class Course {
 	private String fees;	
 	
 	private String lastUpdatedDate;
+	
+	private Long instituteId;
 }

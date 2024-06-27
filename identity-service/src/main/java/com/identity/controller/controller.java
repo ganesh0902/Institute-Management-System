@@ -37,12 +37,14 @@ public class controller {
 	private UserService service;
 
 	@PostMapping("/register")
-	public UserCredential saveUser(@RequestBody UserCredential user) {
-		return this.authService.saveUser(user);
+	public ResponseEntity<String> saveUser(@RequestBody UserCredential user) {
+		 String saveUser = this.authService.saveUser(user);
+		 
+		 return new ResponseEntity<String>(saveUser,HttpStatus.OK);
 	}
 
 	@PostMapping("/token")
-	public String generateToken(@RequestBody AuthRequest user) {
+	public ResponseEntity<String> generateToken(@RequestBody AuthRequest user) {
 
 		String response = "";
 		
@@ -60,7 +62,7 @@ public class controller {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return response;
+		return new ResponseEntity<String>(response, HttpStatus.OK);
 	}
 
 	@GetMapping("/validate")
