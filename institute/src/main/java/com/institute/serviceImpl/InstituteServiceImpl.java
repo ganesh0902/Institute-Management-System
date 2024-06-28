@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.ResourceAccessException;
 
 import com.institute.entities.Institute;
@@ -38,9 +39,10 @@ public class InstituteServiceImpl implements InstituteServices {
 
 	@Override
 	public Institute update(long id, Institute institute) throws ResourceNotFoundException {
-		
-		Institute data= this.repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Institute","Id", String.valueOf(id)));
-		
+
+		Institute data = this.repository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Institute", "Id", String.valueOf(id)));
+
 		data.setDepartment(institute.getDepartment());
 		data.setDomainUsername(institute.getDomainUsername());
 		data.setEmail(institute.getEmail());
@@ -48,15 +50,22 @@ public class InstituteServiceImpl implements InstituteServices {
 		data.setStartDate(institute.getStartDate());
 		data.setStatus(institute.getStatus());
 		data.setAddress(institute.getAddress());
-		
-		return this.repository.save(data);				
+
+		return this.repository.save(data);
 	}
 
 	@Override
 	public void delete(long id) throws ResourceNotFoundException {
-		
-		Institute data = this.repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Institute","Id",String.valueOf(id)));
+
+		Institute data = this.repository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Institute", "Id", String.valueOf(id)));
 		this.repository.deleteById(data.getId());
 	}
 
+	@Override
+	public Institute findByEmailAddress(String email) throws ResourceNotFoundException {
+
+		return this.repository.findByEmail(email).orElseThrow(()-> new ResourceNotFoundException("Institute","Email",email));
+		
+	}
 }

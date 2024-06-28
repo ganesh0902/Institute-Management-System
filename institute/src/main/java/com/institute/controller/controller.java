@@ -65,4 +65,12 @@ public class controller {
 		ApiResponse apiResponse = new ApiResponse("Record deleted Successfully", true);
 		return new ResponseEntity<ApiResponse>(apiResponse, HttpStatus.OK);
 	}
+	
+	@GetMapping("/details/{email}")
+	public ResponseEntity<Institute> findByEmailAddress(@PathVariable("email") String email) throws ResourceNotFoundException 
+	{
+		Institute findByEmailAddress = this.service.findByEmailAddress(email);
+				
+		return new ResponseEntity<Institute>(findByEmailAddress, HttpStatus.OK);
+	}
 }

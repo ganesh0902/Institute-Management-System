@@ -12,4 +12,5 @@ public interface InstituteServices {
 	public List<Institute> getAll();
 	public Institute update(long id, Institute institute) throws ResourceNotFoundException;
 	public void delete(long id) throws ResourceNotFoundException;	
+	public Institute findByEmailAddress(String email) throws ResourceNotFoundException;
 }
