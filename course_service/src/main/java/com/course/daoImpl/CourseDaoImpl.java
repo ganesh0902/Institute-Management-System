@@ -93,8 +93,8 @@ public class CourseDaoImpl implements CourseDao{
 	}
 	
 	@Override
-	public long getCountOfCourseAvailable() {
+	public long getCountOfCourseAvailable(long instituteId) {
 		
-		return  this.repository.findCourseAvailable();				
-	}
+		return this.repository.findCourseAvailable(instituteId);		  	
+	}	
 }

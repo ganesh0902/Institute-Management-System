@@ -125,10 +125,10 @@ public class batchController {
 		
 		return new ResponseEntity<List<BatchTitleAndDate>>(batchTitleAndDate,HttpStatus.OK);
 	}
-	@GetMapping("/countBatch")
-	public ResponseEntity<Long> countBatchAvailable()
+	@GetMapping("/countBatch/{instituteId}")
+	public ResponseEntity<Long> countBatchAvailable(@PathVariable("instituteId") long instituteId)
 	{
-		Long countBatchAvailable = this.serviceImpl.countBatchAvailable();
+		Long countBatchAvailable = this.serviceImpl.countBatchAvailable(instituteId);
 		return new ResponseEntity<Long>(countBatchAvailable,HttpStatus.OK); 		
 	}
 }

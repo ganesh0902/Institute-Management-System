@@ -92,9 +92,9 @@ public class TeacherController {
 				teacherIdAndName.isEmpty() ? HttpStatus.NOT_FOUND : HttpStatus.OK);
 	}
 
-	@GetMapping("/teacherCount")
-	public ResponseEntity<Long> getTeacherCount() {
-		long teacherCount = this.teacherServiceImpl.getTeacherCount();
+	@GetMapping("/teacherCount/{instituteId}")
+	public ResponseEntity<Long> getTeacherCount(@PathVariable("instituteId") Long instituteId) {
+		long teacherCount = this.teacherServiceImpl.getTeacherCount(instituteId);
 		return new ResponseEntity<Long>(teacherCount, HttpStatus.OK);
 	}
 }

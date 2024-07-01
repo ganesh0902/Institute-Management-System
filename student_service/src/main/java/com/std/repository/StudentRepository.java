@@ -12,6 +12,7 @@ public interface StudentRepository extends JpaRepository<Student,Integer>{
 
 	List<Student> findByFirstNameContaining(String firstName);
 	
-	@Query("select count(*) from Student")
-	Long countStudent();
+	@Query("select count(s) from Student s where s.instituteId = :instituteId")
+	Long countStudentByInstituteId(@Param("instituteId") Long instituteId);
+	
 }

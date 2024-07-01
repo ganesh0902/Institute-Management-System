@@ -66,10 +66,10 @@ public class CourseController {
 		List<Course> courseByName = this.courseService.getCourseByName(courseName);
 		return new ResponseEntity<List<Course>>(courseByName,HttpStatus.OK);					
 	}	
-	@GetMapping("/courseCount")
-	public ResponseEntity<Long> getCountOfCourseAvailable() {
+	@GetMapping("/courseCount/{instituteId}")
+	public ResponseEntity<Long> getCountOfCourseAvailable(@PathVariable("instituteId") long instituteId) {
 				
-	    long countOfCourseAvailable = this.courseService.getCountOfCourseAvailable();
+	    long countOfCourseAvailable = this.courseService.getCountOfCourseAvailable(instituteId);
 	    return new ResponseEntity<Long>(countOfCourseAvailable, HttpStatus.OK);
 	}
 }

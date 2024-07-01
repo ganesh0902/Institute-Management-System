@@ -92,9 +92,11 @@ public class Controller {
 		return new ResponseEntity<List<Student>>(studentByFilter, HttpStatus.OK);
 	}
 
-	@GetMapping("/studentCount")
-	public ResponseEntity<Long> countStudents() {
-		Long courseStudent = this.service.courseStudent();
+	@GetMapping("/studentCount/{instituteId}")
+	public ResponseEntity<Long> countStudents(@PathVariable("instituteId") Long instituteId) {
+		Long courseStudent = this.service.courseStudent(instituteId);
+		System.out.println("Toatl Student "+courseStudent);
+		System.out.println("Tid  "+instituteId);
 		return new ResponseEntity<Long>(courseStudent, HttpStatus.OK);
 	}
 	@GetMapping("/studentDetails/{sdtId}")

@@ -110,8 +110,8 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public long getTeacherCount() {
-		return this.repository.TeacherCount();
+	public long getTeacherCount(Long instituteId) {
+		 return this.repository.TeacherCount(instituteId);
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.teach.entities.Teacher;
 
@@ -12,6 +13,6 @@ public interface TeacherRepository extends JpaRepository<Teacher,Integer>{
 	@Query("select e.tId, e.firstName, e.lastName from Teacher e")
 	List<Object[]> getTeacherIdAndName();
 	
-	@Query("select count(*) from Teacher")
-	long TeacherCount();
+	@Query("select count(t) from Teacher t where t.instituteId =:instituteId")
+	long TeacherCount(@Param("instituteId") Long instituteId);
 }

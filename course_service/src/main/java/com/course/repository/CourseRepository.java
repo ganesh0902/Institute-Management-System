@@ -18,6 +18,7 @@ public interface CourseRepository extends JpaRepository<Course,Integer>{
 
 	List<Course> findByCourseNameContaining(String courseName);
 	
-	@Query("select count(c) from Course c")
-	int findCourseAvailable();
+	@Query("select count(c) from Course c where c.instituteId =:instituteId")
+	long findCourseAvailable(@Param("instituteId") long instituteId);
+	
 }

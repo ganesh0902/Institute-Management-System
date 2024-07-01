@@ -199,9 +199,9 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 	}
 
 	@Override
-	public Long countBatchAvailable() {
+	public Long countBatchAvailable(long instituteId) {
 
-		return this.repository.countBatchAvailable();
+		return this.repository.countBatchAvailable(instituteId);
 	}
 
 	@Override
