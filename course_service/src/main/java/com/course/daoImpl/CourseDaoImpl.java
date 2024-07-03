@@ -56,16 +56,16 @@ public class CourseDaoImpl implements CourseDao{
 	}
 
 	@Override
-	public List<Course> getAll() {
+	public List<Course> getAll(long instituteId) {
 		
-		return this.repository.findAll();
+		return this.repository.getAll(instituteId);
 				
 	}
 
 	@Override
-	public List<CourseIdAndName> getAllCourseIdAndName() {
+	public List<CourseIdAndName> getAllCourseIdAndName(long instituteId) {
 		
-		List<Object[]> courseIdAndName = this.repository.getCourseIdAndName();
+		List<Object[]> courseIdAndName = this.repository.getCourseIdAndName(instituteId);
 				
 		return courseIdAndName.stream().map(course->{
 			

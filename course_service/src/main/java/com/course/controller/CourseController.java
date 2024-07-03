@@ -31,10 +31,11 @@ public class CourseController {
 	{				
 		return  courseService.findById(courseId);		
 	}
-	@GetMapping("/")
-	public ResponseEntity<List<Course>> getAll()
+	@GetMapping("/institute/{instituteId}")
+	public ResponseEntity<List<Course>> getAll(@PathVariable("instituteId") long instituteId)
 	{
-		List<Course> allCourses = this.courseService.getAll();
+		System.out.println("Institute Id is "+instituteId);
+		List<Course> allCourses = this.courseService.getAll(instituteId);
 		
 		return new ResponseEntity<List<Course>>(allCourses,HttpStatus.OK);
 	}
@@ -53,10 +54,10 @@ public class CourseController {
 		 ApiResponse apiResponse = new ApiResponse("Record deleted Successfully",true);		
 		return new ResponseEntity<ApiResponse>(apiResponse,HttpStatus.OK);
 	}
-	@GetMapping("/getCourseIdAndName")
-	public ResponseEntity<List<CourseIdAndName>> getAllCourseIdAndName()
+	@GetMapping("/getCourseIdAndName/{instituteId}")
+	public ResponseEntity<List<CourseIdAndName>> getAllCourseIdAndName(@PathVariable("instituteId") long instituteId)
 	{
-		 List<CourseIdAndName> allCourseIdAndName = this.courseService.getAllCourseIdAndName();
+		 List<CourseIdAndName> allCourseIdAndName = this.courseService.getAllCourseIdAndName(instituteId);
 		
 		return new ResponseEntity<List<CourseIdAndName>>(allCourseIdAndName,allCourseIdAndName.isEmpty() ? HttpStatus.NOT_FOUND :HttpStatus.OK);
 	}
