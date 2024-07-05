@@ -73,9 +73,9 @@ public class Controller {
 		return new ResponseEntity<Student>(student, HttpStatus.OK);
 	}
 	
-	@GetMapping("/")
-	public ResponseEntity<List<Student>> updateStudent() {
-		List<Student> all = this.service.getAll();
+	@GetMapping("/institute/{instituteId}")
+	public ResponseEntity<List<Student>> updateStudent(@PathVariable("instituteId") long instituteId) {
+		List<Student> all = this.service.getAll(instituteId);
 		return new ResponseEntity<List<Student>>(all, HttpStatus.OK);
 	}
 

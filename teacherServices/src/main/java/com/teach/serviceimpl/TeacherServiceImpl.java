@@ -89,9 +89,9 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public List<TeacherIdAndName> getTeacherIdAndName() {
+	public List<TeacherIdAndName> getTeacherIdAndName(long instituteId) {
 
-		List<Object[]> teacherIdAndName = this.repository.getTeacherIdAndName();
+		List<Object[]> teacherIdAndName = this.repository.getTeacherIdAndName(instituteId);
 
 		return teacherIdAndName.stream().map(teacher -> {
 

@@ -94,9 +94,9 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 	}
 
 	@Override
-	public List<BatchDto> getAllBatch() {
+	public List<BatchDto> getAllBatch(long instituteId) {
 
-		List<Batch> findAll = this.repository.findAll();
+		List<Batch> findAll = this.repository.findAllBatchByInstituteId(instituteId);
 
 		List<BatchDto> batchDtoList = new ArrayList<>();
 

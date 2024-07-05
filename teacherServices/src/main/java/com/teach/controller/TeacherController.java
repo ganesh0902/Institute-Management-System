@@ -84,9 +84,9 @@ public class TeacherController {
 		return new ResponseEntity<List<TeacherDto>>(all, HttpStatus.OK);
 	}
 
-	@GetMapping("/getTeachers")
-	public ResponseEntity<List<TeacherIdAndName>> getTeacherIdAndName() {
-		List<TeacherIdAndName> teacherIdAndName = this.teacherServiceImpl.getTeacherIdAndName();
+	@GetMapping("/getTeachers/{instituteId}")
+	public ResponseEntity<List<TeacherIdAndName>> getTeacherIdAndName(@PathVariable("instituteId") long instituteId) {
+		List<TeacherIdAndName> teacherIdAndName = this.teacherServiceImpl.getTeacherIdAndName(instituteId);
 		System.out.println(teacherIdAndName);
 		return new ResponseEntity<List<TeacherIdAndName>>(teacherIdAndName,
 				teacherIdAndName.isEmpty() ? HttpStatus.NOT_FOUND : HttpStatus.OK);

@@ -49,9 +49,9 @@ public class StudentImpl implements Service {
 	}
 
 	@Override
-	public List<Student> getAll() {
+	public List<Student> getAll(long instituteId) {
 
-		return repo.findAll();
+		return repo.findByInstituteId(instituteId);
 	}
 
 	@Override

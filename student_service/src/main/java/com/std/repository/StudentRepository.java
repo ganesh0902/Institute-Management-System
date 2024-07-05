@@ -15,4 +15,7 @@ public interface StudentRepository extends JpaRepository<Student,Integer>{
 	@Query("select count(s) from Student s where s.instituteId = :instituteId")
 	Long countStudentByInstituteId(@Param("instituteId") Long instituteId);
 	
+	 @Query("select s from Student s where s.instituteId = :instituteId")
+	    List<Student> findByInstituteId(@Param("instituteId") long instituteId);
+	
 }

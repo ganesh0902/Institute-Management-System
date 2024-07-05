@@ -11,7 +11,7 @@ public interface Service {
 	public Student saveStudent(Student std);
 	public Student updateStudent(int stdId,Student std) throws ResourceNotFoundException;
 	public Student findById(int stdId) throws ResourceNotFoundException;
-	public List<Student> getAll();
+	public List<Student> getAll(long instituteId);
 	public boolean delete(int stdId) throws ResourceNotFoundException;
 	public List<Student> getStudentByFilter(String studentName);
 	public Long courseStudent(long instituteId);

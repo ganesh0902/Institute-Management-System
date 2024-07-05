@@ -65,10 +65,10 @@ public class batchController {
 		List<Batch> batchesByTeacherId = this.serviceImpl.getBatchesByTeacherId(tid);
 		return new ResponseEntity<List<Batch>>(batchesByTeacherId,HttpStatus.OK);		
 	}
-	@GetMapping("/")
-	public ResponseEntity<List<BatchDto>> getAllBatch()
+	@GetMapping("/institute/{instituteId}")
+	public ResponseEntity<List<BatchDto>> getAllBatch(@PathVariable("instituteId") long instituteId)
 	{		
-		List<BatchDto> allBatch = this.serviceImpl.getAllBatch();		
+		List<BatchDto> allBatch = this.serviceImpl.getAllBatch(instituteId);		
 		return new ResponseEntity<List<BatchDto>>(allBatch,HttpStatus.OK);		
 	}
 	@PostMapping("image")

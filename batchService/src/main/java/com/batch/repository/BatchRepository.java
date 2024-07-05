@@ -25,4 +25,6 @@ public interface BatchRepository extends JpaRepository<Batch,Integer>{
 	 	@Query("select count(b) from Batch b where b.instituteId = :instituteId")
 	 	long countBatchAvailable(@Param("instituteId") long instituteId);
 	 		 	
+	 	@Query("select b from Batch b where b.instituteId = :instituteId")
+	 	List<Batch> findAllBatchByInstituteId(@Param("instituteId") long instituteId);
 } 
