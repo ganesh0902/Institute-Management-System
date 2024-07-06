@@ -118,10 +118,10 @@ public class batchController {
 						
 		return new ResponseEntity<List<BatchDto>>(findByBatchTitleContaining,HttpStatus.OK);				
 	}
-	@GetMapping("/batchTitleAndDate")
-	public ResponseEntity<List<BatchTitleAndDate>> getBatchTitleAndDate()
+	@GetMapping("/batchTitleAndDate/{instituteId}")
+	public ResponseEntity<List<BatchTitleAndDate>> getBatchTitleAndDate(@PathVariable("instituteId") long instituteId)
 	{
-		List<BatchTitleAndDate> batchTitleAndDate = this.serviceImpl.getBatchTitleAndDate();
+		List<BatchTitleAndDate> batchTitleAndDate = this.serviceImpl.getBatchTitleAndDate(instituteId);
 		
 		return new ResponseEntity<List<BatchTitleAndDate>>(batchTitleAndDate,HttpStatus.OK);
 	}

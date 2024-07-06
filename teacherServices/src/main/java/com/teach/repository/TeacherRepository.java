@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.teach.dto.TeacherDto;
 import com.teach.entities.Teacher;
 
 public interface TeacherRepository extends JpaRepository<Teacher,Integer>{
@@ -15,6 +16,9 @@ public interface TeacherRepository extends JpaRepository<Teacher,Integer>{
 	
 	@Query("select count(t) from Teacher t where t.instituteId =:instituteId")
 	long TeacherCount(@Param("instituteId") Long instituteId);
+	
+	@Query("select t from Teacher t where t.instituteId = :instituteId")
+	List<Teacher> findAllByInstitute(@Param("instituteId") long instituteId);
 	
 	
 }

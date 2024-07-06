@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="api"/>
+		<item key="selection" value="getAll"/>
 		<list key="findhistory">
+			<item value="getAll"/>
 			<item value="api_gate"/>
 			<item value="api"/>
 			<item value="apy"/>
@@ -22,7 +23,6 @@
 			<item value="open"/>
 			<item value="getAllBatchByTeacherId"/>
 			<item value="getBatch"/>
-			<item value="    &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;"/>
 		</list>
 		<list key="replacehistory">
 		</list>

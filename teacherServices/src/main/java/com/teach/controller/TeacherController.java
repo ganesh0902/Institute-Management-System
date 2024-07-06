@@ -77,10 +77,10 @@ public class TeacherController {
 		return new ResponseEntity<TeacherDto>(teacherDto, HttpStatus.OK);
 	}
 
-	@GetMapping("/")
-	public ResponseEntity<List<TeacherDto>> getAll() {
+	@GetMapping("/institute/{instituteId}")
+	public ResponseEntity<List<TeacherDto>> getAll(@PathVariable("instituteId") long instituteId) {
 		System.out.println("getAll Teachers");
-		List<TeacherDto> all = this.teacherServiceImpl.getAll();
+		List<TeacherDto> all = this.teacherServiceImpl.getAll(instituteId);
 		return new ResponseEntity<List<TeacherDto>>(all, HttpStatus.OK);
 	}
 

@@ -52,9 +52,9 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public List<TeacherDto> getAll() {
+	public List<TeacherDto> getAll(long instituteId) {
 
-		List<Teacher> allList = this.repository.findAll();
+		List<Teacher> allList = this.repository.findAllByInstitute(instituteId);
 		List<TeacherDto> teacherDtoList = new ArrayList<>();
 
 		for (Teacher teacher : allList) {
