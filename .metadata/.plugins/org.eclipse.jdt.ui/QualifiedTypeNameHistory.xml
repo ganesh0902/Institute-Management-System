@@ -55,9 +55,9 @@
     <fullyQualifiedTypeName name="com.institute.exception.ResourceNotFoundException"/>
     <fullyQualifiedTypeName name="com.course.entity.Course"/>
     <fullyQualifiedTypeName name="com.teach.entities.Teacher"/>
-    <fullyQualifiedTypeName name="com.teach.dto.TeacherDto"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
     <fullyQualifiedTypeName name="com.std.entities.Student"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
+    <fullyQualifiedTypeName name="com.teach.dto.TeacherDto"/>
     <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
     <fullyQualifiedTypeName name="org.springframework.data.repository.query.Param"/>
 </qualifiedTypeNameHistroy>

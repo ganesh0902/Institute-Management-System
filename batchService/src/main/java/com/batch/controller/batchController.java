@@ -53,11 +53,11 @@ public class batchController {
 		return batch;
 	}
 	
-	@GetMapping("/single/{studentId}")
-	public Batch getSinglebatchByStudentId(@PathVariable("studentId") int studentId) throws ResourceNotFoundException
+	@GetMapping("/single/{batchId}")
+	public ResponseEntity<Batch> getSinglebatchByStudentId(@PathVariable("batchId") int batchId) throws ResourceNotFoundException
 	{						
-		Batch singleBatch = serviceImpl.getSingleBatch(studentId);		
-		return singleBatch;
+		Batch singleBatch = serviceImpl.getSingleBatch(batchId);		
+		return new ResponseEntity<Batch>(singleBatch,HttpStatus.OK);
 	}
 	@GetMapping("/teacherId/{tId}")
 	public ResponseEntity<List<Batch>> getbatchByTeacherId(@PathVariable("tId") int tid)

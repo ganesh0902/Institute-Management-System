@@ -9,6 +9,7 @@
 		<item key="selection" value="getAll"/>
 		<list key="findhistory">
 			<item value="getAll"/>
+			<item value="getBatchTitleAndDate"/>
 			<item value="api_gate"/>
 			<item value="api"/>
 			<item value="apy"/>
@@ -22,7 +23,6 @@
 			<item value="sw"/>
 			<item value="open"/>
 			<item value="getAllBatchByTeacherId"/>
-			<item value="getBatch"/>
 		</list>
 		<list key="replacehistory">
 		</list>

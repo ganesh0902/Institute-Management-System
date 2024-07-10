@@ -205,12 +205,12 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 	}
 
 	@Override
-	public Batch getSingleBatch(int studentId) throws ResourceNotFoundException {
+	public Batch getSingleBatch(int batchId) throws ResourceNotFoundException {
 
-		StudentDto student = this.restTemplate.getForObject("http://student-service/student/" + 252, StudentDto.class);
+		//StudentDto student = this.restTemplate.getForObject("http://student-service/student/" + 252, StudentDto.class);
 
-		return this.repository.findById(student.getBatchId())
-				.orElseThrow(() -> new ResourceNotFoundException("Batch", "Id", String.valueOf(student.getBatchId())));
+		return this.repository.findById(batchId)
+				.orElseThrow(() -> new ResourceNotFoundException("Batch", "Id", String.valueOf(batchId)));
 	}
 
 	@Override

@@ -14,7 +14,7 @@ public interface batchService {
 	public Batch saveBatch(Batch batch);
 	public Batch updateBatch(int bId,Batch batch) throws ResourceNotFoundException;
 	public boolean delete(int bId) throws ResourceNotFoundException;
-	public List<BatchDto> getAllBatch(long instituteId);
+	public List<BatchDto> getAllBatch(long instituteId);	
 	public List<BatchDto> getAllBatchByTeacherId(int tId);
 	public List<BatchDto> findByBatchTitleContaining(String batchTitle);	
 	public List<BatchTitleAndDate> getBatchTitleAndDate(long instituteId);

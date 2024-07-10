@@ -40,6 +40,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                 try {
 //                    //REST call to AUTH service
 //                    template.getForObject("http://IDENTITY-SERVICE//validate?token" + authHeader, String.class);
+                	System.out.println("Auth Header is "+authHeader);
                     jwtUtil.validateToken(authHeader);
 
                 } catch (Exception e) {
