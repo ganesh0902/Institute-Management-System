@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="getSingleBatch"/>
+		<item key="selection" value=""/>
 		<list key="findhistory">
+			<item value="swagger"/>
 			<item value="getSingleBatch"/>
 			<item value="com.batch.batchImpl"/>
 			<item value="getAll"/>
@@ -22,7 +23,6 @@
 			<item value="getAllBatch"/>
 			<item value="uploadDir"/>
 			<item value="teacher"/>
-			<item value="sw"/>
 		</list>
 		<list key="replacehistory">
 		</list>

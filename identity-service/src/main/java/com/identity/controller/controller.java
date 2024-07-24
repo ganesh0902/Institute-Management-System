@@ -23,8 +23,9 @@ import com.identity.service.AuthService;
 import com.identity.service.UserService;
 
 @RequestMapping("/auth")
-@RestController
-@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:9001" })
+@RestController																							
+//@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:9001", "http://192.168.0.120:3000", "http://192.168.0.114:3000" })
+@CrossOrigin(origins = "*")
 public class controller {
 
 	@Autowired
@@ -54,7 +55,7 @@ public class controller {
 					.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
 
 			if (authenticate.isAuthenticated()) {
-				response = this.authService.generateToken(user.getUsername());
+				response = this.authService.generateToken(user.getUsername());				
 				
 			} else {
 				response = "Invalid Authentication";
