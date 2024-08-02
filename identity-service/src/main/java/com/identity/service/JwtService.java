@@ -33,7 +33,7 @@ public class JwtService {
 			Claims chain = claimsJws.getBody();
 			String username = chain.getSubject();
 			Date expiration = chain.getExpiration();
-
+		
 			HashMap<String, Object> userInfo = new HashMap<>();
 			userInfo.put("username", username);
 			userInfo.put("expiration", expiration);
