@@ -26,4 +26,16 @@ public class UserCredential {
 	private String password;
 	private String role;
 	private int instituteId;
+	public UserCredential(int id, String name, String email, String role, int instituteId) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.role = role;
+		this.instituteId = instituteId;
+	}
+	public UserCredential() {
+		super();
+		// TODO Auto-generated constructor stub
+	}		
 }

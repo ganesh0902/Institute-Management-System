@@ -1,15 +1,18 @@
 package com.identity.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +24,7 @@ import com.identity.entity.UserCredential;
 import com.identity.exception.ResourceNotFoundException;
 import com.identity.service.AuthService;
 import com.identity.service.UserService;
+import com.identity.serviceImpl.ServiceDaoImpl;
 
 @RequestMapping("/auth")
 @RestController																							
@@ -36,6 +40,9 @@ public class controller {
 
 	@Autowired
 	private UserService service;
+	
+	@Autowired
+	private ServiceDaoImpl serviceDaoImpl;
 
 	@PostMapping("/register")
 	public ResponseEntity<String> saveUser(@RequestBody UserCredential user) {
@@ -97,8 +104,13 @@ public class controller {
 	@GetMapping("/user")
 	public ResponseEntity<UserCredential> user(@RequestParam("email") String email) throws ResourceNotFoundException {
 		
-		UserCredential user = this.service.getUser(email);
-		
+		UserCredential user = this.service.getUser(email);		
 		return new ResponseEntity<UserCredential>(user,HttpStatus.OK);				
 	}	
+	@GetMapping("/teacher/{instituteId}")
+	public ResponseEntity<List<UserCredential>> getAllTeacher(@PathVariable("instituteId") int instituteId)
+	{
+		List<UserCredential> allTeacher = this.serviceDaoImpl.getAllTeacher(instituteId);
+		return new ResponseEntity<List<UserCredential>>(allTeacher, HttpStatus.OK);
+	}
 }
