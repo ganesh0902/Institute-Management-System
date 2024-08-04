@@ -28,8 +28,8 @@ import com.identity.serviceImpl.ServiceDaoImpl;
 
 @RequestMapping("/auth")
 @RestController																							
-//@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:9001", "http://192.168.0.120:3000", "http://192.168.0.114:3000" })
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:9001", "http://192.168.0.120:3000", "http://192.168.0.114:3000" })
+//@CrossOrigin(origins = "*")
 public class controller {
 
 	@Autowired
@@ -46,6 +46,9 @@ public class controller {
 
 	@PostMapping("/register")
 	public ResponseEntity<String> saveUser(@RequestBody UserCredential user) {
+		
+		System.out.println("==============================================================");
+		System.out.println(user);
 		 String saveUser = this.authService.saveUser(user);
 		 
 		 return new ResponseEntity<String>(saveUser,HttpStatus.OK);

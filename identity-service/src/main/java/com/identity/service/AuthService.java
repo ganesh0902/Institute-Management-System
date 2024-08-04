@@ -33,15 +33,19 @@ public class AuthService {
 	public String saveUser(UserCredential credential) {
 		String response = "";
 
-		UserCredential userCredential = this.repository.findByEmail(credential.getEmail()).get();
-
-		if (userCredential == null) {
+		Optional<UserCredential> findByEmail = this.repository.findByEmail(credential.getEmail());
+		
+		if(!findByEmail.isPresent())
+		{
 			credential.setPassword(encoder.encode(credential.getPassword()));
-			this.repository.save(credential);
-			response = "Record Save Successfully";
-		} else {
-			response = "User is already exist";
+			UserCredential save = this.repository.save(credential);			
+			response = String.valueOf(save.getId());
 		}
+		else
+		{
+			response ="User is Alredy exist";
+		}
+			
 		return response;
 	}
 }

@@ -24,7 +24,6 @@
     <fullyQualifiedTypeName name="com.identity.service.UserService"/>
     <fullyQualifiedTypeName name="com.identity.exception.ResourceNotFoundException"/>
     <fullyQualifiedTypeName name="com.identity.entity.UserCredential"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
     <fullyQualifiedTypeName name="com.institute.service.InstituteServices"/>
     <fullyQualifiedTypeName name="com.institute.serviceImpl.InstituteServiceImpl"/>
@@ -47,7 +46,6 @@
     <fullyQualifiedTypeName name="com.course.entity.Course"/>
     <fullyQualifiedTypeName name="com.teach.entities.Teacher"/>
     <fullyQualifiedTypeName name="com.std.entities.Student"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
     <fullyQualifiedTypeName name="com.teach.dto.TeacherDto"/>
     <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
     <fullyQualifiedTypeName name="org.springframework.data.repository.query.Param"/>
@@ -60,4 +58,6 @@
     <fullyQualifiedTypeName name="io.swagger.v3.oas.annotations.info.License"/>
     <fullyQualifiedTypeName name="io.swagger.v3.oas.annotations.servers.Servers"/>
     <fullyQualifiedTypeName name="io.swagger.v3.oas.annotations.servers.Server"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
 </qualifiedTypeNameHistroy>
