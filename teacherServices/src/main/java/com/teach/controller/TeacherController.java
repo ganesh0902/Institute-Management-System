@@ -97,4 +97,11 @@ public class TeacherController {
 		long teacherCount = this.teacherServiceImpl.getTeacherCount(instituteId);
 		return new ResponseEntity<Long>(teacherCount, HttpStatus.OK);
 	}
+	@GetMapping("/credential/{credentialId}")
+	public ResponseEntity<Teacher> getTeacherByCredential(@PathVariable("credentialId") int credentialId)
+	{
+		Teacher teacherByCredential = this.teacherServiceImpl.getTeacherByCredential(credentialId);
+		
+		return new ResponseEntity<Teacher>(teacherByCredential,HttpStatus.OK);
+	}
 }

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.identity.dto.AuthRequest;
+import com.identity.dto.TeacherDto;
 import com.identity.entity.UserCredential;
 import com.identity.exception.ResourceNotFoundException;
 import com.identity.service.AuthService;
@@ -46,8 +47,7 @@ public class controller {
 
 	@PostMapping("/register")
 	public ResponseEntity<String> saveUser(@RequestBody UserCredential user) {
-		
-		System.out.println("==============================================================");
+				
 		System.out.println(user);
 		 String saveUser = this.authService.saveUser(user);
 		 
@@ -111,9 +111,11 @@ public class controller {
 		return new ResponseEntity<UserCredential>(user,HttpStatus.OK);				
 	}	
 	@GetMapping("/teacher/{instituteId}")
-	public ResponseEntity<List<UserCredential>> getAllTeacher(@PathVariable("instituteId") int instituteId)
+	public ResponseEntity<List<TeacherDto>> getAllTeacher(@PathVariable("instituteId") int instituteId)
 	{
-		List<UserCredential> allTeacher = this.serviceDaoImpl.getAllTeacher(instituteId);
-		return new ResponseEntity<List<UserCredential>>(allTeacher, HttpStatus.OK);
+		System.out.println("================================================================================");
+		List<TeacherDto> allTeacher = this.serviceDaoImpl.getAllTeacher(instituteId);
+		
+		return new ResponseEntity<List<TeacherDto>>(allTeacher, HttpStatus.OK);
 	}
 }

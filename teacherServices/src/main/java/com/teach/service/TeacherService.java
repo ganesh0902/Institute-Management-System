@@ -17,4 +17,5 @@ public interface TeacherService {
 	public List<TeacherIdAndName> getTeacherIdAndName(long instituteId);
 	public long getTeacherCount(Long instituteId);
 	public Teacher updateTeacher(int tId, Teacher teacher) throws ResourceNotFoundException;
+	public Teacher getTeacherByCredential(int cId);
 }

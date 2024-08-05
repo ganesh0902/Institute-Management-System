@@ -126,4 +126,11 @@ public class TeacherServiceImpl implements TeacherService {
 		
 		return this.repository.save(teacher);		
 	}
+
+	@Override
+	public Teacher getTeacherByCredential(int cId) {
+
+		return this.repository.getTeacherByCredential(cId);			
+		
+	}
 }
