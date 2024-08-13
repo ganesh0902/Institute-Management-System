@@ -1,6 +1,8 @@
 package com.std.serviceImpl;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
 import com.std.dto.BatchDto;
@@ -115,5 +117,20 @@ public class StudentImpl implements Service {
 	public Long courseStudent(long instituteId) {
 
 		return this.repo.countStudentByInstituteId(instituteId);
+	}
+
+	@Override
+	public List<Student> getAllStudentByBatch(int batchId) {
+		Optional<List<Student>> allStudentByBatchId = this.repo.getAllStudentByBatchId(batchId);
+		List<Student> students =null;
+		if(allStudentByBatchId.isPresent())
+		{
+			students =  allStudentByBatchId.get();
+		}		
+		else
+		{
+			System.out.println("Record not found");
+		}
+		return students;
 	}
 }

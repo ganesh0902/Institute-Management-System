@@ -105,4 +105,11 @@ public class Controller {
 		 StudentDto studentDetails = this.service.getStudentDetails(stdId);			
 		return new ResponseEntity<StudentDto>(studentDetails,HttpStatus.OK);		
 	}
+	@GetMapping("/studentByBatch/{batchId}")
+	public ResponseEntity<List<Student>> getStudentByBatchId(@PathVariable("batchId") int batchId)
+	{
+		List<Student> allStudentByBatch = this.service.getAllStudentByBatch(batchId);
+		
+		return new ResponseEntity<List<Student>>(allStudentByBatch, HttpStatus.OK);
+	}
 }

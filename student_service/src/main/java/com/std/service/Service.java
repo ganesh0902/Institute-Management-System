@@ -16,5 +16,5 @@ public interface Service {
 	public List<Student> getStudentByFilter(String studentName);
 	public Long courseStudent(long instituteId);
 	public StudentDto getStudentDetails(int stdId) throws ResourceNotFoundException;
-	
+	public List<Student> getAllStudentByBatch(int batchId);
 }

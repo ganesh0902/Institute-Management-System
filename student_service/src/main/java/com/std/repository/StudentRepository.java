@@ -1,6 +1,7 @@
 package com.std.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,4 +19,6 @@ public interface StudentRepository extends JpaRepository<Student,Integer>{
 	 @Query("select s from Student s where s.instituteId = :instituteId")
 	    List<Student> findByInstituteId(@Param("instituteId") long instituteId);
 	
+	 @Query("select s from Student s where s.batchId = :batchId")
+	 Optional<List<Student>> getAllStudentByBatchId(@Param("batchId") int batchId);
 }
