@@ -130,5 +130,5 @@ public class batchController {
 	{
 		Long countBatchAvailable = this.serviceImpl.countBatchAvailable(instituteId);
 		return new ResponseEntity<Long>(countBatchAvailable,HttpStatus.OK); 		
-	}
+	}	
 }

@@ -22,13 +22,11 @@
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.DeleteMapping"/>
     <fullyQualifiedTypeName name="java.lang.Object"/>
     <fullyQualifiedTypeName name="java.lang.Error"/>
-    <fullyQualifiedTypeName name="java.util.Optional"/>
     <fullyQualifiedTypeName name="com.institute.entities.Institute"/>
     <fullyQualifiedTypeName name="com.institute.exception.GlobalException"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ExceptionHandler"/>
     <fullyQualifiedTypeName name="com.institute.exception.ResourceNotFoundException"/>
     <fullyQualifiedTypeName name="com.course.entity.Course"/>
-    <fullyQualifiedTypeName name="com.std.entities.Student"/>
     <fullyQualifiedTypeName name="com.batch.entities.Batch"/>
     <fullyQualifiedTypeName name="io.swagger.v3.oas.annotations.OpenAPIDefinition"/>
     <fullyQualifiedTypeName name="io.swagger.v3.oas.annotations.info.Info"/>
@@ -52,12 +50,14 @@
     <fullyQualifiedTypeName name="lombok.ToString"/>
     <fullyQualifiedTypeName name="com.teach.dto.TeacherDto"/>
     <fullyQualifiedTypeName name="com.teach.entities.Teacher"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="com.identity.dto.TeacherDto"/>
+    <fullyQualifiedTypeName name="java.util.Optional"/>
     <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
     <fullyQualifiedTypeName name="org.springframework.data.repository.query.Param"/>
+    <fullyQualifiedTypeName name="com.std.entities.Student"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
     <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
     <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="com.identity.dto.TeacherDto"/>
 </qualifiedTypeNameHistroy>

@@ -112,8 +112,7 @@ public class controller {
 	}	
 	@GetMapping("/teacher/{instituteId}")
 	public ResponseEntity<List<TeacherDto>> getAllTeacher(@PathVariable("instituteId") int instituteId)
-	{
-		System.out.println("================================================================================");
+	{		
 		List<TeacherDto> allTeacher = this.serviceDaoImpl.getAllTeacher(instituteId);
 		
 		return new ResponseEntity<List<TeacherDto>>(allTeacher, HttpStatus.OK);
