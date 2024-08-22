@@ -25,10 +25,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.batch.batchImpl.AssignmentImpl;
 import com.batch.batchImpl.BatchServiceImpl;
 import com.batch.dto.BatchDto;
 import com.batch.dto.BatchTitleAndDate;
 import com.batch.dto.TeacherDto;
+import com.batch.entities.Assignment;
 import com.batch.entities.Batch;
 import com.batch.entities.Course;
 import com.batch.exception.ApiResponse;
@@ -42,6 +44,9 @@ public class batchController {
 
 	@Autowired
 	private BatchServiceImpl serviceImpl;
+	
+	@Autowired
+	private AssignmentImpl assignmentImpl;
 	
 	   @Value("${image.upload.dir}")
 	   private String uploadDir;
@@ -131,4 +136,11 @@ public class batchController {
 		Long countBatchAvailable = this.serviceImpl.countBatchAvailable(instituteId);
 		return new ResponseEntity<Long>(countBatchAvailable,HttpStatus.OK); 		
 	}	
+	@PostMapping("/assignmentSave")
+	public ResponseEntity<Assignment> saveAssignment(@RequestBody Assignment assignment)
+	{
+		Assignment saveAssignment = this.assignmentImpl.saveAssignment(assignment);
+		
+		return new ResponseEntity<Assignment>(saveAssignment, HttpStatus.OK);
+	}
 }
