@@ -308,7 +308,6 @@ INDEX VERSION 1.132+C:\Users\Sangita\Institute Management System\.metadata\.plug
 2828743167.index
 3151853015.index
 1211742672.index
-1742584861.index
 4171106477.index
 772105370.index
 1887760569.index

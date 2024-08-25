@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -33,11 +36,12 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public TeacherDto getTeacherById(int id) throws ResourceNotFoundException {
+	@Cacheable(cacheNames = "teacher", key = "#tId")
+	public TeacherDto getTeacherById(int tId) throws ResourceNotFoundException {
 
 		TeacherDto teacherDto = new TeacherDto();
-		Teacher teacher = this.repository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Teacher", "Id", String.valueOf(id)));
+		Teacher teacher = this.repository.findById(tId)
+				.orElseThrow(() -> new ResourceNotFoundException("Teacher", "Id", String.valueOf(tId)));
 		teacherDto.setTId(teacher.getTId());
 		teacherDto.setFirstName(teacher.getFirstName());
 		teacherDto.setLastName(teacher.getLastName());
@@ -51,12 +55,14 @@ public class TeacherServiceImpl implements TeacherService {
 		return teacherDto;
 	}
 
-	@Override
+	@Override									  
+	/* @Cacheable(cacheNames = "teacher", key = "#instituteId") */
 	public List<TeacherDto> getAll(long instituteId) {
 
 		List<Teacher> allList = this.repository.findAllByInstitute(instituteId);
 		List<TeacherDto> teacherDtoList = new ArrayList<>();
 
+		System.out.println("Getting record from data base");
 		for (Teacher teacher : allList) {
 
 			TeacherDto teacherDto = new TeacherDto();
@@ -76,11 +82,12 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public boolean delete(int id) throws ResourceNotFoundException {
+	@CacheEvict(cacheNames = "teacher",key="#tId")
+	public boolean delete(int tId) throws ResourceNotFoundException {
 
 		boolean status = false;
-		Teacher teacher = this.repository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Teacher", "Id", String.valueOf(id)));
+		Teacher teacher = this.repository.findById(tId)
+				.orElseThrow(() -> new ResourceNotFoundException("Teacher", "Id", String.valueOf(tId)));
 
 		if (teacher != null) {
 			status = true;
@@ -89,10 +96,12 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
+	@Cacheable(cacheNames = "teacher", key = "#instituteId")
 	public List<TeacherIdAndName> getTeacherIdAndName(long instituteId) {
 
 		List<Object[]> teacherIdAndName = this.repository.getTeacherIdAndName(instituteId);
 
+		System.out.println("Getting record from data base");
 		return teacherIdAndName.stream().map(teacher -> {
 
 			TeacherIdAndName teacherr = new TeacherIdAndName();
@@ -110,27 +119,34 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
+	@Cacheable(cacheNames = "teacher", key = "#instituteId")
 	public long getTeacherCount(Long instituteId) {
-		 return this.repository.TeacherCount(instituteId);
+		System.out.println("Fetching data from database");
+		return this.repository.TeacherCount(instituteId);
 	}
 
 	@Override
+	@CachePut(cacheNames = "teacher", key = "#tId")
 	public Teacher updateTeacher(int tId, Teacher teacherDto) throws ResourceNotFoundException {
-		
-		Teacher teacher = this.repository.findById(tId).orElseThrow(()-> new ResourceNotFoundException("Teacher","Id",String.valueOf(tId)));
-		
-		teacher.setContact(teacherDto.getContact() =="" ? teacher.getContact() : teacherDto.getContact());
-		teacher.setEducation(teacherDto.getEducation() =="" ? teacher.getEducation() : teacherDto.getEducation());
-		teacher.setFirstName(teacherDto.getFirstName() ==""? teacher.getFirstName() : teacherDto.getFirstName());
-		teacher.setLastName(teacherDto.getLastName() =="" ? teacher.getLastName() : teacherDto.getLastName());		
-		
-		return this.repository.save(teacher);		
+
+		System.out.println("Updating from Database");
+		Teacher teacher = this.repository.findById(tId)
+				.orElseThrow(() -> new ResourceNotFoundException("Teacher", "Id", String.valueOf(tId)));
+
+		teacher.setContact(teacherDto.getContact() == "" ? teacher.getContact() : teacherDto.getContact());
+		teacher.setEducation(teacherDto.getEducation() == "" ? teacher.getEducation() : teacherDto.getEducation());
+		teacher.setFirstName(teacherDto.getFirstName() == "" ? teacher.getFirstName() : teacherDto.getFirstName());
+		teacher.setLastName(teacherDto.getLastName() == "" ? teacher.getLastName() : teacherDto.getLastName());
+
+		return this.repository.save(teacher);
 	}
 
 	@Override
+	@Cacheable(cacheNames = "teacher", key = "#cId")
 	public Teacher getTeacherByCredential(int cId) {
 
-		return this.repository.getTeacherByCredential(cId);			
-		
+		System.out.println();
+		return this.repository.getTeacherByCredential(cId);
+
 	}
 }
