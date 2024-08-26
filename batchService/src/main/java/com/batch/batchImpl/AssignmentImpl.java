@@ -1,5 +1,6 @@
 package com.batch.batchImpl;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class AssignmentImpl implements AssignmentService {
 
 	@Override
 	public Assignment saveAssignment(Assignment assignment) {
+		LocalDate currentDate = LocalDate.now();
+		assignment.setStartDate(currentDate.toString());
 		Assignment save = this.repository.save(assignment);
 		return save;
 	}

@@ -26,4 +26,5 @@ public class Assignment {
 	private String endDate;
 	private int batchId;
 	private String time;
+	private String status;
 }
