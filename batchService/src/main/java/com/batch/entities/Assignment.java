@@ -27,4 +27,5 @@ public class Assignment {
 	private int batchId;
 	private String time;
 	private String status;
+	private int teacherId;
 }

@@ -143,4 +143,18 @@ public class batchController {
 		
 		return new ResponseEntity<Assignment>(saveAssignment, HttpStatus.OK);
 	}
+	@GetMapping("/assignmentByBatchId/{batchId}")
+	public ResponseEntity<List<Assignment>> getAllAssignmentByBatch(@PathVariable("batchId")  int batchId)
+	{
+		List<Assignment> allAssignmentByBatch = this.assignmentImpl.getAllAssignmentByBatch(batchId);
+		
+		return new ResponseEntity<List<Assignment>>(allAssignmentByBatch, HttpStatus.OK);
+	}
+	@GetMapping("/asssignmentByTeacherId/{teacherId}")
+	public ResponseEntity<List<Assignment>> getAllTeacherById(@PathVariable("teacherId") int teacherId)
+	{
+		List<Assignment> allAssignmentByTeacherId = this.assignmentImpl.getAllAssignmentByTeacherId(teacherId);
+		
+		return new ResponseEntity<List<Assignment>>(allAssignmentByTeacherId,HttpStatus.OK);
+	}
 }

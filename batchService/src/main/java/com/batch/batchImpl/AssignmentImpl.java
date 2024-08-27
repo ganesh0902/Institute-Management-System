@@ -34,8 +34,13 @@ public class AssignmentImpl implements AssignmentService {
 
 	@Override
 	public List<Assignment> getAllAssignmentByBatch(int batchId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return this.repository.getAllAssignmentsByBatchid(batchId);		
 	}
 
+	@Override
+	public List<Assignment> getAllAssignmentByTeacherId(int teacherId) {
+
+		return this.repository.getAllAssignmentByTeacherId(teacherId);		
+	}
 }
