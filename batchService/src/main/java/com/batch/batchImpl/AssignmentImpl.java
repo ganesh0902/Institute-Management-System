@@ -18,6 +18,10 @@ public class AssignmentImpl implements AssignmentService {
 
 	@Override
 	public Assignment saveAssignment(Assignment assignment) {
+		if(assignment.getTaskId()==0)
+		{
+			assignment.setStatus("active");
+		}
 		LocalDate currentDate = LocalDate.now();
 		assignment.setStartDate(currentDate.toString());
 		Assignment save = this.repository.save(assignment);

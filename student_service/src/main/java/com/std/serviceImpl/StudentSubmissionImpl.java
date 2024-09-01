@@ -1,11 +1,13 @@
 package com.std.serviceImpl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.std.entities.StudentSubmission;
+import com.std.exception.ResourceNotFoundException;
 import com.std.repository.StudentSubmissionRepository;
 import com.std.service.AssignmentService;
 
@@ -17,6 +19,12 @@ public class StudentSubmissionImpl implements AssignmentService {
 
 	@Override
 	public StudentSubmission saveSubmission(StudentSubmission studentSubmission) {
+		
+		if(studentSubmission.getSubmissionId()==null)
+		{
+			studentSubmission.setStatus("active");
+			studentSubmission.setDate(new Date().toLocaleString());
+		}
 		StudentSubmission save = this.submissionRepository.save(studentSubmission);
 		return save;
 	}
@@ -29,7 +37,7 @@ public class StudentSubmissionImpl implements AssignmentService {
 	}
 
 	@Override
-	public List<StudentSubmission> getSubmissionByBatchId(int batchId, int instituteId) {
+	public List<StudentSubmission> getSubmissionByBatchId(int batchId) {
 
 		List<StudentSubmission> studentSubmissionByBatchId = this.submissionRepository
 				.getStudentSubmissionByBatchId(batchId);
@@ -40,6 +48,13 @@ public class StudentSubmissionImpl implements AssignmentService {
 	public List<StudentSubmission> getAllSubmission() {
 		List<StudentSubmission> findAll = this.submissionRepository.findAll();
 		return findAll;
+	}
+
+	@Override
+	public StudentSubmission findBySubmissionId(Long sbId) throws ResourceNotFoundException {
+		
+		StudentSubmission submission = this.submissionRepository.findById(sbId).orElseThrow(()-> new ResourceNotFoundException("Submission", "Id",String.valueOf(sbId)));
+		return submission;
 	}
 
 }
