@@ -12,7 +12,7 @@ import com.batch.entities.Assignment;
 @Repository
 public interface AssignmentRepository extends JpaRepository<Assignment, Integer>{
 	
-	@Query("select a from Assignment a where a.batchId = :batchId")
+	@Query("select a from Assignment a where a.batchId = :batchId order by a.startDate desc")
 	public List<Assignment> getAllAssignmentsByBatchid(@Param("batchId") int batchId);
 	
 	@Query("select a from Assignment a where a.teacherId = :teacherId")
