@@ -18,4 +18,7 @@ public interface StudentSubmissionRepository extends JpaRepository<StudentSubmis
 	@Query("select b from StudentSubmission b where b.batchId =:batchId")
 	List<StudentSubmission> getStudentSubmissionByBatchId(@Param("batchId") int batchId);
 	
+	@Query("select s from StudentSubmission s where s.assignmentId = :assignmentId")
+	List<StudentSubmission> getStudentByAssignmentId(@Param("assignmentId") int assignmentId);
+	
 }

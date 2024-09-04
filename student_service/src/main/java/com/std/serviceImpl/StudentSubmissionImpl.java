@@ -57,4 +57,10 @@ public class StudentSubmissionImpl implements AssignmentService {
 		return submission;
 	}
 
+	@Override
+	public List<StudentSubmission> getStudentByAssignmentId(int assignmentId) {
+		List<StudentSubmission> studentByAssignmentId = this.submissionRepository.getStudentByAssignmentId(assignmentId);
+		return studentByAssignmentId;
+	}
+
 }

@@ -12,5 +12,5 @@ public interface AssignmentService {
 	 List<StudentSubmission> getStudentSubmissionByStudentId(int stdSubmId);
 	 List<StudentSubmission> getSubmissionByBatchId(int batchId);
 	 List<StudentSubmission> getAllSubmission();
-	
+	 List<StudentSubmission> getStudentByAssignmentId(int assignmentId);
 }

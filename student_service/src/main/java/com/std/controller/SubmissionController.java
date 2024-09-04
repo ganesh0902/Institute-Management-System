@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,5 +51,13 @@ public class SubmissionController {
 
 		return new ResponseEntity<List<StudentSubmission>>(submissionByBatchId, HttpStatus.OK);
 	}
-
+	
+	@GetMapping("/assignment/{assignmentId}")
+	public ResponseEntity<List<StudentSubmission>> getStudentByAssignmentId(@PathVariable("assignmentId") int assignmentId)
+	{
+		List<StudentSubmission> studentByAssignmentId = this.service.getStudentByAssignmentId(assignmentId);
+		
+		return new ResponseEntity<List<StudentSubmission>>(studentByAssignmentId, HttpStatus.OK);
+		
+	}
 }
