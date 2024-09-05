@@ -1,13 +1,17 @@
 package com.std.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.std.dto.SubmissionDto;
+import com.std.entities.Student;
 import com.std.entities.StudentSubmission;
 import com.std.exception.ResourceNotFoundException;
+import com.std.repository.StudentRepository;
 import com.std.repository.StudentSubmissionRepository;
 import com.std.service.AssignmentService;
 
@@ -16,6 +20,9 @@ public class StudentSubmissionImpl implements AssignmentService {
 
 	@Autowired
 	private StudentSubmissionRepository submissionRepository;
+	
+	@Autowired
+	private StudentImpl studentService;
 
 	@Override
 	public StudentSubmission saveSubmission(StudentSubmission studentSubmission) {
@@ -58,9 +65,32 @@ public class StudentSubmissionImpl implements AssignmentService {
 	}
 
 	@Override
-	public List<StudentSubmission> getStudentByAssignmentId(int assignmentId) {
+	public List<SubmissionDto> getStudentByAssignmentId(int assignmentId) throws ResourceNotFoundException {
 		List<StudentSubmission> studentByAssignmentId = this.submissionRepository.getStudentByAssignmentId(assignmentId);
-		return studentByAssignmentId;
+		
+		List<SubmissionDto> submisionList = new ArrayList<SubmissionDto>();
+		
+		for(StudentSubmission sbt: studentByAssignmentId)
+		{
+			SubmissionDto submission = new SubmissionDto();			
+			Student std = this.studentService.findById(sbt.getStdId());
+			
+			submission.setAssignmentId(sbt.getAssignmentId());
+			submission.setBatchId(sbt.getBatchId());
+			submission.setDate(sbt.getDate());
+			submission.setSubmissionId(sbt.getSubmissionId());
+			submission.setStdId(sbt.getStdId());
+			
+			submission.setFirstName(std.getFirstName());
+			submission.setLastName(std.getLastName());
+			submission.setImage(std.getImage());
+			submission.setSolution(sbt.getSolution());
+			submission.setStatus(sbt.getStatus());	
+			
+			submisionList.add(submission);
+			
+		}
+		return submisionList;
 	}
 
 }

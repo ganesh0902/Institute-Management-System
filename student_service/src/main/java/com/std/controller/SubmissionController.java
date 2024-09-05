@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.std.dto.SubmissionDto;
 import com.std.entities.StudentSubmission;
 import com.std.exception.ResourceNotFoundException;
 import com.std.serviceImpl.StudentSubmissionImpl;
@@ -53,11 +54,11 @@ public class SubmissionController {
 	}
 	
 	@GetMapping("/assignment/{assignmentId}")
-	public ResponseEntity<List<StudentSubmission>> getStudentByAssignmentId(@PathVariable("assignmentId") int assignmentId)
+	public ResponseEntity<List<SubmissionDto>> getStudentByAssignmentId(@PathVariable("assignmentId") int assignmentId) throws ResourceNotFoundException
 	{
-		List<StudentSubmission> studentByAssignmentId = this.service.getStudentByAssignmentId(assignmentId);
+		List<SubmissionDto> studentByAssignmentId = this.service.getStudentByAssignmentId(assignmentId);
 		
-		return new ResponseEntity<List<StudentSubmission>>(studentByAssignmentId, HttpStatus.OK);
+		return new ResponseEntity<List<SubmissionDto>>(studentByAssignmentId, HttpStatus.OK);
 		
 	}
 }

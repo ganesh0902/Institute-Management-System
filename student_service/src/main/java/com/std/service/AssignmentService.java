@@ -2,6 +2,7 @@ package com.std.service;
 
 import java.util.List;
 
+import com.std.dto.SubmissionDto;
 import com.std.entities.StudentSubmission;
 import com.std.exception.ResourceNotFoundException;
 
@@ -12,5 +13,5 @@ public interface AssignmentService {
 	 List<StudentSubmission> getStudentSubmissionByStudentId(int stdSubmId);
 	 List<StudentSubmission> getSubmissionByBatchId(int batchId);
 	 List<StudentSubmission> getAllSubmission();
-	 List<StudentSubmission> getStudentByAssignmentId(int assignmentId);
+	 List<SubmissionDto> getStudentByAssignmentId(int assignmentId) throws ResourceNotFoundException;
 }
