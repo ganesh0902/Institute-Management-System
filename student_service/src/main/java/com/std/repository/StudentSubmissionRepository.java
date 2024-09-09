@@ -3,11 +3,14 @@ package com.std.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.std.entities.StudentSubmission;
+
+import jakarta.transaction.Transactional;
 
 @Repository
 public interface StudentSubmissionRepository extends JpaRepository<StudentSubmission,Long>{
@@ -20,5 +23,10 @@ public interface StudentSubmissionRepository extends JpaRepository<StudentSubmis
 	
 	@Query("select s from StudentSubmission s where s.assignmentId = :assignmentId")
 	List<StudentSubmission> getStudentByAssignmentId(@Param("assignmentId") int assignmentId);
+
+	@Modifying
+	@Transactional
+	@Query("UPDATE StudentSubmission s SET s.status =:status WHERE s.stdId = :stdId")
+	StudentSubmission updateAssignmentStatus(@Param("status") String status, @Param("stdId") int stdId);	
 	
 }

@@ -14,4 +14,5 @@ public interface AssignmentService {
 	 List<StudentSubmission> getSubmissionByBatchId(int batchId);
 	 List<StudentSubmission> getAllSubmission();
 	 List<SubmissionDto> getStudentByAssignmentId(int assignmentId) throws ResourceNotFoundException;
+	 StudentSubmission updateStatus(String status, int stdId);
 }

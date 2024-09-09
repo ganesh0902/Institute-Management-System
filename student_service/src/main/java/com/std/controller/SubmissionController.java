@@ -3,6 +3,7 @@ package com.std.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -58,7 +59,14 @@ public class SubmissionController {
 	{
 		List<SubmissionDto> studentByAssignmentId = this.service.getStudentByAssignmentId(assignmentId);
 		
-		return new ResponseEntity<List<SubmissionDto>>(studentByAssignmentId, HttpStatus.OK);
+		return new ResponseEntity<List<SubmissionDto>>(studentByAssignmentId, HttpStatus.OK);	
+	}
+	@Query("/status/{status}/{stdId}")
+	public ResponseEntity<StudentSubmission> updateStudentSubmissionStatus(@PathVariable("status") String status, @PathVariable("stdId") int stdId)
+	{
+		StudentSubmission updateStatus = this.service.updateStatus(status, stdId);
 		
+		return new ResponseEntity<StudentSubmission>(updateStatus, HttpStatus.OK);
+	
 	}
 }

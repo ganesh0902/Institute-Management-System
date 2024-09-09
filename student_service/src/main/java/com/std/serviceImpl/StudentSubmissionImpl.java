@@ -93,4 +93,17 @@ public class StudentSubmissionImpl implements AssignmentService {
 		return submisionList;
 	}
 
+	@Override
+	public StudentSubmission updateStatus(String status, int stdId) {
+
+		StudentSubmission updateAssignmentStatus = this.submissionRepository.updateAssignmentStatus(status, stdId);
+		
+		if(updateAssignmentStatus==null)
+		{
+			new ResourceNotFoundException("Student","Id", String.valueOf(stdId));
+		}
+		
+		return updateAssignmentStatus;
+	}
+
 }
