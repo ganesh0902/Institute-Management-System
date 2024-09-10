@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -61,12 +62,12 @@ public class SubmissionController {
 		
 		return new ResponseEntity<List<SubmissionDto>>(studentByAssignmentId, HttpStatus.OK);	
 	}
-	@Query("/status/{status}/{stdId}")
-	public ResponseEntity<StudentSubmission> updateStudentSubmissionStatus(@PathVariable("status") String status, @PathVariable("stdId") int stdId)
+	@PutMapping("/status/{status}/{submissionId}/{stdId}")
+	public ResponseEntity<String> updateStudentSubmissionStatus(@PathVariable("status") String status, @PathVariable("submissionId") int submissionId, @PathVariable("stdId") int stdId) throws ResourceNotFoundException
 	{
-		StudentSubmission updateStatus = this.service.updateStatus(status, stdId);
+		this.service.updateStatus(status, submissionId, stdId);
 		
-		return new ResponseEntity<StudentSubmission>(updateStatus, HttpStatus.OK);
+		return new ResponseEntity<String>("Record Updated Successfully", HttpStatus.OK);
 	
 	}
 }
