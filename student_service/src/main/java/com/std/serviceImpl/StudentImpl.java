@@ -133,4 +133,11 @@ public class StudentImpl implements Service {
 		}
 		return students;
 	}
+
+	@Override
+	public List<Student> getAllStudent() {
+		
+		List<Student> findAll = this.repo.findAll();
+		return findAll;
+	}
 }

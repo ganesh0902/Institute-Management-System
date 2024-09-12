@@ -59,7 +59,13 @@ public class Controller {
 		}		
 		return new ResponseEntity<String>(fileName, HttpStatus.OK);
 	}
-
+	@GetMapping("/")
+	public ResponseEntity<List<Student>> getAllStudent()
+	{
+		List<Student> allStudent = this.service.getAllStudent();
+		
+		return new ResponseEntity<List<Student>>(allStudent, HttpStatus.OK);
+	}
 	@PutMapping("/{stdId}")
 	public ResponseEntity<Student> updateStudent(@PathVariable("stdId") int stdId, @RequestBody Student student)
 			throws ResourceNotFoundException {
