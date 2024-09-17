@@ -38,5 +38,8 @@ public class Student {
 	private String courseName;	
 	private String image;
 	private Long instituteId;
+	private Long totalFees;
+	private Long paidFees;
+	private Long remainFees;
 		 
 }
