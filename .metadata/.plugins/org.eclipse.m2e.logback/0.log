@@ -15559,3 +15559,99 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact io.netty:nett
 2024-09-17 20:19:12,850 [Worker-1: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
 2024-09-17 20:19:12,916 [Worker-1: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
 2024-09-17 20:19:12,920 [Worker-1: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\student_service\src\test\resources
+2024-09-17 20:46:41,434 [Stop Help Server] INFO  org.eclipse.jetty.server.Server - Stopped Server@4d56758{STOPPING}[10.0.13,sto=0]
+2024-09-17 20:46:41,533 [Stop Help Server] INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@1f59a558{HTTP/1.1, (http/1.1)}{127.0.0.1:0}
+2024-09-17 20:46:41,681 [Stop Help Server] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@5bbfed43{/help,null,STOPPED}
+2024-09-18 07:49:35,838 [Worker-3: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2024-09-19 18:41:30,377 [Worker-3: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2024-09-19 18:42:15,030 [Worker-9: Launching e_server - EServerApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 18:42:15,103 [Worker-9: Launching e_server - EServerApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 18:42:15,111 [Worker-9: Launching e_server - EServerApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\e_server\src\test\resources
+2024-09-19 18:42:22,652 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 18:42:22,822 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 18:42:22,829 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\api_gate_way\src\test\resources
+2024-09-19 18:42:29,119 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 18:42:29,239 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 18:42:29,246 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\batchService\src\test\resources
+2024-09-19 18:42:32,750 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 18:42:32,804 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 18:42:32,810 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\course_service\src\test\resources
+2024-09-19 18:42:41,556 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 18:42:41,687 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 18:42:41,694 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\identity-service\src\test\resources
+2024-09-19 18:42:45,614 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 18:42:45,802 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 18:42:45,808 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\institute\src\test\resources
+2024-09-19 18:42:50,918 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 18:42:51,050 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 18:42:51,055 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\student_service\src\test\resources
+2024-09-19 18:42:55,288 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 18:42:55,398 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 18:42:55,407 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\teacherServices\src\test\resources
+2024-09-19 20:35:12,734 [Worker-483: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 20:35:13,057 [Worker-483: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 20:35:13,062 [Worker-483: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\student_service\src\test\resources
+2024-09-19 20:36:20,112 [Worker-518: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 20:36:20,226 [Worker-518: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 20:36:20,232 [Worker-518: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\student_service\src\test\resources
+2024-09-19 20:36:58,525 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-10.0.13; built: 2022-12-07T20:13:20.134Z; git: 1c2636ea05c0ca8de1ffd6ca7f3a98ac084c766d; jvm 17.0.6+10
+2024-09-19 20:36:58,892 [Start Help Server] INFO  o.e.j.s.s.DefaultSessionIdManager - Session workerName=node0
+2024-09-19 20:36:58,952 [Start Help Server] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@4fffde4{/help,null,AVAILABLE}
+2024-09-19 20:36:59,028 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@6b6843d4{HTTP/1.1, (http/1.1)}{127.0.0.1:54954}
+2024-09-19 20:36:59,047 [Start Help Server] INFO  org.eclipse.jetty.server.Server - Started Server@5e796f8e{STARTING}[10.0.13,sto=0] @6951683ms
+2024-09-19 20:37:47,192 [Worker-422: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 20:37:47,273 [Worker-422: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 20:37:47,280 [Worker-422: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\student_service\src\test\resources
+2024-09-19 20:38:35,975 [Worker-524: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 20:38:36,106 [Worker-524: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 20:38:36,110 [Worker-524: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\student_service\src\test\resources
+2024-09-19 20:38:50,355 [Worker-522: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 20:38:50,491 [Worker-522: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 20:38:50,496 [Worker-522: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\student_service\src\test\resources
+2024-09-19 20:39:20,297 [Worker-591: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 20:39:20,315 [Worker-591: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 20:39:20,320 [Worker-591: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\student_service\src\test\resources
+2024-09-19 20:39:22,402 [Worker-613: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 20:39:22,564 [Worker-613: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 20:39:22,568 [Worker-613: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\student_service\src\test\resources
+2024-09-19 20:41:34,906 [Worker-1262: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 20:41:34,929 [Worker-1262: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 20:41:34,936 [Worker-1262: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\student_service\src\test\resources
+2024-09-19 20:42:01,287 [Worker-1488: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 20:42:01,367 [Worker-1488: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 20:42:01,372 [Worker-1488: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\student_service\src\test\resources
+2024-09-19 20:42:36,948 [Worker-1661: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2024-09-19 20:42:41,635 [Worker-1661: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.teach:student-service:0.0.1-SNAPSHOT @ C:\Users\Sangita\Institute Management System\student_service\pom.xml.
+2024-09-19 20:42:52,684 [Worker-1661: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /student_service/src/main/java
+2024-09-19 20:42:52,686 [Worker-1661: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /student_service/src/main/resources
+2024-09-19 20:42:52,687 [Worker-1661: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /student_service/src/main/resources
+2024-09-19 20:42:52,688 [Worker-1661: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /student_service/src/test/java
+2024-09-19 20:42:55,233 [Worker-1661: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed for 1 poms: local refresh takes 0.00 sec, refresh facades takes 15.00 sec, update config takes 1.00 sec 
+2024-09-19 20:43:04,537 [Worker-1698: Launching student_service - StudentServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 20:43:05,118 [Worker-1698: Launching student_service - StudentServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 20:43:05,159 [Worker-1698: Launching student_service - StudentServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\student_service\src\test\resources
+2024-09-19 20:44:20,777 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2024-09-19 20:44:51,391 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 20:44:51,769 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 20:44:51,816 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\api_gate_way\src\test\resources
+2024-09-19 20:45:08,946 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 20:45:09,336 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 20:45:09,349 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\batchService\src\test\resources
+2024-09-19 20:45:14,079 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 20:45:14,165 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 20:45:14,174 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\course_service\src\test\resources
+2024-09-19 20:45:18,036 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 20:45:18,140 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 20:45:18,150 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\e_server\src\test\resources
+2024-09-19 20:45:30,426 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 20:45:30,528 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 20:45:30,538 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\identity-service\src\test\resources
+2024-09-19 20:45:42,751 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 20:45:42,837 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 20:45:42,852 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\institute\src\test\resources
+2024-09-19 20:45:46,949 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 20:45:47,007 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 20:45:47,014 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\student_service\src\test\resources
+2024-09-19 20:45:50,952 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2024-09-19 20:45:51,012 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-09-19 20:45:51,021 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Sangita\Institute Management System\teacherServices\src\test\resources

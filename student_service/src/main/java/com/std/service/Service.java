@@ -18,4 +18,5 @@ public interface Service {
 	public StudentDto getStudentDetails(int stdId) throws ResourceNotFoundException;
 	public List<Student> getAllStudentByBatch(int batchId);
 	public List<Student> getAllStudent();
+	public List<Student> searchStudentByName(String name);
 }

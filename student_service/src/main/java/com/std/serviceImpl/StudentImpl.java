@@ -140,4 +140,11 @@ public class StudentImpl implements Service {
 		List<Student> findAll = this.repo.findAll();
 		return findAll;
 	}
+
+	@Override
+	public List<Student> searchStudentByName(String name) {
+		
+		List<Student> searchStudentByName = this.searchStudentByName(name);
+		return searchStudentByName;
+	}
 }

@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -117,5 +118,12 @@ public class Controller {
 		List<Student> allStudentByBatch = this.service.getAllStudentByBatch(batchId);
 		
 		return new ResponseEntity<List<Student>>(allStudentByBatch, HttpStatus.OK);
+	}
+	@GetMapping("/search/{name}")
+	public ResponseEntity<List<Student>> searchStudent(@PathVariable("name") String name){
+		
+		List<Student> searchStudentByName = this.service.searchStudentByName(name);
+		
+		return new ResponseEntity<List<Student>>(searchStudentByName,HttpStatus.OK);
 	}
 }
