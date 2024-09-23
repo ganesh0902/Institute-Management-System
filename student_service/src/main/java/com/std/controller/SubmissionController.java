@@ -52,6 +52,7 @@ public class SubmissionController {
 	public ResponseEntity<List<StudentSubmission>> getSubmissionByBatchId(@PathVariable("batchId") int batchId) {
 		List<StudentSubmission> submissionByBatchId = this.service.getSubmissionByBatchId(batchId);
 
+		System.out.println("Gettint submission By BatchId");
 		return new ResponseEntity<List<StudentSubmission>>(submissionByBatchId, HttpStatus.OK);
 	}
 	

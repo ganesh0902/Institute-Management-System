@@ -2,6 +2,7 @@ package com.std.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -118,12 +119,5 @@ public class Controller {
 		List<Student> allStudentByBatch = this.service.getAllStudentByBatch(batchId);
 		
 		return new ResponseEntity<List<Student>>(allStudentByBatch, HttpStatus.OK);
-	}
-	@GetMapping("/search/{name}")
-	public ResponseEntity<List<Student>> searchStudent(@PathVariable("name") String name){
-		
-		List<Student> searchStudentByName = this.service.searchStudentByName(name);
-		
-		return new ResponseEntity<List<Student>>(searchStudentByName,HttpStatus.OK);
-	}
+	}	
 }

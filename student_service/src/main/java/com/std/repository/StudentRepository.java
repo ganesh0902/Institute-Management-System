@@ -22,6 +22,7 @@ public interface StudentRepository extends JpaRepository<Student,Integer>{
 	 @Query("select s from Student s where s.batchId = :batchId")
 	 Optional<List<Student>> getAllStudentByBatchId(@Param("batchId") int batchId);
 	 
-	 @Query("select s from Student s where s.firstName like :stdName")
-	 List<Student> searchStudentByName(@Param("stdName") String name);
+	 @Query("select s from Student s where s.firstName like %:stdName%")
+	 List<Student> searchStudentByName(@Param("stdName") String stdName);
+	 
 }

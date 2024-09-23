@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.std.dto.SubmissionDto;
@@ -25,6 +27,7 @@ public class StudentSubmissionImpl implements AssignmentService {
 	private StudentImpl studentService;
 
 	@Override
+	@CachePut(cacheNames = "submission", key = "#studentSubmission.submissionId")
 	public StudentSubmission saveSubmission(StudentSubmission studentSubmission) {
 		
 		if(studentSubmission.getSubmissionId()==null)
@@ -37,6 +40,7 @@ public class StudentSubmissionImpl implements AssignmentService {
 	}
 
 	@Override
+	@Cacheable(cacheNames = "submission", key = "#stdSubmId")
 	public List<StudentSubmission> getStudentSubmissionByStudentId(int stdSubmId) {
 
 		List<StudentSubmission> submissionByStudentId = this.submissionRepository.getSubmissionByStudentId(stdSubmId);
@@ -44,6 +48,7 @@ public class StudentSubmissionImpl implements AssignmentService {
 	}
 
 	@Override
+	@Cacheable(cacheNames="submission", key ="#batchId")
 	public List<StudentSubmission> getSubmissionByBatchId(int batchId) {
 
 		List<StudentSubmission> studentSubmissionByBatchId = this.submissionRepository
@@ -52,7 +57,9 @@ public class StudentSubmissionImpl implements AssignmentService {
 	}
 
 	@Override
+	@Cacheable(cacheNames = "submission")
 	public List<StudentSubmission> getAllSubmission() {
+		System.out.println("Getting submission from dataBase");
 		List<StudentSubmission> findAll = this.submissionRepository.findAll();
 		return findAll;
 	}
@@ -81,9 +88,13 @@ public class StudentSubmissionImpl implements AssignmentService {
 			submission.setSubmissionId(sbt.getSubmissionId());
 			submission.setStdId(sbt.getStdId());
 			
-			submission.setFirstName(std.getFirstName());
-			submission.setLastName(std.getLastName());
-			submission.setImage(std.getImage());
+			String firstName = std.getFirstName();
+			String lastName = std.getLastName();
+			String image = std.getImage();			
+			
+			submission.setFirstName(firstName);
+			submission.setLastName(lastName);
+			submission.setImage(image);
 			submission.setSolution(sbt.getSolution());
 			submission.setStatus(sbt.getStatus());	
 			

@@ -1,7 +1,6 @@
 package com.teach.serviceimpl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,11 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-
-import com.teach.dto.BatchDto;
 import com.teach.dto.TeacherDto;
 import com.teach.dto.TeacherIdAndName;
 import com.teach.entities.Teacher;
@@ -26,11 +21,9 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Autowired
 	private TeacherRepository repository;
-
-	@Autowired
-	private RestTemplate restTemplate;
-
+	
 	@Override
+	@CachePut(cacheNames = "teacher", key = "#teacher.tId")
 	public Teacher saveTeacher(Teacher teacher) {
 		return this.repository.save(teacher);
 	}
@@ -38,7 +31,7 @@ public class TeacherServiceImpl implements TeacherService {
 	@Override
 	@Cacheable(cacheNames = "teacher", key = "#tId")
 	public TeacherDto getTeacherById(int tId) throws ResourceNotFoundException {
-
+		
 		TeacherDto teacherDto = new TeacherDto();
 		Teacher teacher = this.repository.findById(tId)
 				.orElseThrow(() -> new ResourceNotFoundException("Teacher", "Id", String.valueOf(tId)));

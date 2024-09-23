@@ -1,5 +1,6 @@
 package com.std.serviceImpl;
 
+import org.springframework.cache.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,12 +25,14 @@ public class StudentImpl implements Service {
 	private RestTemplate restTemplate;
 
 	@Override
+	@CachePut(cacheNames = "student", key = "#std.stdId")
 	public Student saveStudent(Student std) {
 
 		return this.repo.save(std);
 	}
 
 	@Override
+	@CachePut(cacheNames = "student", key = "#std.stdId")
 	public Student updateStudent(int stdId, Student std) throws ResourceNotFoundException {
 
 		Student student = this.repo.findById(stdId)
@@ -44,19 +47,24 @@ public class StudentImpl implements Service {
 	}
 
 	@Override
+	@Cacheable(cacheNames = "student", key = "#stdId")
 	public Student findById(int stdId) throws ResourceNotFoundException {
 
+		System.out.println("Getting student record from dataBase");
 		return this.repo.findById(stdId)
 				.orElseThrow(() -> new ResourceNotFoundException("Student", "Id", String.valueOf(stdId)));
 	}
 
 	@Override
+	@Cacheable(cacheNames = "teacher", key = "#instituteId")
 	public List<Student> getAll(long instituteId) {
 
+		System.out.println("Getting student by instituteId");
 		return repo.findByInstituteId(instituteId);
 	}
 
 	@Override
+	@CacheEvict(cacheNames = "student", key = "#stdId")
 	public boolean delete(int stdId) throws ResourceNotFoundException {
 
 		boolean status = false;
@@ -81,6 +89,7 @@ public class StudentImpl implements Service {
 	}
 
 	@Override
+	@Cacheable(cacheNames = "student", key = "#stdId")
 	public StudentDto getStudentDetails(int stdId) throws ResourceNotFoundException {
 
 		StudentDto studentDto = new StudentDto();
@@ -114,37 +123,33 @@ public class StudentImpl implements Service {
 	}
 
 	@Override
+	@Cacheable(cacheNames = "student", key = "#instituteId")
 	public Long courseStudent(long instituteId) {
 
 		return this.repo.countStudentByInstituteId(instituteId);
 	}
 
 	@Override
+	@Cacheable(cacheNames = "student", key = "#batchId")
 	public List<Student> getAllStudentByBatch(int batchId) {
+		
+		System.out.println("Getting student by batch Id from database");
 		Optional<List<Student>> allStudentByBatchId = this.repo.getAllStudentByBatchId(batchId);
-		List<Student> students =null;
-		if(allStudentByBatchId.isPresent())
-		{
-			students =  allStudentByBatchId.get();
-		}		
-		else
-		{
+		List<Student> students = null;
+		if (allStudentByBatchId.isPresent()) {
+			students = allStudentByBatchId.get();
+		} else {
 			System.out.println("Record not found");
 		}
 		return students;
 	}
 
 	@Override
+	@Cacheable(cacheNames = "student")
 	public List<Student> getAllStudent() {
-		
+
+		System.out.println("Getting All Student from dataBase");
 		List<Student> findAll = this.repo.findAll();
 		return findAll;
-	}
-
-	@Override
-	public List<Student> searchStudentByName(String name) {
-		
-		List<Student> searchStudentByName = this.searchStudentByName(name);
-		return searchStudentByName;
 	}
 }
