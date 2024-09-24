@@ -6,30 +6,30 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="Teacher"/>
+		<item key="selection" value="getSubmissionByBatchId"/>
 		<list key="findhistory">
+			<item value="getSubmissionByBatchId"/>
+			<item value="getStudentSubmissionByStudentId"/>
+			<item value="getAllStudentByBatch"/>
+			<item value="findById"/>
+			<item value="getAll"/>
+			<item value="findByInstituteId"/>
+			<item value="cache"/>
 			<item value="teacher"/>
 			<item value="swagger"/>
 			<item value="getSingleBatch"/>
 			<item value="com.batch.batchImpl"/>
-			<item value="getAll"/>
 			<item value="getBatchTitleAndDate"/>
 			<item value="api_gate"/>
 			<item value="api"/>
 			<item value="apy"/>
-			<item value="gate"/>
-			<item value="gateway"/>
-			<item value="update"/>
-			<item value="findAllByTeacherId"/>
-			<item value="getAllBatch"/>
-			<item value="uploadDir"/>
 		</list>
 		<list key="replacehistory">
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="1014"/>
-		<item key="DIALOG_Y_ORIGIN" value="198"/>
+		<item key="DIALOG_X_ORIGIN" value="1283"/>
+		<item key="DIALOG_Y_ORIGIN" value="156"/>
 		<item key="DIALOG_WIDTH" value="414"/>
 		<item key="DIALOG_HEIGHT" value="454"/>
 		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>

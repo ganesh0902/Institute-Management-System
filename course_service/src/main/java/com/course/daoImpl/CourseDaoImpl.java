@@ -1,15 +1,15 @@
 package com.course.daoImpl;
 
 import java.time.LocalDate;
+
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collector;
+
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.course.dao.CourseDao;
@@ -35,12 +35,14 @@ public class CourseDaoImpl implements CourseDao{
 	}
 
 	@Override
+	@Cacheable(cacheNames = "course", key = "#cid")
 	public Course findById(int cid) throws ResourceNotFoundException {
-		
+		System.out.println("Getting Institute from DataBase");
 		return this.repository.findById(cid).orElseThrow(() -> new ResourceNotFoundException("course","Id",String.valueOf(cid)));				
 	}
 
 	@Override
+	@CacheEvict(cacheNames = "course", key = "#cid")
 	public boolean delete(int cid) throws ResourceNotFoundException {
 
 		boolean status=true;
