@@ -6,15 +6,15 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="getSubmissionByBatchId"/>
+		<item key="selection" value="cache"/>
 		<list key="findhistory">
+			<item value="cache"/>
 			<item value="getSubmissionByBatchId"/>
 			<item value="getStudentSubmissionByStudentId"/>
 			<item value="getAllStudentByBatch"/>
 			<item value="findById"/>
 			<item value="getAll"/>
 			<item value="findByInstituteId"/>
-			<item value="cache"/>
 			<item value="teacher"/>
 			<item value="swagger"/>
 			<item value="getSingleBatch"/>

@@ -2,10 +2,8 @@ package com.batch.batchImpl;
 
 import java.util.ArrayList;
 
-import java.util.List;
-import java.util.Optional;
 
-import org.modelmapper.ModelMapper;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -51,6 +49,7 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 				Course.class);
 		TeacherDto teacherDto = this.restTemplate.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(),
 				TeacherDto.class);
+		
 		batchDto.setCourse(course);
 		batchDto.setTeacherDto(teacherDto);
 		return batchDto;
