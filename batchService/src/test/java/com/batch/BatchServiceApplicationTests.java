@@ -3,18 +3,25 @@ package com.batch;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockitoSession;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.springframework.boot.context.config.ConfigData.Options;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.util.Optionals;
 import org.springframework.web.client.RestTemplate;
 
 import com.batch.batchImpl.BatchServiceImpl;
@@ -38,13 +45,43 @@ class BatchServiceApplicationTests {
 	@InjectMocks
 	private BatchServiceImpl serviceImpl;
 	
+	private Batch existingBatch;
+	private Batch updateBatch;
+	
 	@Test
 	void contextLoads() {
+				
+		  
+	}
+	@BeforeEach
+	public void init()
+	{
+		MockitoAnnotations.openMocks(this);
+
+        // Set up existing batch
+        existingBatch = new Batch();
+        existingBatch.setBatchTitle("Original Title");
+        existingBatch.setDuration("6 months");
+        existingBatch.setStartDate("2024-01-01");
+        existingBatch.setEndDate("2024-06-30");
+        existingBatch.setStatus("Active");
+        existingBatch.setTeacherId(1);
+        existingBatch.setTime("10:00 AM");
+
+        // Set up update batch
+        updateBatch = new Batch();
+        updateBatch.setBatchTitle("Updated Title");
+        updateBatch.setDuration("3 months");
+        updateBatch.setStartDate("2024-02-01");
+        updateBatch.setEndDate("2024-05-30");
+        updateBatch.setStatus("Inactive");
+        updateBatch.setTeacherId(2);
+        updateBatch.setTime("02:00 PM");
 		
 	}
 	
 	@Test
-    public void testGetBatchSuccess() throws ResourceNotFoundException {
+    public void testGetexistBatchSuccess() throws ResourceNotFoundException {
 		
 		 int bId = 1;
 
@@ -106,6 +143,64 @@ class BatchServiceApplicationTests {
 		 when(repository.findById(bId)).thenReturn(Optional.empty());
 		 
 		 assertThrows(ResourceNotFoundException.class, ()-> serviceImpl.getBatch(bId));
-		
 	}	
+	@Test
+	public void saveBatch()
+	{
+		Batch batch = new Batch();
+		
+		batch.setBId(10);
+		batch.setBatchTitle("Java Development");
+		batch.setCourseId(10);
+		batch.setDuration("4 Months");
+		batch.setStartDate("09-01-2009");
+		batch.setEndDate("09-08-2009");
+		batch.setImage("");		
+		batch.setStatus("pending");
+		batch.setTeacherId(101);
+		batch.setTime("09:20");
+		
+		Mockito.when(repository.save(batch)).thenReturn(batch);
+		
+		Batch result = this.serviceImpl.saveBatch(batch);
+		
+		assertNotNull(result);
+		assertEquals(batch,result);		
+		
+		verify(repository, times(1)).save(batch);
+	}
+
+	public void updateBatch() throws ResourceNotFoundException
+	{
+		int batchId =21;
+		
+		Mockito.when(this.repository.findById(batchId)).thenReturn(Optional.of(updateBatch));
+		Mockito.when(this.repository.save(updateBatch)).thenReturn(existingBatch);
+		
+		Batch updatedBatch = this.serviceImpl.updateBatch(batchId, updateBatch);
+		
+		 // Verify that the fields are updated correctly
+        assertEquals("Updated Title", updatedBatch.getBatchTitle());
+        assertEquals("3 months", updatedBatch.getDuration());
+        assertEquals("2024-02-01", updatedBatch.getStartDate());
+        assertEquals("2024-05-30", updatedBatch.getEndDate());
+        assertEquals("Inactive", updatedBatch.getStatus());
+        assertEquals(2, updatedBatch.getTeacherId());
+        assertEquals("02:00 PM", updatedBatch.getTime());
+
+        // Verify that save was called
+        verify(repository, times(1)).save(existingBatch);		
+	}
+	public void testUpdateBatch_ResourceNotFoundException()
+	{
+		int batchId = 21;
+		
+		Mockito.when(this.repository.findById(batchId)).thenReturn(Optional.empty());
+		
+		assertThrows(ResourceNotFoundException.class, ()-> {
+			serviceImpl.updateBatch(batchId, updateBatch);
+		});
+		
+		verify(repository, never()).save(any(Batch.class));
+	}
 }
