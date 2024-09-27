@@ -170,12 +170,13 @@ class BatchServiceApplicationTests {
 		verify(repository, times(1)).save(batch);
 	}
 
+	@Test
 	public void updateBatch() throws ResourceNotFoundException
 	{
 		int batchId =21;
 		
 		Mockito.when(this.repository.findById(batchId)).thenReturn(Optional.of(updateBatch));
-		Mockito.when(this.repository.save(updateBatch)).thenReturn(existingBatch);
+		Mockito.when(this.repository.save(updateBatch)).thenReturn(updateBatch);
 		
 		Batch updatedBatch = this.serviceImpl.updateBatch(batchId, updateBatch);
 		
@@ -189,8 +190,9 @@ class BatchServiceApplicationTests {
         assertEquals("02:00 PM", updatedBatch.getTime());
 
         // Verify that save was called
-        verify(repository, times(1)).save(existingBatch);		
+        verify(repository, times(1)).save(updatedBatch);		
 	}
+	@Test
 	public void testUpdateBatch_ResourceNotFoundException()
 	{
 		int batchId = 21;
@@ -203,4 +205,33 @@ class BatchServiceApplicationTests {
 		
 		verify(repository, never()).save(any(Batch.class));
 	}
+	@Test
+	public void testDeleteBatch() throws ResourceNotFoundException
+	{
+		int bId =21;
+		
+		Mockito.when(this.repository.findById(bId)).thenReturn(Optional.of(this.existingBatch));
+		
+		boolean result = serviceImpl.delete(bId);
+		
+		assertEquals(true, result);
+		
+		verify(repository, times(1)).findById(bId);
+		verify(repository, times(1)).deleteById(bId);		
+	}
+	@Test
+	public void testDeleteBatch_ResourceNotFoundException()
+	{
+		int batchId = 21;
+		
+		Mockito.when(this.repository.findById(batchId)).thenReturn(Optional.empty());
+		
+		assertThrows(ResourceNotFoundException.class, ()->{
+			
+			this.serviceImpl.delete(batchId);
+		});
+		
+		verify(repository,times(1)).findById(batchId);
+	}
+	
 }

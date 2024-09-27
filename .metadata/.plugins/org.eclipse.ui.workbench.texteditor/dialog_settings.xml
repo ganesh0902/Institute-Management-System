@@ -6,8 +6,10 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="cache"/>
+		<item key="selection" value="batch.setB"/>
 		<list key="findhistory">
+			<item value="batch"/>
+			<item value="Batch"/>
 			<item value="cache"/>
 			<item value="getSubmissionByBatchId"/>
 			<item value="getStudentSubmissionByStudentId"/>
@@ -21,10 +23,9 @@
 			<item value="com.batch.batchImpl"/>
 			<item value="getBatchTitleAndDate"/>
 			<item value="api_gate"/>
-			<item value="api"/>
-			<item value="apy"/>
 		</list>
 		<list key="replacehistory">
+			<item value="existBatch"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
