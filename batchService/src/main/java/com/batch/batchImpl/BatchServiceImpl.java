@@ -175,13 +175,13 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 			batchDto.setStatus(batch.getStatus());
 			batchDto.setLocation(batch.getLocation());
 			batchDto.setImage(batch.getImage());
-
+			
+			Course course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
+					Course.class);
+			
 			TeacherDto teacher = this.restTemplate
 					.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(), TeacherDto.class);
 			System.out.println("Course Id is " + batch.getCourseId());
-
-			Course course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
-					Course.class);
 
 			System.out.println(course);
 			batchDto.setTeacherDto(teacher);
@@ -206,8 +206,6 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 
 	@Override
 	public Batch getSingleBatch(int batchId) throws ResourceNotFoundException {
-
-		//StudentDto student = this.restTemplate.getForObject("http://student-service/student/" + 252, StudentDto.class);
 
 		return this.repository.findById(batchId)
 				.orElseThrow(() -> new ResourceNotFoundException("Batch", "Id", String.valueOf(batchId)));
