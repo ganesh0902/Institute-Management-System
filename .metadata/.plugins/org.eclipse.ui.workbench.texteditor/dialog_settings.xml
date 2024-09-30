@@ -6,8 +6,10 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="batch.setB"/>
+		<item key="selection" value="getSingleBatch"/>
 		<list key="findhistory">
+			<item value="getSingleBatch"/>
+			<item value="getBatch"/>
 			<item value="batch"/>
 			<item value="Batch"/>
 			<item value="cache"/>
@@ -19,10 +21,8 @@
 			<item value="findByInstituteId"/>
 			<item value="teacher"/>
 			<item value="swagger"/>
-			<item value="getSingleBatch"/>
 			<item value="com.batch.batchImpl"/>
 			<item value="getBatchTitleAndDate"/>
-			<item value="api_gate"/>
 		</list>
 		<list key="replacehistory">
 			<item value="existBatch"/>

@@ -13,6 +13,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -32,6 +33,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.batch.batchImpl.BatchServiceImpl;
 import com.batch.dto.BatchDto;
+import com.batch.dto.BatchTitleAndDate;
 import com.batch.dto.TeacherDto;
 import com.batch.entities.Batch;
 import com.batch.entities.Course;
@@ -736,11 +738,11 @@ class BatchServiceApplicationTests {
 		course.setSkills("Java, Spring boot");
 
 		Mockito.when(this.repository.findByBatchTitleContaining(batchTitle)).thenReturn(singletonList);
-		
+
 		Mockito.when(restTemplate.getForObject("http://course-service/course/23", Course.class)).thenReturn(course);
-		
+
 		Mockito.when(restTemplate.getForObject("http://teacher-service/teacher/22", TeacherDto.class))
-		.thenThrow(new RuntimeException("Teacher Service is not available"));
+				.thenThrow(new RuntimeException("Teacher Service is not available"));
 
 		List<BatchDto> result = null;
 		try {
@@ -809,16 +811,98 @@ class BatchServiceApplicationTests {
 		verify(this.repository, times(1)).findByBatchTitleContaining(batchTitle);
 		verify(this.restTemplate, times(1)).getForObject("http://course-service/course/23", Course.class);
 	}
+
 	@Test
-	public void testFindByBatchTitleContaining_RepositoryException()
-	{
+	public void testFindByBatchTitleContaining_RepositoryException() {
 		String batchTitle = "Java";
-		Mockito.when(repository.findByBatchTitleContaining(batchTitle)).thenThrow(new RuntimeException("Database Error"));
-		
-	 Exception result =	assertThrows(RuntimeException.class, ()->{
+		Mockito.when(repository.findByBatchTitleContaining(batchTitle))
+				.thenThrow(new RuntimeException("Database Error"));
+
+		Exception result = assertThrows(RuntimeException.class, () -> {
 			serviceImpl.findByBatchTitleContaining(batchTitle);
 		});
-		
+
 		assertEquals("Database Error", result.getMessage());
 	}
+
+	@Test
+	public void testGetBatchTitleAndDate() {
+		int instituteId = 23;
+		BatchTitleAndDate batchTitleAndDate = new BatchTitleAndDate();
+		batchTitleAndDate.setBatchTitle("Java Development");
+		batchTitleAndDate.setBId(21);
+		batchTitleAndDate.setStartDate("2024-05-05");
+
+		List<BatchTitleAndDate> singletonList = Collections.singletonList(batchTitleAndDate);
+
+		Mockito.when(this.repository.getBatchTitleAndStartDate(instituteId)).thenReturn(singletonList);
+
+		List<BatchTitleAndDate> result = this.serviceImpl.getBatchTitleAndDate(instituteId);
+
+		assertNotNull(result);
+		assertEquals("Java Development", result.get(0).getBatchTitle());
+		assertEquals("2024-05-05", result.get(0).getStartDate());
+		assertEquals(singletonList, result);
+
+		verify(this.repository, times(1)).getBatchTitleAndStartDate(instituteId);
+	}
+	@Test
+	public void testGetBatchTitleAndDateEmpty() {
+		int instituteId = 23;
+			
+		List<BatchTitleAndDate> singletonList = new ArrayList<>();
+
+		Mockito.when(this.repository.getBatchTitleAndStartDate(instituteId)).thenReturn(singletonList);
+
+		List<BatchTitleAndDate> result = this.serviceImpl.getBatchTitleAndDate(instituteId);
+
+		assertNotNull(result);	
+		assertEquals(singletonList, result);
+
+		verify(this.repository, times(1)).getBatchTitleAndStartDate(instituteId);
+	}
+	@Test
+	public void testGetSingleBatch() throws ResourceNotFoundException
+	{
+		int batchId = 21;
+		
+		Batch batch = new Batch();
+		batch.setBId(21);
+		batch.setBatchTitle("Java Development");
+		batch.setCourseId(12);
+		batch.setDuration("6 Months");
+		batch.setStartDate("2024-05-05");
+		batch.setEndDate("2024-05-05");
+		batch.setImage("hhh");
+		batch.setInstituteId(21l);
+		batch.setTeacherId(25);
+		batch.setTime("09:30");
+		batch.setLocation("Pune");
+				
+		Mockito.when(this.repository.findById(batchId)).thenReturn(Optional.of(batch));
+		
+		Batch result = this.serviceImpl.getSingleBatch(batchId);
+				
+		assertNotNull(result);
+		assertEquals(batch, result);
+		
+		verify(this.repository,times(1)).findById(batchId);				
+	}
+	@Test
+	public void testGetSingleBatch_resourceNotFoundException()
+	{
+		int batchId = 21;
+		
+		Mockito.when(this.repository.findById(batchId)).thenReturn(Optional.empty());
+		
+		ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class, ()->{
+			
+			this.serviceImpl.getSingleBatch(batchId);
+		});
+		
+		  assertEquals("Batch is not found with Id : 21", exception.getMessage());		    
+		  verify(repository, times(1)).findById(batchId); 
+	}
+	
+	
 }
