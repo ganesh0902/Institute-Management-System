@@ -1,9 +1,7 @@
 package com.batch.batchImpl;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.batch.entities.Assignment;
