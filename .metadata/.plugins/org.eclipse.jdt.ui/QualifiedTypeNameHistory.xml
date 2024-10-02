@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.batch.repository.AssignmentRepository"/>
-    <fullyQualifiedTypeName name="java.time.LocalDate"/>
-    <fullyQualifiedTypeName name="com.batch.batchImpl.AssignmentImpl"/>
     <fullyQualifiedTypeName name="org.springframework.expression.spel.ast.Assign"/>
     <fullyQualifiedTypeName name="com.batch.entities.Assignment"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
@@ -32,32 +29,35 @@
     <fullyQualifiedTypeName name="org.springframework.cache.annotation.Cacheable"/>
     <fullyQualifiedTypeName name="org.springframework.cache.annotation.EnableCaching"/>
     <fullyQualifiedTypeName name="com.batch.repository.BatchRepository"/>
-    <fullyQualifiedTypeName name="org.springframework.web.client.RestTemplate"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="com.batch.batchImpl.BatchServiceImpl"/>
-    <fullyQualifiedTypeName name="org.mockito.InjectMocks"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.BeforeEach"/>
     <fullyQualifiedTypeName name="org.mockito.MockitoAnnotations"/>
     <fullyQualifiedTypeName name="com.fasterxml.jackson.databind.introspect.TypeResolutionContext.Empty"/>
-    <fullyQualifiedTypeName name="org.springframework.boot.context.config.ConfigData.Options"/>
     <fullyQualifiedTypeName name="org.springframework.data.util.Optionals"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="com.batch.service.batchService"/>
     <fullyQualifiedTypeName name="org.junit.platform.engine.discovery.ClassSelector"/>
     <fullyQualifiedTypeName name="java.util.Collections"/>
-    <fullyQualifiedTypeName name="org.mockito.Mock"/>
     <fullyQualifiedTypeName name="com.batch.dto.BatchDto"/>
     <fullyQualifiedTypeName name="com.batch.dto.TeacherDto"/>
     <fullyQualifiedTypeName name="com.batch.entities.Course"/>
-    <fullyQualifiedTypeName name="java.lang.RuntimeException"/>
     <fullyQualifiedTypeName name="java.lang.Exception"/>
     <fullyQualifiedTypeName name="lombok.ToString"/>
     <fullyQualifiedTypeName name="java.util.Collection"/>
     <fullyQualifiedTypeName name="com.batch.dto.BatchTitleAndDate"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="com.batch.entities.Batch"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.Test"/>
-    <fullyQualifiedTypeName name="org.mockito.Mockito"/>
     <fullyQualifiedTypeName name="java.util.Optional"/>
     <fullyQualifiedTypeName name="com.batch.exception.ResourceNotFoundException"/>
+    <fullyQualifiedTypeName name="com.jayway.jsonpath.Option"/>
+    <fullyQualifiedTypeName name="org.springframework.boot.context.config.ConfigData.Options"/>
+    <fullyQualifiedTypeName name="com.batch.entities.Batch"/>
+    <fullyQualifiedTypeName name="org.mockito.Mockito"/>
+    <fullyQualifiedTypeName name="java.lang.RuntimeException"/>
+    <fullyQualifiedTypeName name="com.batch.repository.AssignmentRepository"/>
+    <fullyQualifiedTypeName name="com.batch.batchImpl.AssignmentImpl"/>
+    <fullyQualifiedTypeName name="org.springframework.web.client.RestTemplate"/>
+    <fullyQualifiedTypeName name="org.mockito.Mock"/>
+    <fullyQualifiedTypeName name="org.mockito.InjectMocks"/>
 </qualifiedTypeNameHistroy>

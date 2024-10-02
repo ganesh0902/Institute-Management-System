@@ -6,19 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.mockitoSession;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,9 +22,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.context.config.ConfigData.Options;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.util.Optionals;
 import org.springframework.web.client.RestTemplate;
 
 import com.batch.batchImpl.BatchServiceImpl;
@@ -39,8 +33,6 @@ import com.batch.entities.Batch;
 import com.batch.entities.Course;
 import com.batch.exception.ResourceNotFoundException;
 import com.batch.repository.BatchRepository;
-import com.batch.service.batchService;
-import com.jayway.jsonpath.Option;
 
 @SpringBootTest
 class BatchServiceApplicationTests {
