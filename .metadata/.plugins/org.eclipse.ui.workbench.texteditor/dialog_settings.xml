@@ -6,31 +6,32 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="empty"/>
+		<item key="selection" value="pring-boot-starter-test"/>
 		<list key="findhistory">
+			<item value="pring-boot-starter-test"/>
+			<item value="unit"/>
+			<item value="hamcrest-library"/>
+			<item value="mockito"/>
+			<item value="batchDto"/>
+			<item value="ResourceNotFound"/>
+			<item value="ResourceNotFoundException"/>
+			<item value="Resource"/>
+			<item value="optional"/>
+			<item value="option"/>
 			<item value="empty"/>
 			<item value="testGetBatchTitleAndDate"/>
 			<item value="getSingleBatch"/>
 			<item value="getBatch"/>
 			<item value="batch"/>
-			<item value="Batch"/>
-			<item value="cache"/>
-			<item value="getSubmissionByBatchId"/>
-			<item value="getStudentSubmissionByStudentId"/>
-			<item value="getAllStudentByBatch"/>
-			<item value="findById"/>
-			<item value="getAll"/>
-			<item value="findByInstituteId"/>
-			<item value="teacher"/>
-			<item value="swagger"/>
 		</list>
 		<list key="replacehistory">
+			<item value="mockDto"/>
 			<item value="existBatch"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="1173"/>
-		<item key="DIALOG_Y_ORIGIN" value="438"/>
+		<item key="DIALOG_X_ORIGIN" value="892"/>
+		<item key="DIALOG_Y_ORIGIN" value="396"/>
 		<item key="DIALOG_WIDTH" value="414"/>
 		<item key="DIALOG_HEIGHT" value="454"/>
 		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
