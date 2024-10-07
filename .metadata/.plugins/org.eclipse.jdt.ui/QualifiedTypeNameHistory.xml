@@ -34,7 +34,6 @@
     <fullyQualifiedTypeName name="org.springframework.scheduling.config.Task"/>
     <fullyQualifiedTypeName name="com.batch.exception.ResourceNotFoundException"/>
     <fullyQualifiedTypeName name="java.util.Optional"/>
-    <fullyQualifiedTypeName name="java.lang.RuntimeException"/>
     <fullyQualifiedTypeName name="java.util.Collections"/>
     <fullyQualifiedTypeName name="com.batch.controller.batchController"/>
     <fullyQualifiedTypeName name="com.batch.batchImpl.AssignmentImpl"/>
@@ -50,7 +49,6 @@
     <fullyQualifiedTypeName name="org.junit.jupiter.api.Test"/>
     <fullyQualifiedTypeName name="com.course.repository.CourseRepository"/>
     <fullyQualifiedTypeName name="com.course.entity.Course"/>
-    <fullyQualifiedTypeName name="org.junit.jupiter.api.BeforeEach"/>
     <fullyQualifiedTypeName name="com.course.daoImpl.CourseDaoImpl"/>
     <fullyQualifiedTypeName name="org.springframework.test.context.ContextConfiguration"/>
     <fullyQualifiedTypeName name="com.teach.serviceimpl.TeacherServiceImpl"/>
@@ -60,4 +58,6 @@
     <fullyQualifiedTypeName name="org.mockito.Mock"/>
     <fullyQualifiedTypeName name="com.teach.entities.Teacher"/>
     <fullyQualifiedTypeName name="org.mockito.Mockito"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.BeforeEach"/>
+    <fullyQualifiedTypeName name="java.lang.RuntimeException"/>
 </qualifiedTypeNameHistroy>
