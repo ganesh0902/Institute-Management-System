@@ -1,0 +1,10 @@
+server:
+  port: 9009
+
+spring:
+  application:
+    name: payment-service
+    
+eureka:
+  instance:
+    hostname: localhost
