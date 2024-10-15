@@ -61,12 +61,13 @@ spring:
           predicates:
             - Path=/institute/**
           filters:
-            - AuthenticationFilter
-        - id: student-service
-          uri: lb://student-service
+            - AuthenticationFilter       
+        - id: payment-service
+          uri: lb://payment-service
           predicates:
-          - Path=/submission/**
+            - Path=/payment/**
           filters:
           - AuthenticationFilter
+            
             
                                   
