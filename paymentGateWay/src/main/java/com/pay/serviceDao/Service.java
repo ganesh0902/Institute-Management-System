@@ -1,8 +1,10 @@
 package com.pay.serviceDao;
 
+import com.pay.entities.OrderEntities;
+import com.razorpay.Order;
 import com.razorpay.RazorpayException;
 
 public interface Service {
 
-	public String createOrder(int amount) throws RazorpayException;	
+	public OrderEntities createOrder(int amount) throws RazorpayException;	
 }

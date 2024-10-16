@@ -1,5 +1,7 @@
 package com.pay.entities;
 
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,13 +21,14 @@ public class OrderEntities {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	private int idobjectId;
+	private String orderId;
 	private String entity;
 	private int amount;
 	private int amount_paid;
 	private int amount_due;
 	private String currency;
 	private String receipt;
-	private long  created_at;
+	private Date  created_at;
 	private String offer_id;
+	private String status;
 }
