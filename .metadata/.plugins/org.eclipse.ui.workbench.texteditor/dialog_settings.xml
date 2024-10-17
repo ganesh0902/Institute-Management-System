@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="Runtime"/>
+		<item key="selection" value="devto"/>
 		<list key="findhistory">
+			<item value="devto"/>
 			<item value="runtime"/>
 			<item value="Dev"/>
 			<item value="dev"/>
@@ -22,7 +23,6 @@
 			<item value="Resource"/>
 			<item value="optional"/>
 			<item value="option"/>
-			<item value="empty"/>
 		</list>
 		<list key="replacehistory">
 			<item value="mockDto"/>

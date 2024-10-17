@@ -20,8 +20,8 @@ public class OrderEntities {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	private String orderId;
+	private long gId;
+	private String id;	
 	private String entity;
 	private int amount;
 	private int amount_paid;
@@ -31,4 +31,5 @@ public class OrderEntities {
 	private Date  created_at;
 	private String offer_id;
 	private String status;
+	private int stdId;	
 }
