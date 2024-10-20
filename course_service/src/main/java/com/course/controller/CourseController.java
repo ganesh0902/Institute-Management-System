@@ -40,8 +40,8 @@ public class CourseController {
 		return new ResponseEntity<List<Course>>(allCourses,HttpStatus.OK);
 	}
 	@PostMapping("/")
-	public ResponseEntity<Course> saveCourse(@Validated @RequestBody Course course)
-	{
+	public ResponseEntity<Course> saveCourse(@RequestBody Course course)
+	{		
 		Course saveCourse = courseService.saveCourse(course);		
 		return new ResponseEntity<Course>(saveCourse,HttpStatus.OK);
 	}	

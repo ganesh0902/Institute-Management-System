@@ -3,6 +3,7 @@ package com.course.daoImpl;
 import java.time.LocalDate;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import java.util.stream.Collectors;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.course.dao.CourseDao;
 import com.course.dto.CourseIdAndName;
 import com.course.entity.Course;
+import com.course.entity.CourseTopic;
 import com.course.exception.ResourceNotFoundException;
 import com.course.repository.CourseRepository;
 
@@ -30,7 +32,19 @@ public class CourseDaoImpl implements CourseDao{
 		LocalDate currentDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String current = currentDate.format(formatter);        
-        course.setLastUpdatedDate(current);        
+        course.setLastUpdatedDate(current);                  
+        System.out.println(course);
+        ArrayList<CourseTopic> topics = new ArrayList<>();
+        
+        for(CourseTopic topic : course.getTopics())
+        {
+        	topics.add(topic);    
+        	topic.setCourse(course);
+        }
+        repository.save(course);
+        
+        System.out.println(course);
+        
 		return this.repository.save(course);						
 	}
 
