@@ -9,5 +9,4 @@ class CoursesApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
