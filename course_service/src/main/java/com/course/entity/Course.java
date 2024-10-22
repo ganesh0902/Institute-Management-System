@@ -46,7 +46,7 @@ public class Course {
 	
 	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonManagedReference
-	 private List<CourseTopic> topics = new ArrayList<>(); // Ensure the name matches the JSON key
+	 private List<CourseTopic> topics = new ArrayList<>(); 
 
 	  @Override
 	    public String toString() {

@@ -34,11 +34,9 @@ public class CourseDaoImpl implements CourseDao{
         String current = currentDate.format(formatter);        
         course.setLastUpdatedDate(current);                  
         System.out.println(course);
-        ArrayList<CourseTopic> topics = new ArrayList<>();
         
         for(CourseTopic topic : course.getTopics())
-        {
-        	topics.add(topic);    
+        {        	
         	topic.setCourse(course);
         }
         repository.save(course);
