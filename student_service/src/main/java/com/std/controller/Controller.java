@@ -39,6 +39,8 @@ public class Controller {
 	@PostMapping("/")
 	public ResponseEntity<Student> saveStudent(@RequestBody Student student) {
 		Student saveStudent = this.service.saveStudent(student);
+		
+		
 		return new ResponseEntity<Student>(saveStudent, HttpStatus.OK);
 	}
 	@PostMapping("/image")

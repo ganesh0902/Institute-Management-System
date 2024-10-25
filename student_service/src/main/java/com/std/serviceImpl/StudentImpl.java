@@ -26,8 +26,16 @@ public class StudentImpl implements Service {
 
 	@Override
 	@CachePut(cacheNames = "student", key = "#std.stdId")
-	public Student saveStudent(Student std) {
+	public Student saveStudent(Student std) {		
 
+		BatchDto batch = this.restTemplate.getForObject("http://batch-service/batch/"+std.getBatchId(), BatchDto.class);
+		
+		CourseDto course = this.restTemplate.getForObject("http://course-service/course/"+batch.getCourseId(), CourseDto.class);
+		
+		String fees = course.getFees();
+		std.setCourseName(course.getCourseName());
+		Long totalFees = Long.parseLong(fees);		
+		std.setTotalFees(totalFees);
 		return this.repo.save(std);
 	}
 
@@ -60,6 +68,7 @@ public class StudentImpl implements Service {
 	public List<Student> getAll(long instituteId) {
 
 		System.out.println("Getting student by instituteId");
+		System.out.println(repo.findByInstituteId(instituteId));
 		return repo.findByInstituteId(instituteId);
 	}
 
