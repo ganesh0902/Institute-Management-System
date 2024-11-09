@@ -5,4 +5,5 @@
 <workingSet editPageId="org.eclipse.ui.resourceWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1729399746733_4" label="teacherService" name="teacherService"/>
 <workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1708235752480_2" label="Window Working Set" name="Aggregate for window 1708235752480"/>
 <workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1718121432213_3" label="Window Working Set" name="Aggregate for window 1718121432213"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1730047281812_5" label="Window Working Set" name="Aggregate for window 1730047281812"/>
 </workingSetManager>

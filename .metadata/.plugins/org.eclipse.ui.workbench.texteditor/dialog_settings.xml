@@ -6,8 +6,10 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="devto"/>
+		<item key="selection" value="getCourseIdAndName"/>
 		<list key="findhistory">
+			<item value="getCourseIdAndName"/>
+			<item value="getAllCourseIdAndName"/>
 			<item value="devto"/>
 			<item value="runtime"/>
 			<item value="Dev"/>
@@ -21,8 +23,6 @@
 			<item value="ResourceNotFound"/>
 			<item value="ResourceNotFoundException"/>
 			<item value="Resource"/>
-			<item value="optional"/>
-			<item value="option"/>
 		</list>
 		<list key="replacehistory">
 			<item value="mockDto"/>

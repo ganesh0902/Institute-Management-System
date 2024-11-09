@@ -47,7 +47,6 @@
     <fullyQualifiedTypeName name="jakarta.persistence.Id"/>
     <fullyQualifiedTypeName name="jakarta.persistence.GeneratedValue"/>
     <fullyQualifiedTypeName name="jakarta.persistence.GenerationType"/>
-    <fullyQualifiedTypeName name="com.course.entity.Course"/>
     <fullyQualifiedTypeName name="jakarta.persistence.ManyToOne"/>
     <fullyQualifiedTypeName name="jakarta.persistence.JoinColumn"/>
     <fullyQualifiedTypeName name="java.util.List"/>
@@ -60,4 +59,5 @@
     <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonBackReference"/>
     <fullyQualifiedTypeName name="com.std.dto.BatchDto"/>
     <fullyQualifiedTypeName name="com.std.dto.CourseDto"/>
+    <fullyQualifiedTypeName name="com.course.entity.Course"/>
 </qualifiedTypeNameHistroy>

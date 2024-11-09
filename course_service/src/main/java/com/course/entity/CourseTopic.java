@@ -43,5 +43,4 @@ public class CourseTopic {
 	                ", courseId=" + (course != null ? course.getCid() : "null") + 
 	                '}';
 	    }
-
 }

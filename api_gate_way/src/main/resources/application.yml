@@ -14,8 +14,7 @@ spring:
         cors-configurations:
           '[/**]': 
             allowedOrigins: 
-              - "http://localhost:3000"
-              - "http://192.168.0.120:3000"
+              - "http://localhost:3000"              
             allowedMethods:
               - GET
               - POST
@@ -33,9 +32,10 @@ spring:
         - id: course-service
           uri: lb://course-service
           predicates:
-            - Path=/course/**
+            - Path=/course/**          
           filters:
-            - AuthenticationFilter
+            - AuthenticationFilter 
+            
         - id: teacher-service
           uri: lb://teacher-service
           predicates:
@@ -68,6 +68,7 @@ spring:
             - Path=/payment/**
           filters:
           - AuthenticationFilter
+          
             
             
                                   

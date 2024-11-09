@@ -39,7 +39,6 @@ import com.batch.exception.ResourceNotFoundException;
 
 @RestController
 @RequestMapping("/batch")
-//@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:9002"})
 public class batchController {
 
 	@Autowired

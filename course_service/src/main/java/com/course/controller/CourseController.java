@@ -20,7 +20,6 @@ import com.course.exception.ResourceNotFoundException;
 
 @RestController
 @RequestMapping("/course")
-//@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:9001"})
 public class CourseController {
 
 	@Autowired
