@@ -21,4 +21,5 @@ public interface batchService {
 	public Long countBatchAvailable(long instituteId);
 	public Batch getSingleBatch(int studentId) throws ResourceNotFoundException;
 	public List<Batch> getBatchesByTeacherId(int tId);
+	public List<Batch> findByCourseId(int courseId);
 }

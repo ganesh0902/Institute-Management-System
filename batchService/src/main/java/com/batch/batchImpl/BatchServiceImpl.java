@@ -216,4 +216,11 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 
 		return this.repository.findAllByTeacherId(tId);
 	}
+
+	@Override
+	public List<Batch> findByCourseId(int courseId) {
+		
+		return this.repository.findByCourseId(courseId);
+		
+	}
 }
