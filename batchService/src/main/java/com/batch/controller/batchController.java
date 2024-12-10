@@ -159,7 +159,9 @@ public class batchController {
 	@GetMapping("/course/{courseId}")
 	public ResponseEntity<List<Batch>> findBatchByCourseId(@PathVariable("courseId") int courseId)
 	{
+		System.out.println(courseId);
 		List<Batch> findByCourseId = this.serviceImpl.findByCourseId(courseId);
+		System.out.println(findByCourseId);
 		
 		return new ResponseEntity<List<Batch>>(findByCourseId,HttpStatus.OK);
 		
