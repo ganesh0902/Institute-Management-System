@@ -66,11 +66,11 @@ public class controller {
 		return new ResponseEntity<ApiResponse>(apiResponse, HttpStatus.OK);
 	}
 	
-	@GetMapping("/details/{email}")
-	public ResponseEntity<Institute> findByEmailAddress(@PathVariable("email") String email) throws ResourceNotFoundException 
+	@GetMapping("/details/{InstituteId}")
+	public ResponseEntity<Institute> findByEmailAddress(@PathVariable("InstituteId") long InstituteId) throws ResourceNotFoundException 
 	{
-		Institute findByEmailAddress = this.service.findByEmailAddress(email);
+		Institute institute = this.service.getInstituteById(InstituteId);
 				
-		return new ResponseEntity<Institute>(findByEmailAddress, HttpStatus.OK);
+		return new ResponseEntity<Institute>(institute, HttpStatus.OK);
 	}
 }

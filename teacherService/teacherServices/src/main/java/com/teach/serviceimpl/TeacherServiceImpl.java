@@ -134,11 +134,10 @@ public class TeacherServiceImpl implements TeacherService {
 		return this.repository.save(teacher);
 	}
 
-	@Override
-	@Cacheable(cacheNames = "teacher", key = "#cId")
+	@Override	
 	public Teacher getTeacherByCredential(int cId) {
 
-		System.out.println();
+		System.out.println(cId);
 		return this.repository.getTeacherByCredential(cId);
 
 	}

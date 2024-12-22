@@ -64,8 +64,10 @@ public class controller {
 			Authentication authenticate = authenticationManager
 					.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
 
+			System.out.println("Is Authenticate"+authenticate);
 			if (authenticate.isAuthenticated()) {
-				response = this.authService.generateToken(user.getUsername());				
+				UserCredential userInfo = serviceDaoImpl.getUserInfo(user.getUsername());
+				response = this.authService.generateToken(user.getUsername(),userInfo);				
 				
 			} else {
 				response = "Invalid Authentication";
@@ -93,7 +95,8 @@ public class controller {
 					.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
 
 			if (authenticate.isAuthenticated()) {
-				response = this.authService.generateToken(user.getUsername());
+				UserCredential userInfo = serviceDaoImpl.getUserInfo(user.getUsername());
+				response = this.authService.generateToken(user.getUsername(),userInfo);
 
 				userInformation = validateToken(response);
 			} else {

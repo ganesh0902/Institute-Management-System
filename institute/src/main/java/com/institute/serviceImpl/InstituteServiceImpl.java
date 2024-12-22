@@ -72,11 +72,4 @@ public class InstituteServiceImpl implements InstituteServices {
 				.orElseThrow(() -> new ResourceNotFoundException("Institute", "Id", String.valueOf(id)));
 		this.repository.deleteById(data.getId());
 	}
-
-	@Override
-	public Institute findByEmailAddress(String email) throws ResourceNotFoundException {
-
-		return this.repository.findByEmail(email).orElseThrow(()-> new ResourceNotFoundException("Institute","Email",email));
-		
-	}
 }

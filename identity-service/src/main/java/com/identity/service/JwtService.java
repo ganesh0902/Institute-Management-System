@@ -2,6 +2,8 @@ package com.identity.service;
 
 import org.springframework.stereotype.Service;
 
+import com.identity.entity.UserCredential;
+
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -25,18 +27,23 @@ public class JwtService {
 
 	public static final String SECRET = "5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437";
 
-	public Map<String, Object> validateToken(String token) {
+	 public Map<String, Object> validateToken(String token) {
 
 		try {
 			Jws<Claims> claimsJws = Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(token);
 
 			Claims chain = claimsJws.getBody();
 			String username = chain.getSubject();
-			Date expiration = chain.getExpiration();
+			Date expiration = chain.getExpiration();			
+	
+			Object name = chain.get("name");
+			Object instituteId = chain.get("InstituteId");
 		
 			HashMap<String, Object> userInfo = new HashMap<>();
 			userInfo.put("username", username);
 			userInfo.put("expiration", expiration);
+			userInfo.put("name", name);
+	        userInfo.put("InstituteId", instituteId);
 
 			return userInfo;
 
@@ -51,13 +58,19 @@ public class JwtService {
 		}
 	}
 
-	public String generateToken(String userName) {
+	public String generateToken(String userName, UserCredential user) {
 		Map<String, Object> claims = new HashMap<>();
+		claims.put("name", user.getName());
+		claims.put("InstituteId",user.getInstituteId());
 		return createToken(claims, userName);
 	}
 
 	private String createToken(Map<String, Object> claims, String userName) {
-		return Jwts.builder().setClaims(claims) 
+		
+		System.out.println("Claim Is ");
+		System.out.println(claims);
+		return Jwts.builder().setClaims(claims)
+				
 				.setSubject(userName).setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))
 				.signWith(getSignKey(), SignatureAlgorithm.HS256).compact();

@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.identity.dto.TeacherDto;
 import com.identity.entity.UserCredential;
+import com.identity.exception.ResourceNotFoundException;
 import com.identity.repository.UserCredentialRepository;
 import com.identity.service.ServiceDao;
 
@@ -39,4 +40,11 @@ public class ServiceDaoImpl implements ServiceDao {
 		}
 		return teachers;
 	}
+	@Override
+	public UserCredential getUserInfo(String email) throws ResourceNotFoundException
+	{
+		return this.repository.findByEmail(email).orElseThrow(()-> new ResourceNotFoundException("User","Username",email));
+	}
+	
+	
 }

@@ -6,8 +6,10 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="getCourseIdAndName"/>
+		<item key="selection" value="course"/>
 		<list key="findhistory">
+			<item value="course"/>
+			<item value="getBatchesByCourseId"/>
 			<item value="getCourseIdAndName"/>
 			<item value="getAllCourseIdAndName"/>
 			<item value="devto"/>
@@ -21,8 +23,6 @@
 			<item value="mockito"/>
 			<item value="batchDto"/>
 			<item value="ResourceNotFound"/>
-			<item value="ResourceNotFoundException"/>
-			<item value="Resource"/>
 		</list>
 		<list key="replacehistory">
 			<item value="mockDto"/>

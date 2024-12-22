@@ -22,8 +22,8 @@ public class AuthService {
 	@Autowired
 	private JwtService jwtService;
 
-	public String generateToken(String username) {
-		return jwtService.generateToken(username);
+	public String generateToken(String username,UserCredential user) {
+		return jwtService.generateToken(username,user);
 	}
 
 	public Map<String, Object> validateToken(String username) {
@@ -45,7 +45,7 @@ public class AuthService {
 		{
 			response ="User is Alredy exist";
 		}
-			
+			System.out.println(response);
 		return response;
 	}
 }
