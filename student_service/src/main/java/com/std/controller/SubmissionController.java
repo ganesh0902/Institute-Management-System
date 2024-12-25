@@ -59,6 +59,7 @@ public class SubmissionController {
 	@GetMapping("/assignment/{assignmentId}")
 	public ResponseEntity<List<SubmissionDto>> getStudentByAssignmentId(@PathVariable("assignmentId") int assignmentId) throws ResourceNotFoundException
 	{
+		System.out.println("assignment id is "+assignmentId);
 		List<SubmissionDto> studentByAssignmentId = this.service.getStudentByAssignmentId(assignmentId);
 		
 		return new ResponseEntity<List<SubmissionDto>>(studentByAssignmentId, HttpStatus.OK);	

@@ -22,7 +22,7 @@ public class BatchDto {
 	private String location;
 	private String time;
 	private String image;	
-	private int teacherId;
+	private int teacherId;	
 	private int courseId;
 	private CourseDto courseDto;
 }

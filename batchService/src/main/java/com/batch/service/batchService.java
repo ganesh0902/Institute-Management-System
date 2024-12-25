@@ -22,4 +22,5 @@ public interface batchService {
 	public Batch getSingleBatch(int studentId) throws ResourceNotFoundException;
 	public List<Batch> getBatchesByTeacherId(int tId);
 	public List<Batch> findByCourseId(int courseId);
+	List<Batch> getBatchByTeacherId(int tId); 
 }

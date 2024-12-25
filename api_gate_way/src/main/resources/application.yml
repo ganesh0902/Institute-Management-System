@@ -68,6 +68,13 @@ spring:
             - Path=/payment/**
           filters:
           - AuthenticationFilter
+        - id: student-service
+          uri: lb://student-service
+          predicates:
+          - Path=/submission/**
+          filters:
+           - AuthenticationFilter
+        
           
             
             

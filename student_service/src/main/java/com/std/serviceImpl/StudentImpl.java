@@ -1,6 +1,11 @@
 package com.std.serviceImpl;
 
 import org.springframework.cache.annotation.*;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,15 +31,17 @@ public class StudentImpl implements Service {
 
 	@Override
 	@CachePut(cacheNames = "student", key = "#std.stdId")
-	public Student saveStudent(Student std) {		
+	public Student saveStudent(Student std) {
 
-		BatchDto batch = this.restTemplate.getForObject("http://batch-service/batch/"+std.getBatchId(), BatchDto.class);
-		
-		CourseDto course = this.restTemplate.getForObject("http://course-service/course/"+batch.getCourseId(), CourseDto.class);
-		
+		BatchDto batch = this.restTemplate.getForObject("http://batch-service/batch/" + std.getBatchId(),
+				BatchDto.class);
+
+		CourseDto course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
+				CourseDto.class);
+
 		String fees = course.getFees();
 		std.setCourseName(course.getCourseName());
-		Long totalFees = Long.parseLong(fees);		
+		Long totalFees = Long.parseLong(fees);
 		std.setTotalFees(totalFees);
 		return this.repo.save(std);
 	}
@@ -141,7 +148,7 @@ public class StudentImpl implements Service {
 	@Override
 	@Cacheable(cacheNames = "student", key = "#batchId")
 	public List<Student> getAllStudentByBatch(int batchId) {
-		
+
 		System.out.println("Getting student by batch Id from database");
 		Optional<List<Student>> allStudentByBatchId = this.repo.getAllStudentByBatchId(batchId);
 		List<Student> students = null;
@@ -161,4 +168,27 @@ public class StudentImpl implements Service {
 		List<Student> findAll = this.repo.findAll();
 		return findAll;
 	}
+
+	@Override
+	public List<Student> getStudentByTeacherId(int tId) {
+
+		List<Student> studentList = new ArrayList<>();
+		String url = "http://batch-service/batch/batchByTeacherId/" + tId;
+
+		ResponseEntity<List<BatchDto>> responseEntity = restTemplate.exchange(url, HttpMethod.GET, null,
+				new ParameterizedTypeReference<List<BatchDto>>() {
+				});
+
+		System.out.println("Batch");
+		System.out.println(responseEntity.getBody());
+		List<BatchDto> batchList = responseEntity.getBody();
+
+		for (BatchDto batch : batchList) {
+			List<Student> findByTeacherId = this.repo.findByTeacherId(batch.getBid());
+			studentList.addAll(findByTeacherId);
+		}
+
+		return studentList;
+	}
+
 }

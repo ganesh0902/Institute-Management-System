@@ -39,37 +39,33 @@ public class Controller {
 	@PostMapping("/")
 	public ResponseEntity<Student> saveStudent(@RequestBody Student student) {
 		Student saveStudent = this.service.saveStudent(student);
-		
-		
+
 		return new ResponseEntity<Student>(saveStudent, HttpStatus.OK);
 	}
+
 	@PostMapping("/image")
 	public ResponseEntity<String> saveImage(@RequestParam("file") MultipartFile file)
 			throws IllegalStateException, IOException {
 		String fileName = UUID.randomUUID().toString() + "-" + StringUtils.cleanPath(file.getOriginalFilename());
-		
-        String filePath = System.getProperty("user.home") + File.separator +
-        		"Institute Management System UI" + File.separator +
-                "institute" + File.separator +
-                "public" + File.separator +
-                "student" + File.separator + fileName;          
-		try
-		{
+
+		String filePath = System.getProperty("user.home") + File.separator + "Institute Management System UI"
+				+ File.separator + "institute" + File.separator + "public" + File.separator + "student" + File.separator
+				+ fileName;
+		try {
 			file.transferTo(new File(filePath));
-		}
-		catch(IOException e)
-		{
+		} catch (IOException e) {
 			System.out.println(e.getMessage());
-		}		
+		}
 		return new ResponseEntity<String>(fileName, HttpStatus.OK);
 	}
+
 	@GetMapping("/")
-	public ResponseEntity<List<Student>> getAllStudent()
-	{
+	public ResponseEntity<List<Student>> getAllStudent() {
 		List<Student> allStudent = this.service.getAllStudent();
-		
+
 		return new ResponseEntity<List<Student>>(allStudent, HttpStatus.OK);
 	}
+
 	@PutMapping("/{stdId}")
 	public ResponseEntity<Student> updateStudent(@PathVariable("stdId") int stdId, @RequestBody Student student)
 			throws ResourceNotFoundException {
@@ -82,7 +78,7 @@ public class Controller {
 		Student student = this.service.findById(stdId);
 		return new ResponseEntity<Student>(student, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/institute/{instituteId}")
 	public ResponseEntity<List<Student>> updateStudent(@PathVariable("instituteId") long instituteId) {
 		List<Student> all = this.service.getAll(instituteId);
@@ -93,7 +89,7 @@ public class Controller {
 	public ResponseEntity<ApiResponse> deleteById(@PathVariable("stdId") int stdId) throws ResourceNotFoundException {
 		boolean status = this.service.delete(stdId);
 		ApiResponse apiResponse = new ApiResponse("Record Deleted", status);
-         return new ResponseEntity<ApiResponse>(apiResponse, HttpStatus.OK);
+		return new ResponseEntity<ApiResponse>(apiResponse, HttpStatus.OK);
 	}
 
 	@GetMapping("/filter/{username}")
@@ -105,21 +101,29 @@ public class Controller {
 	@GetMapping("/studentCount/{instituteId}")
 	public ResponseEntity<Long> countStudents(@PathVariable("instituteId") Long instituteId) {
 		Long courseStudent = this.service.courseStudent(instituteId);
-		System.out.println("Toatl Student "+courseStudent);
-		System.out.println("Tid  "+instituteId);
+		System.out.println("Toatl Student " + courseStudent);
+		System.out.println("Tid  " + instituteId);
 		return new ResponseEntity<Long>(courseStudent, HttpStatus.OK);
 	}
+
 	@GetMapping("/studentDetails/{sdtId}")
-	public ResponseEntity<StudentDto> getStudentDetails(@PathVariable("sdtId") int stdId) throws ResourceNotFoundException
-	{
-		 StudentDto studentDetails = this.service.getStudentDetails(stdId);			
-		return new ResponseEntity<StudentDto>(studentDetails,HttpStatus.OK);		
+	public ResponseEntity<StudentDto> getStudentDetails(@PathVariable("sdtId") int stdId)
+			throws ResourceNotFoundException {
+		StudentDto studentDetails = this.service.getStudentDetails(stdId);
+		return new ResponseEntity<StudentDto>(studentDetails, HttpStatus.OK);
 	}
+
 	@GetMapping("/studentByBatch/{batchId}")
-	public ResponseEntity<List<Student>> getStudentByBatchId(@PathVariable("batchId") int batchId)
-	{
+	public ResponseEntity<List<Student>> getStudentByBatchId(@PathVariable("batchId") int batchId) {
 		List<Student> allStudentByBatch = this.service.getAllStudentByBatch(batchId);
-		
+
 		return new ResponseEntity<List<Student>>(allStudentByBatch, HttpStatus.OK);
-	}	
+	}
+
+	@GetMapping("/studentByTeacherId/{tId}")
+	public ResponseEntity<List<Student>> getStudentByTeacherId(@PathVariable("tId") int tId) {
+		List<Student> students = this.service.getStudentByTeacherId(tId);
+
+		return new ResponseEntity<List<Student>>(students, HttpStatus.OK);
+	}
 }

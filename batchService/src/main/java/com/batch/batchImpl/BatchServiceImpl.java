@@ -115,10 +115,10 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 			batchDto.setTime(batch.getTime());
 			batchDto.setCourse(course);
 			batchDto.setImage(batch.getImage());
-			//TeacherDto teacher = this.restTemplate
-				//	.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(), TeacherDto.class);
+			TeacherDto teacher = this.restTemplate
+					.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(), TeacherDto.class);
 
-			//batchDto.setTeacherDto(teacher);
+			batchDto.setTeacherDto(teacher);
 
 			batchDtoList.add(batchDto);
 
@@ -222,5 +222,11 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 		
 		return this.repository.findByCourseId(courseId);
 		
+	}
+
+	@Override
+	public List<Batch> getBatchByTeacherId(int tId) {
+				
+		return this.repository.findAllByTeacherId(tId);
 	}
 }

@@ -2,6 +2,7 @@ package com.std.service;
 
 import java.util.List;
 
+import com.std.dto.BatchDto;
 import com.std.dto.StudentDto;
 import com.std.entities.Student;
 import com.std.exception.ResourceNotFoundException;
@@ -18,4 +19,5 @@ public interface Service {
 	public StudentDto getStudentDetails(int stdId) throws ResourceNotFoundException;
 	public List<Student> getAllStudentByBatch(int batchId);
 	public List<Student> getAllStudent();	
+	public List<Student> getStudentByTeacherId(int tId);	
 }

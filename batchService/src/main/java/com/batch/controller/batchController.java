@@ -93,7 +93,8 @@ public class batchController {
 	@GetMapping("/teacher/{tId}")
 	public ResponseEntity<List<BatchDto>> getListOfBatch(@PathVariable("tId") int bId)
 	{		
-		List<BatchDto> allBatchByTeacherId = this.serviceImpl.getAllBatchByTeacherId(bId);		
+		List<BatchDto> allBatchByTeacherId = this.serviceImpl.getAllBatchByTeacherId(bId);	
+		System.out.println(allBatchByTeacherId);
 		return new ResponseEntity<List<BatchDto>>(allBatchByTeacherId,HttpStatus.OK);
 	}	
 	@PostMapping("/")
@@ -165,5 +166,11 @@ public class batchController {
 		
 		return new ResponseEntity<List<Batch>>(findByCourseId,HttpStatus.OK);
 		
+	}
+	@GetMapping("/batchByTeacherId/{tId}")
+	public ResponseEntity<List<Batch>> getBatchByTeacherId(@PathVariable("tId") int tId)
+	{
+		List<Batch> batchByTeacherId = this.serviceImpl.getBatchByTeacherId(tId);
+		return new ResponseEntity<List<Batch>>(batchByTeacherId, HttpStatus.OK);
 	}
 }
