@@ -74,7 +74,11 @@ spring:
           - Path=/submission/**
           filters:
            - AuthenticationFilter
-        
+        - id: batch-service
+          uri: lb://batch-service
+          predicates:
+          - Path=/batch/course
+          
           
             
             
