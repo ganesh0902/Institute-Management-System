@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @SpringBootApplication
 @EnableCaching
 public class TeacherServicesApplication {
@@ -22,5 +24,11 @@ public class TeacherServicesApplication {
 	public RestTemplate restTemplate()
 	{
 		return new RestTemplate();
-	}	
+	}
+	
+	@Bean
+	public ObjectMapper objectMapper() {
+	    return new ObjectMapper();
+	}
+
 }

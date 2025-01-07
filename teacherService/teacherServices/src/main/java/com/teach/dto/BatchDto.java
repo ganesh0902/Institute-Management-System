@@ -19,10 +19,12 @@ public class BatchDto {
 	private String image;
 	private int teacherId;	
 	private Course course;
+	private int courseId;
+	private int instituteId;
 	
 	
 	public BatchDto(int bId, String batchTitle, String duration, String startDate, String endDate, String status,
-			String location, String time, String image, int teacherId, Course course) {
+			String location, String time, String image, int teacherId, Course course, int courseId, int instituteId) {
 		super();
 		this.bId = bId;
 		this.batchTitle = batchTitle;
@@ -34,8 +36,9 @@ public class BatchDto {
 		this.time = time;
 		this.image = image;
 		this.teacherId = teacherId;
-		
+		this.courseId = courseId;
 		this.course = course;
+		this.instituteId = instituteId;
 	}
 
 	public BatchDto() {

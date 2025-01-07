@@ -1,6 +1,7 @@
 package com.teach.serviceimpl;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,7 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import com.teach.dto.BatchDto;
 import com.teach.dto.TeacherDto;
 import com.teach.dto.TeacherIdAndName;
 import com.teach.entities.Teacher;
@@ -16,11 +21,19 @@ import com.teach.exception.ResourceNotFoundException;
 import com.teach.repository.TeacherRepository;
 import com.teach.service.TeacherService;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @Service
 public class TeacherServiceImpl implements TeacherService {
 
 	@Autowired
 	private TeacherRepository repository;
+	
+	@Autowired
+	private RestTemplate restTemplate;
+	
+	@Autowired
+	private ObjectMapper objectMapper;
 	
 	@Override
 	@CachePut(cacheNames = "teacher", key = "#teacher.tId")
@@ -41,10 +54,21 @@ public class TeacherServiceImpl implements TeacherService {
 		teacherDto.setEmail(teacher.getEmail());
 		teacherDto.setEducation(teacher.getEducation());
 		teacherDto.setContact(teacher.getContact());
-		teacherDto.setImage(teacher.getImage());
+		teacherDto.setImage(teacher.getImage());		 
+		
+		String url = "http://batch-service/batch/teacherId/" + teacher.getTId();
+		
+		
+		String jsonResponse = restTemplate.getForObject(url, String.class);
+		
+		 try {
+			 List<BatchDto> batchList = objectMapper.readValue(jsonResponse, new com.fasterxml.jackson.core.type.TypeReference<List<BatchDto>>() {});
 
-		// this.restTemplate.getForObject("http://batch-service/batch/teacherId/"+teacher.getTId(),BatchDto.class);
-
+			 teacherDto.setBatchDto(batchList);
+	        } catch (Exception e) {
+	            throw new RuntimeException("Failed to parse response", e);
+	        }
+		 		 
 		return teacherDto;
 	}
 
@@ -65,12 +89,10 @@ public class TeacherServiceImpl implements TeacherService {
 			teacherDto.setEducation(teacher.getEducation());
 			teacherDto.setEmail(teacher.getEmail());
 			teacherDto.setTId(teacher.getTId());
-			teacherDto.setImage(teacher.getImage());
-			// this.restTemplate.getForObject("http://batch-service/batch/teacher/"+teacher.getTId(),BatchDto.class);
-			// teacherDto.setBatchDto(batchDto);
+			teacherDto.setImage(teacher.getImage());			 
 			teacherDtoList.add(teacherDto);
 
-		}
+			}
 		return teacherDtoList;
 	}
 

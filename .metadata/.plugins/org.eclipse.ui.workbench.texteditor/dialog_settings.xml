@@ -6,8 +6,11 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="course"/>
+		<item key="selection" value="BatchDto"/>
 		<list key="findhistory">
+			<item value="BatchDto"/>
+			<item value="getAll"/>
+			<item value="getTeacherById"/>
 			<item value="course"/>
 			<item value="getBatchesByCourseId"/>
 			<item value="getCourseIdAndName"/>
@@ -20,9 +23,6 @@
 			<item value="pring-boot-starter-test"/>
 			<item value="unit"/>
 			<item value="hamcrest-library"/>
-			<item value="mockito"/>
-			<item value="batchDto"/>
-			<item value="ResourceNotFound"/>
 		</list>
 		<list key="replacehistory">
 			<item value="mockDto"/>

@@ -72,6 +72,7 @@ public class TeacherController {
 	}
 
 	@GetMapping("/{id}")
+	
 	public ResponseEntity<TeacherDto> getTeacherById(@PathVariable("id") int id) throws ResourceNotFoundException {
 		TeacherDto teacherDto = this.teacherServiceImpl.getTeacherById(id);
 		return new ResponseEntity<TeacherDto>(teacherDto, HttpStatus.OK);
