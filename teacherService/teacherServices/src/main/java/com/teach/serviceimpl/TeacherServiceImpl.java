@@ -45,6 +45,7 @@ public class TeacherServiceImpl implements TeacherService {
 	@Cacheable(cacheNames = "teacher", key = "#tId")
 	public TeacherDto getTeacherById(int tId) throws ResourceNotFoundException {
 		
+		System.out.println("Fetching Data From Data Base");
 		TeacherDto teacherDto = new TeacherDto();
 		Teacher teacher = this.repository.findById(tId)
 				.orElseThrow(() -> new ResourceNotFoundException("Teacher", "Id", String.valueOf(tId)));

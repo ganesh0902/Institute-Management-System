@@ -2,7 +2,9 @@ package com.teach.controller;
 
 import java.io.File;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,6 +30,9 @@ import com.teach.dto.TeacherIdAndName;
 import com.teach.entities.Teacher;
 import com.teach.exception.ResourceNotFoundException;
 import com.teach.serviceimpl.TeacherServiceImpl;
+
+import ch.qos.logback.classic.Logger;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 @RestController
 @RequestMapping("/teacher")
@@ -72,12 +77,33 @@ public class TeacherController {
 	}
 
 	@GetMapping("/{id}")
-	
+	@CircuitBreaker(name="batchCircuitBreaker", fallbackMethod = "betchForFallBack")
 	public ResponseEntity<TeacherDto> getTeacherById(@PathVariable("id") int id) throws ResourceNotFoundException {
 		TeacherDto teacherDto = this.teacherServiceImpl.getTeacherById(id);
+		
 		return new ResponseEntity<TeacherDto>(teacherDto, HttpStatus.OK);
 	}
 
+	// creating callback method for circuit breaker
+	
+	public ResponseEntity<TeacherDto> betchForFallBack(int id, Exception e)
+	{
+		System.out.println(e.getMessage());
+		
+		TeacherDto fallbackTeacher = new TeacherDto();
+	    fallbackTeacher.setTId(id);
+	    fallbackTeacher.setFirstName("Fallback Batch Service is not available ");
+	    fallbackTeacher.setLastName("User");
+	    fallbackTeacher.setEmail("fallback@example.com");
+	    fallbackTeacher.setEducation("N/A");
+	    fallbackTeacher.setContact("N/A");
+	    fallbackTeacher.setImage("fallback.png");
+	    fallbackTeacher.setBatchDto(Collections.emptyList());
+		
+		return new ResponseEntity<TeacherDto>(fallbackTeacher,HttpStatus.SERVICE_UNAVAILABLE);
+	}
+	
+	
 	@GetMapping("/institute/{instituteId}")
 	public ResponseEntity<List<TeacherDto>> getAll(@PathVariable("instituteId") long instituteId) {
 		System.out.println("getAll Teachers");

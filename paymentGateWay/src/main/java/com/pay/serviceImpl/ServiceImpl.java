@@ -64,9 +64,7 @@ public class ServiceImpl implements Service{
 	    orderDto.setReceipt(order.get("receipt"));
 	    orderDto.setCreated_at(order.get("created_at"));
 	    orderDto.setStatus(order.get("status"));
-	    orderDto.setStdId(stdId);
-	    
-	    
+	    orderDto.setStdId(stdId);	    	    
 	    	    	    	      
 	    System.out.println("order created and save" +orderDto);
 
