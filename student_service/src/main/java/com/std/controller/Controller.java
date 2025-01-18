@@ -3,9 +3,11 @@ package com.std.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import org.aspectj.weaver.ast.Instanceof;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -26,7 +28,11 @@ import com.std.dto.StudentDto;
 import com.std.entities.Student;
 import com.std.exception.ApiResponse;
 import com.std.exception.ResourceNotFoundException;
+import com.std.exception.ServiceFailureException;
 import com.std.serviceImpl.StudentImpl;
+
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+
 import org.springframework.util.StringUtils;
 
 @RestController
@@ -37,10 +43,25 @@ public class Controller {
 	private StudentImpl service;
 
 	@PostMapping("/")
+	@CircuitBreaker(name="saveStudentCircuitBreaker",fallbackMethod = "saveStudentFallback")
 	public ResponseEntity<Student> saveStudent(@RequestBody Student student) {
 		Student saveStudent = this.service.saveStudent(student);
 
 		return new ResponseEntity<Student>(saveStudent, HttpStatus.OK);
+	}
+	
+	public ResponseEntity<Student> saveStudentFallback(Student student, Throwable throwable)
+	{
+		Student fallbackStudent = new Student();
+		String errorMessage = "Unknown error occurred";
+		
+		if(throwable instanceof ServiceFailureException)
+		{
+			errorMessage = throwable.getMessage();
+		}
+        fallbackStudent.setFirstName("Fallback: Unable to save student due to service failure");
+        fallbackStudent.setLastEducation("Fallback: " +errorMessage);
+		return new ResponseEntity<Student>(fallbackStudent,HttpStatus.OK);
 	}
 
 	@PostMapping("/image")
@@ -100,17 +121,28 @@ public class Controller {
 
 	@GetMapping("/studentCount/{instituteId}")
 	public ResponseEntity<Long> countStudents(@PathVariable("instituteId") Long instituteId) {
-		Long courseStudent = this.service.courseStudent(instituteId);
-		System.out.println("Toatl Student " + courseStudent);
-		System.out.println("Tid  " + instituteId);
+		Long courseStudent = this.service.courseStudent(instituteId);		
 		return new ResponseEntity<Long>(courseStudent, HttpStatus.OK);
 	}
 
 	@GetMapping("/studentDetails/{sdtId}")
+	@CircuitBreaker(name="handleStudentCircuiteBreaker",fallbackMethod = "studentAllDetailsBreaker")
 	public ResponseEntity<StudentDto> getStudentDetails(@PathVariable("sdtId") int stdId)
 			throws ResourceNotFoundException {
 		StudentDto studentDetails = this.service.getStudentDetails(stdId);
 		return new ResponseEntity<StudentDto>(studentDetails, HttpStatus.OK);
+	}
+	
+	public ResponseEntity<StudentDto> studentAllDetailsBreaker(int stdId,Throwable throwable)
+	{
+		StudentDto studentDto = new StudentDto();			
+		String errorMessage ="";
+		if(throwable instanceof ServiceFailureException)
+		{
+			errorMessage = throwable.getMessage();
+		}
+		studentDto.setLastName("Fall Back Error: "+errorMessage);
+		return new ResponseEntity<StudentDto>(studentDto,HttpStatus.OK);
 	}
 
 	@GetMapping("/studentByBatch/{batchId}")
@@ -121,9 +153,20 @@ public class Controller {
 	}
 
 	@GetMapping("/studentByTeacherId/{tId}")
+	@CircuitBreaker(name = "teacherCircuitBreaker", fallbackMethod = "teacherServiceBreaker")
 	public ResponseEntity<List<Student>> getStudentByTeacherId(@PathVariable("tId") int tId) {
 		List<Student> students = this.service.getStudentByTeacherId(tId);
 
 		return new ResponseEntity<List<Student>>(students, HttpStatus.OK);
 	}
+
+	public ResponseEntity<List<Student>> teacherServiceBreaker(int tId, Throwable throwable) {
+		// Log or handle the error
+		List<Student> students = new ArrayList<>();
+		Student s1 = new Student();
+		s1.setFirstName("Fallback: Teacher service is not available");
+		students.add(s1);
+		return new ResponseEntity<>(students, HttpStatus.OK);
+	}
+
 }

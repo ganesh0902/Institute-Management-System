@@ -6,11 +6,14 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="BatchDto"/>
+		<item key="selection" value=""/>
 		<list key="findhistory">
+			<item value="maven-dependency-plugin"/>
+			<item value="Application"/>
+			<item value="log"/>
+			<item value="getTeacherById"/>
 			<item value="BatchDto"/>
 			<item value="getAll"/>
-			<item value="getTeacherById"/>
 			<item value="course"/>
 			<item value="getBatchesByCourseId"/>
 			<item value="getCourseIdAndName"/>
@@ -20,9 +23,6 @@
 			<item value="Dev"/>
 			<item value="dev"/>
 			<item value="devToo"/>
-			<item value="pring-boot-starter-test"/>
-			<item value="unit"/>
-			<item value="hamcrest-library"/>
 		</list>
 		<list key="replacehistory">
 			<item value="mockDto"/>

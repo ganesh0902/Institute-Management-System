@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.web.reactive.function.client.WebCl
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -17,6 +19,9 @@ public class TeacherServicesApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TeacherServicesApplication.class, args);
+		
+		System.out.println("Application is running from: " + System.getProperty("user.dir"));
+
 	}
 
 	@Bean

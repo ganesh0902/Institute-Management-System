@@ -17,6 +17,7 @@ import com.std.dto.StudentDto;
 import com.std.dto.TeacherDto;
 import com.std.entities.Student;
 import com.std.exception.ResourceNotFoundException;
+import com.std.exception.ServiceFailureException;
 import com.std.repository.StudentRepository;
 import com.std.service.Service;
 
@@ -33,19 +34,37 @@ public class StudentImpl implements Service {
 	@CachePut(cacheNames = "student", key = "#std.stdId")
 	public Student saveStudent(Student std) {
 
-		BatchDto batch = this.restTemplate.getForObject("http://batch-service/batch/" + std.getBatchId(),
+		BatchDto batch;
+		CourseDto course;
+		
+		try
+		{
+		batch = this.restTemplate.getForObject("http://batch-service/batch/" + std.getBatchId(),
 				BatchDto.class);
-
-		CourseDto course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
-				CourseDto.class);
+		}
+		catch(Exception e)
+		{
+			throw new ServiceFailureException("Failed to fetch batch information");
+		}
+		
+		try
+		{
+			course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
+					CourseDto.class);
+		}
+		catch(Exception e)
+		{
+			throw new ServiceFailureException("Failed to fetch Course information"); 
+		}
+		
 
 		String fees = course.getFees();
 		std.setCourseName(course.getCourseName());
 		Long totalFees = Long.parseLong(fees);
 		std.setTotalFees(totalFees);
 		return this.repo.save(std);
-	}
-
+	}	
+	
 	@Override
 	@CachePut(cacheNames = "student", key = "#std.stdId")
 	public Student updateStudent(int stdId, Student std) throws ResourceNotFoundException {
@@ -109,21 +128,48 @@ public class StudentImpl implements Service {
 	public StudentDto getStudentDetails(int stdId) throws ResourceNotFoundException {
 
 		StudentDto studentDto = new StudentDto();
-
+		BatchDto batch = null;
+		TeacherDto teacher = null;
+		CourseDto course =null;
+				
 		Student student = this.repo.findById(stdId)
 				.orElseThrow(() -> new ResourceNotFoundException("Student", "Id", String.valueOf(stdId)));
+				
+		try
+		{
+			// get batch details from it's service by batchId
+			batch = this.restTemplate.getForObject("http://batch-service/batch/" + student.getBatchId(),
+					BatchDto.class);
+		}
+		catch(Exception e)
+		{
+			System.out.println("Error occurred while calling batch-service: {}: "+ e.getMessage());
+			throw new ServiceFailureException("Failed to fetch batch information");
+		}
 
-		// get batch details from it's service by batchId
-		BatchDto batch = this.restTemplate.getForObject("http://batch-service/batch/" + student.getBatchId(),
-				BatchDto.class);
+		try
+		{
+			// get teacher details from it's service by teacherId			
+			teacher = this.restTemplate.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(),
+					TeacherDto.class);
+		}
+		catch(Exception e)
+		{
+			System.out.println("Error occurred while calling teacher-service: {}: "+ e.getMessage());
+			throw new ServiceFailureException("Failed to fetch teacher information");
+		}
 
-		// get teacher details from it's service by teacherId
-		TeacherDto teacher = this.restTemplate.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(),
-				TeacherDto.class);
-
-		// get course details from it's service by course Id
-		CourseDto course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
-				CourseDto.class);
+		try
+		{
+			// get course details from it's service by course Id			
+			course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
+					CourseDto.class);
+		}
+		catch(Exception e)
+		{
+			System.out.println("Error occurred while calling course-service: {}: "+ e.getMessage());
+			throw new ServiceFailureException("Failed to fetch course information");
+		}
 
 		studentDto.setStdId(student.getStdId());
 		studentDto.setFirstName(student.getFirstName());

@@ -9,7 +9,7 @@ eureka:
   instance:
     hostname: localhost
              
-#configuration for activator             
+#configuration for acuator             
 management:
   health:
     circuitbreakers:

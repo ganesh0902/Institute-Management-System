@@ -77,7 +77,7 @@ public class TeacherController {
 	}
 
 	@GetMapping("/{id}")
-	@CircuitBreaker(name="batchCircuitBreaker", fallbackMethod = "betchForFallBack")
+	@CircuitBreaker(name="batchCircuitBreaker", fallbackMethod = "batchForFallBack")
 	public ResponseEntity<TeacherDto> getTeacherById(@PathVariable("id") int id) throws ResourceNotFoundException {
 		TeacherDto teacherDto = this.teacherServiceImpl.getTeacherById(id);
 		
@@ -86,7 +86,7 @@ public class TeacherController {
 
 	// creating callback method for circuit breaker
 	
-	public ResponseEntity<TeacherDto> betchForFallBack(int id, Exception e)
+	public ResponseEntity<TeacherDto> batchForFallBack(int id, Exception e)
 	{
 		System.out.println(e.getMessage());
 		

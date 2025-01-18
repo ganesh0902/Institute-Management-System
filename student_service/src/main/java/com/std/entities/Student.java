@@ -27,6 +27,8 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Student {
 
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int stdId;

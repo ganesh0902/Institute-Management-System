@@ -11,6 +11,9 @@ import lombok.ToString;
 @NoArgsConstructor
 public class CourseDto {
 
+	public CourseDto(String string, String string2) {
+		// TODO Auto-generated constructor stub
+	}
 	private String courseName;
 	private String description;
 	private String skills;
