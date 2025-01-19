@@ -21,6 +21,9 @@ import com.teach.exception.ResourceNotFoundException;
 import com.teach.repository.TeacherRepository;
 import com.teach.service.TeacherService;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
@@ -28,13 +31,18 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Autowired
 	private TeacherRepository repository;
-	
+
 	@Autowired
 	private RestTemplate restTemplate;
-	
+
 	@Autowired
 	private ObjectMapper objectMapper;
+
+	@Autowired
+	private FallBackImpl fallBack;
 	
+	int retryCount =0;
+
 	@Override
 	@CachePut(cacheNames = "teacher", key = "#teacher.tId")
 	public Teacher saveTeacher(Teacher teacher) {
@@ -43,8 +51,11 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Override
 	@Cacheable(cacheNames = "teacher", key = "#tId")
+	@Retry(name = "batchCircuitBreaker", fallbackMethod = "batchForFallBack")
 	public TeacherDto getTeacherById(int tId) throws ResourceNotFoundException {
 		
+		System.out.println("Retry Count :{} "+retryCount);
+		retryCount++;
 		System.out.println("Fetching Data From Data Base");
 		TeacherDto teacherDto = new TeacherDto();
 		Teacher teacher = this.repository.findById(tId)
@@ -55,25 +66,32 @@ public class TeacherServiceImpl implements TeacherService {
 		teacherDto.setEmail(teacher.getEmail());
 		teacherDto.setEducation(teacher.getEducation());
 		teacherDto.setContact(teacher.getContact());
-		teacherDto.setImage(teacher.getImage());		 
-		
-		String url = "http://batch-service/batch/teacherId/" + teacher.getTId();
-		
-		
-		String jsonResponse = restTemplate.getForObject(url, String.class);
-		
-		 try {
-			 List<BatchDto> batchList = objectMapper.readValue(jsonResponse, new com.fasterxml.jackson.core.type.TypeReference<List<BatchDto>>() {});
+		teacherDto.setImage(teacher.getImage());
 
-			 teacherDto.setBatchDto(batchList);
-	        } catch (Exception e) {
-	            throw new RuntimeException("Failed to parse response", e);
-	        }
-		 		 
+		String url = "http://batch-service/batch/teacherId/" + teacher.getTId();
+
+		String jsonResponse = restTemplate.getForObject(url, String.class);
+
+		try {
+			List<BatchDto> batchList = objectMapper.readValue(jsonResponse,
+					new com.fasterxml.jackson.core.type.TypeReference<List<BatchDto>>() {
+					});
+
+			teacherDto.setBatchDto(batchList);
+		} catch (Exception e) {
+			throw new RuntimeException("Failed to parse response", e);
+		}
+
 		return teacherDto;
 	}
 
-	@Override									  
+	// creating callback method for circuit breaker
+	public TeacherDto batchForFallBack(int id, Exception e) {
+		return fallBack.batchForFallBack(id);
+
+	}
+
+	@Override
 	/* @Cacheable(cacheNames = "teacher", key = "#instituteId") */
 	public List<TeacherDto> getAll(long instituteId) {
 
@@ -90,15 +108,15 @@ public class TeacherServiceImpl implements TeacherService {
 			teacherDto.setEducation(teacher.getEducation());
 			teacherDto.setEmail(teacher.getEmail());
 			teacherDto.setTId(teacher.getTId());
-			teacherDto.setImage(teacher.getImage());			 
+			teacherDto.setImage(teacher.getImage());
 			teacherDtoList.add(teacherDto);
 
-			}
+		}
 		return teacherDtoList;
 	}
 
 	@Override
-	@CacheEvict(cacheNames = "teacher",key="#tId")
+	@CacheEvict(cacheNames = "teacher", key = "#tId")
 	public boolean delete(int tId) throws ResourceNotFoundException {
 
 		boolean status = false;
@@ -157,7 +175,7 @@ public class TeacherServiceImpl implements TeacherService {
 		return this.repository.save(teacher);
 	}
 
-	@Override	
+	@Override
 	public Teacher getTeacherByCredential(int cId) {
 
 		System.out.println(cId);
