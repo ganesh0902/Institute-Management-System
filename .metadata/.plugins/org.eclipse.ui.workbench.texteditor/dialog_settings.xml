@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value=""/>
+		<item key="selection" value="getBatch"/>
 		<list key="findhistory">
+			<item value="getBatch"/>
 			<item value="maven-dependency-plugin"/>
 			<item value="Application"/>
 			<item value="log"/>
@@ -22,7 +23,6 @@
 			<item value="runtime"/>
 			<item value="Dev"/>
 			<item value="dev"/>
-			<item value="devToo"/>
 		</list>
 		<list key="replacehistory">
 			<item value="mockDto"/>

@@ -2,8 +2,9 @@ package com.batch.batchImpl;
 
 import java.util.ArrayList;
 
-
 import java.util.List;
+
+import org.modelmapper.internal.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -15,7 +16,12 @@ import com.batch.dto.TeacherDto;
 import com.batch.entities.Batch;
 import com.batch.entities.Course;
 import com.batch.exception.ResourceNotFoundException;
+import com.batch.exception.ServiceFailureException;
+import com.batch.fallback.BatchFallBack;
 import com.batch.repository.BatchRepository;
+
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 
 @Service
 public class BatchServiceImpl implements com.batch.service.batchService {
@@ -26,7 +32,11 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 	@Autowired
 	private BatchRepository repository;
 
+	@Autowired
+	private BatchFallBack fallBack;
+
 	@Override
+	@CircuitBreaker(name = "", fallbackMethod = "getBatchFallBack")
 	public BatchDto getBatch(int bId) throws ResourceNotFoundException {
 
 		BatchDto batchDto = new BatchDto();
@@ -45,14 +55,30 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 		batchDto.setCourseId(batch.getCourseId());
 		batchDto.setTeacherId(batch.getTeacherId());
 
-		Course course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
-				Course.class);
-		TeacherDto teacherDto = this.restTemplate.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(),
-				TeacherDto.class);
-		
-		batchDto.setCourse(course);
-		batchDto.setTeacherDto(teacherDto);
+		try {
+			Course course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
+					Course.class);
+			batchDto.setCourse(course);
+		} catch (Exception e) {
+			throw new ServiceFailureException("Course Service is failed");
+
+		}
+
+		try {
+			TeacherDto teacherDto = this.restTemplate
+					.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(), TeacherDto.class);
+			batchDto.setTeacherDto(teacherDto);
+		} catch (Exception e) {
+			throw new ServiceFailureException("Teacher Service is failed");
+		}
+
 		return batchDto;
+	}
+
+	public BatchDto getBatchFallBack(int bId, Throwable throwable) {
+		BatchDto batchFallBack = this.fallBack.getBatchFallBack(bId);
+
+		return batchFallBack;
 	}
 
 	@Override
@@ -93,6 +119,7 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 	}
 
 	@Override
+	@Retry(name = "", fallbackMethod = "getAllBatchfallBack")
 	public List<BatchDto> getAllBatch(long instituteId) {
 
 		List<Batch> findAll = this.repository.findAllBatchByInstituteId(instituteId);
@@ -126,6 +153,10 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 		return batchDtoList;
 	}
 
+	public List<BatchDto> getAllBatchfallBack(long instituteId) {
+		return this.fallBack.getAllBatch(instituteId);
+	}
+
 	@Override
 	public List<BatchDto> getAllBatchByTeacherId(int tId) {
 
@@ -135,8 +166,15 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 		for (Batch batch : findAllByTeacherId) {
 
 			BatchDto batchDto = new BatchDto();
-			Course course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
-					Course.class);
+
+			try {
+				Course course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
+						Course.class);
+				batchDto.setCourse(course);
+			} catch (Exception e) {
+				throw new ServiceFailureException("Course Service is down");
+			}
+
 			batchDto.setBId(batch.getBId());
 			batchDto.setBatchTitle(batch.getBatchTitle());
 			batchDto.setStartDate(batch.getStartDate());
@@ -145,12 +183,18 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 			batchDto.setStatus(batch.getStatus());
 			batchDto.setLocation(batch.getLocation());
 			batchDto.setTime(batch.getTime());
-			batchDto.setCourse(course);
+
 			batchDto.setImage(batch.getImage());
 
-			TeacherDto teacher = this.restTemplate
-					.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(), TeacherDto.class);
-			batchDto.setTeacherDto(teacher);
+			try {
+				TeacherDto teacher = this.restTemplate
+						.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(), TeacherDto.class);
+				batchDto.setTeacherDto(teacher);
+			} catch (Exception e) {
+
+				throw new ServiceFailureException("Teacher Service is down");
+			}
+
 			batchDtoList.add(batchDto);
 		}
 
@@ -175,10 +219,10 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 			batchDto.setStatus(batch.getStatus());
 			batchDto.setLocation(batch.getLocation());
 			batchDto.setImage(batch.getImage());
-			
+
 			Course course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
 					Course.class);
-			
+
 			TeacherDto teacher = this.restTemplate
 					.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(), TeacherDto.class);
 			System.out.println("Course Id is " + batch.getCourseId());
@@ -219,14 +263,14 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 
 	@Override
 	public List<Batch> findByCourseId(int courseId) {
-		
+
 		return this.repository.findByCourseId(courseId);
-		
+
 	}
 
 	@Override
 	public List<Batch> getBatchByTeacherId(int tId) {
-				
+
 		return this.repository.findAllByTeacherId(tId);
 	}
 }

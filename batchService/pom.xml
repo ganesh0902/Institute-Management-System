@@ -40,7 +40,7 @@
 		    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		    <version>3.0.2</version>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>			
@@ -51,12 +51,13 @@
 			<artifactId>spring-boot-starter-aop</artifactId>			
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/io.github.resilience4j/resilience4j-circuitbreaker -->
+		
 		<dependency>
 		    <groupId>io.github.resilience4j</groupId>
-		    <artifactId>resilience4j-circuitbreaker</artifactId>
-		    <version>2.3.0</version>
+		    <artifactId>resilience4j-spring-boot3</artifactId>		    
 		</dependency>
-
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
