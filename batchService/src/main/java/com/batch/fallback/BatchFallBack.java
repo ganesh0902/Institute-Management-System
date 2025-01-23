@@ -52,4 +52,51 @@ public class BatchFallBack implements FallBackDao {
 		return batchList;
 
 	}
+
+	@Override
+	public List<BatchDto> getAllBatchByTeacherId(int teacherId) {
+		
+		List<BatchDto> batchList = new ArrayList<>();
+
+		BatchDto dto = new BatchDto();
+
+		dto.setBatchTitle("Fallback Batch Service is not available");		
+		dto.setDuration("");
+		dto.setStartDate("");
+		dto.setEndDate("");
+		dto.setStatus("");
+		dto.setLocation("");
+		dto.setTime("");
+		dto.setCourse(null);
+		dto.setTeacherId(0);
+		dto.setCourseId(0);
+		dto.setImage("");
+
+		batchList.add(dto);
+		return batchList;				
+	}
+
+	@Override
+	public List<BatchDto> findByBatchTitleContaining(String batchTitle) {
+
+		
+		List<BatchDto> batchList = new ArrayList<>();
+
+		BatchDto dto = new BatchDto();
+
+		dto.setBatchTitle("Fallback Batch Service is not available");		
+		dto.setDuration("");
+		dto.setStartDate("");
+		dto.setEndDate("");
+		dto.setStatus("");
+		dto.setLocation("");
+		dto.setTime("");
+		dto.setCourse(null);
+		dto.setTeacherId(0);
+		dto.setCourseId(0);
+		dto.setImage("");
+
+		batchList.add(dto);
+		return batchList;				
+	}
 }

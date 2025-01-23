@@ -36,7 +36,7 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 	private BatchFallBack fallBack;
 
 	@Override
-	@CircuitBreaker(name = "", fallbackMethod = "getBatchFallBack")
+	@CircuitBreaker(name = "getBatchFallBack", fallbackMethod = "getBatchFallBack")
 	public BatchDto getBatch(int bId) throws ResourceNotFoundException {
 
 		BatchDto batchDto = new BatchDto();
@@ -119,7 +119,7 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 	}
 
 	@Override
-	@Retry(name = "", fallbackMethod = "getAllBatchfallBack")
+	@Retry(name = "getAllBatchFallBack", fallbackMethod = "getAllBatchfallBack")
 	public List<BatchDto> getAllBatch(long instituteId) {
 
 		List<Batch> findAll = this.repository.findAllBatchByInstituteId(instituteId);
@@ -153,11 +153,12 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 		return batchDtoList;
 	}
 
-	public List<BatchDto> getAllBatchfallBack(long instituteId) {
+	public List<BatchDto> getAllBatchfallBack(long instituteId, Throwable throwable) {
 		return this.fallBack.getAllBatch(instituteId);
 	}
 
 	@Override
+	@Retry(name = "batchByTId", fallbackMethod = "getBatchByTIdFallBack")
 	public List<BatchDto> getAllBatchByTeacherId(int tId) {
 
 		List<Batch> findAllByTeacherId = this.repository.findAllByTeacherId(tId);
@@ -201,7 +202,12 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 		return batchDtoList;
 	}
 
+	public List<BatchDto> getBatchByTIdFallBack(int teacherId, Throwable throwable) {
+		return this.fallBack.getAllBatchByTeacherId(teacherId);
+	}
+
 	@Override
+	@Retry(name = "findByTitleFallBack", fallbackMethod = "findByTitleFallBack")
 	public List<BatchDto> findByBatchTitleContaining(String batchTitle) {
 
 		List<BatchDto> batchDtoList = new ArrayList<>();
@@ -220,20 +226,34 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 			batchDto.setLocation(batch.getLocation());
 			batchDto.setImage(batch.getImage());
 
-			Course course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
-					Course.class);
+			try {
+				Course course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
+						Course.class);
 
-			TeacherDto teacher = this.restTemplate
-					.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(), TeacherDto.class);
+				System.out.println(course);
+				batchDto.setCourse(course);
+			} catch (Exception e) {
+				throw new ServiceFailureException("Course service is down");
+			}
+
+			try {
+				TeacherDto teacher = this.restTemplate
+						.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(), TeacherDto.class);
+				batchDto.setTeacherDto(teacher);
+			} catch (Exception e) {
+				throw new ServiceFailureException("Teacher Service is failed");
+			}
+
 			System.out.println("Course Id is " + batch.getCourseId());
 
-			System.out.println(course);
-			batchDto.setTeacherDto(teacher);
-			batchDto.setCourse(course);
 			batchDtoList.add(batchDto);
 
 		}
 		return batchDtoList;
+	}
+
+	public List<BatchDto> findByTitleFallBack(String batchTitle) {
+		return this.fallBack.findByBatchTitleContaining(batchTitle);
 	}
 
 	@Override
@@ -265,7 +285,6 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 	public List<Batch> findByCourseId(int courseId) {
 
 		return this.repository.findByCourseId(courseId);
-
 	}
 
 	@Override
