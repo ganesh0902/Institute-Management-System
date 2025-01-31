@@ -6,23 +6,23 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="getBatch"/>
+		<item key="selection" value=""/>
 		<list key="findhistory">
-			<item value="getBatch"/>
-			<item value="maven-dependency-plugin"/>
-			<item value="Application"/>
-			<item value="log"/>
-			<item value="getTeacherById"/>
-			<item value="BatchDto"/>
-			<item value="getAll"/>
-			<item value="course"/>
-			<item value="getBatchesByCourseId"/>
-			<item value="getCourseIdAndName"/>
-			<item value="getAllCourseIdAndName"/>
-			<item value="devto"/>
-			<item value="runtime"/>
-			<item value="Dev"/>
-			<item value="dev"/>
+			<item value="mysql"/>
+			<item value="Driver loaded successfully"/>
+			<item value="HikariCP"/>
+			<item value="packaging"/>
+			<item value="maven"/>
+			<item value="micrometer"/>
+			<item value="com.mysql"/>
+			<item value="jakarta"/>
+			<item value="mvnw"/>
+			<item value="Wrapper"/>
+			<item value="wrapper"/>
+			<item value="pack"/>
+			<item value="pac"/>
+			<item value="pa"/>
+			<item value="p"/>
 		</list>
 		<list key="replacehistory">
 			<item value="mockDto"/>

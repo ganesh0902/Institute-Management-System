@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.springframework.boot.autoconfigure.pulsar.PulsarProperties.Reader"/>
-    <fullyQualifiedTypeName name="java.io.Reader"/>
-    <fullyQualifiedTypeName name="java.io.FileReader"/>
-    <fullyQualifiedTypeName name="com.opencsv.bean.CsvToBean"/>
     <fullyQualifiedTypeName name="com.opencsv.bean.CsvToBeanBuilder"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
     <fullyQualifiedTypeName name="com.pay.daoImpl.CarImpl"/>
@@ -60,4 +56,8 @@
     <fullyQualifiedTypeName name="com.batch.dto.BatchDto"/>
     <fullyQualifiedTypeName name="java.lang.Exception"/>
     <fullyQualifiedTypeName name="com.batch.exception.ServiceFailureException"/>
+    <fullyQualifiedTypeName name="jakarta.activation.DataSource"/>
+    <fullyQualifiedTypeName name="org.springframework.context.annotation.Bean"/>
+    <fullyQualifiedTypeName name="com.zaxxer.hikari.HikariDataSource"/>
+    <fullyQualifiedTypeName name="org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration"/>
 </qualifiedTypeNameHistroy>

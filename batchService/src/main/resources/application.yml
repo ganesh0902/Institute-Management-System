@@ -9,14 +9,14 @@ eureka:
 management:
   health:
     circuitbreakers:
-      enabled: true
+      enabled: true    
   endpoints:
     web:
       exposure:
-        include: health  
+        include: health, resilience4j  
   endpoint:
     health:
-      show-details: always
+      show-details: always      
   
         
 #configuration for circuit breaker
