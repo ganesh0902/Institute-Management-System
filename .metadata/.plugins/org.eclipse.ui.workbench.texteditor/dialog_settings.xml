@@ -6,8 +6,14 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value=""/>
+		<item key="selection" value="true"/>
 		<list key="findhistory">
+			<item value="true"/>
+			<item value="student"/>
+			<item value="port"/>
+			<item value="prod"/>
+			<item value="port No"/>
+			<item value="freemarker"/>
 			<item value="mysql"/>
 			<item value="Driver loaded successfully"/>
 			<item value="HikariCP"/>
@@ -17,12 +23,6 @@
 			<item value="com.mysql"/>
 			<item value="jakarta"/>
 			<item value="mvnw"/>
-			<item value="Wrapper"/>
-			<item value="wrapper"/>
-			<item value="pack"/>
-			<item value="pac"/>
-			<item value="pa"/>
-			<item value="p"/>
 		</list>
 		<list key="replacehistory">
 			<item value="mockDto"/>

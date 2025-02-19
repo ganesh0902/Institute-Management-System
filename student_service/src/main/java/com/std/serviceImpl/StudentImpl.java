@@ -90,7 +90,7 @@ public class StudentImpl implements Service {
 	}
 
 	@Override
-	@Cacheable(cacheNames = "teacher", key = "#instituteId")
+	//@Cacheable(cacheNames = "teacher", key = "#instituteId")
 	public List<Student> getAll(long instituteId) {
 
 		System.out.println("Getting student by instituteId");
