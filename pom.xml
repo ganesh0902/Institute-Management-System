@@ -19,7 +19,7 @@
        <module>institute</module>
       <module>paymentGateway</module>
        <module>student_service</module>
-       <module>teacher-service</module>
+       <module>teacherService</module>
     </modules>
 
     <dependencyManagement>
