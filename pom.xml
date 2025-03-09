@@ -11,15 +11,15 @@
     <packaging>pom</packaging>
     
     <modules>
-        <module>api-gate-way</module>
+        <module>api_gate_way</module>
         <module>batchService</module>
-        <module>course-service</module>
+        <module>course_service</module>
         <module>e_server</module>
        <module>identity-service</module>
        <module>institute</module>
       <module>paymentGateway</module>
        <module>student_service</module>
-       <module>TeacherService</module>
+       <module>teacherService</module>
     </modules>
 
     <dependencyManagement>
