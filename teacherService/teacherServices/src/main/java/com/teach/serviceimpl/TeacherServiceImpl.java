@@ -2,15 +2,16 @@ package com.teach.serviceimpl;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import com.teach.dto.BatchDto;
@@ -21,7 +22,6 @@ import com.teach.exception.ResourceNotFoundException;
 import com.teach.repository.TeacherRepository;
 import com.teach.service.TeacherService;
 
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -52,8 +52,7 @@ public class TeacherServiceImpl implements TeacherService {
 	@Override
 	@Cacheable(cacheNames = "teacher", key = "#tId")
 	@Retry(name = "batchCircuitBreaker", fallbackMethod = "batchForFallBack")
-	public TeacherDto getTeacherById(int tId) throws ResourceNotFoundException {
-		
+	public TeacherDto getTeacherById(int tId) throws ResourceNotFoundException {				
 		System.out.println("Retry Count :{} "+retryCount);
 		retryCount++;
 		System.out.println("Fetching Data From Data Base");

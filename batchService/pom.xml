@@ -79,6 +79,7 @@
 		    <artifactId>lombok</artifactId>		    
 		    <scope>provided</scope>
 		</dependency>
+					
 		<dependency>
 	        <groupId>org.springdoc</groupId>
       		<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
@@ -87,7 +88,7 @@
 		<dependency>
 	      <groupId>org.springframework.boot</groupId>
 	      <artifactId>spring-boot-starter-cache</artifactId>
-	    </dependency>
+	    </dependency>	    	  
 	    
 	    <dependency>
 		    <groupId>org.mockito</groupId>
@@ -95,6 +96,24 @@
 		    <version>4.6.1</version>
 		    <scope>test</scope>
 		</dependency>
+		
+		<!-- Micrometer Tracing -->
+	    <dependency>
+	        <groupId>io.micrometer</groupId>
+	        <artifactId>micrometer-tracing</artifactId>
+	    </dependency>
+	
+	    <!-- Brave for context propagation -->
+	    <dependency>
+	        <groupId>io.micrometer</groupId>
+	        <artifactId>micrometer-tracing-bridge-brave</artifactId>
+	    </dependency>
+	
+	    <!-- Zipkin Reporter -->
+	    <dependency>
+	        <groupId>io.zipkin.reporter2</groupId>
+	        <artifactId>zipkin-reporter-brave</artifactId>
+	    </dependency>
 
 	</dependencies>
 

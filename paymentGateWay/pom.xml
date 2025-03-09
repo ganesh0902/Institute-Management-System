@@ -62,6 +62,18 @@
 			<version>1.4.7</version> 
 		</dependency>
 			
+		<!-- Micrometer Tracing -->
+	    <dependency>
+	        <groupId>io.micrometer</groupId>
+	        <artifactId>micrometer-tracing</artifactId>
+	    </dependency>
+	
+	    <!-- Brave for context propagation -->
+	    <dependency>
+	        <groupId>io.micrometer</groupId>
+	        <artifactId>micrometer-tracing-bridge-brave</artifactId>
+	    </dependency>
+	    	
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

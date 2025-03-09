@@ -30,6 +30,18 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
+		
+		<!-- Micrometer Tracing -->
+	    <dependency>
+	        <groupId>io.micrometer</groupId>
+	        <artifactId>micrometer-tracing</artifactId>
+	    </dependency>
+	
+	    <!-- Brave for context propagation -->
+	    <dependency>
+	        <groupId>io.micrometer</groupId>
+	        <artifactId>micrometer-tracing-bridge-brave</artifactId>
+	    </dependency>
 
 		<dependency>
 			<groupId>com.mysql</groupId>

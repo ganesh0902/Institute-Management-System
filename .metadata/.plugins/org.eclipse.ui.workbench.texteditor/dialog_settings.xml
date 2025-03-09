@@ -6,23 +6,23 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="true"/>
+		<item key="selection" value=""/>
 		<list key="findhistory">
-			<item value="true"/>
-			<item value="student"/>
-			<item value="port"/>
-			<item value="prod"/>
-			<item value="port No"/>
-			<item value="freemarker"/>
-			<item value="mysql"/>
-			<item value="Driver loaded successfully"/>
-			<item value="HikariCP"/>
-			<item value="packaging"/>
-			<item value="maven"/>
-			<item value="micrometer"/>
-			<item value="com.mysql"/>
-			<item value="jakarta"/>
-			<item value="mvnw"/>
+			<item value="Micrometer"/>
+			<item value="Spring-Cloud-Sleuth"/>
+			<item value="Spring-Cloud-Sleuth-3"/>
+			<item value="Spring-Cloud-Sleuth-3."/>
+			<item value="zip"/>
+			<item value="info"/>
+			<item value="S"/>
+			<item value="Sl"/>
+			<item value="Sle"/>
+			<item value="sle"/>
+			<item value="zipkin"/>
+			<item value="CustomeUserDetails"/>
+			<item value="CustomeUserDetailsService"/>
+			<item value="User"/>
+			<item value="loggin"/>
 		</list>
 		<list key="replacehistory">
 			<item value="mockDto"/>
@@ -30,8 +30,8 @@
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="1151"/>
-		<item key="DIALOG_Y_ORIGIN" value="246"/>
+		<item key="DIALOG_X_ORIGIN" value="1008"/>
+		<item key="DIALOG_Y_ORIGIN" value="159"/>
 		<item key="DIALOG_WIDTH" value="414"/>
 		<item key="DIALOG_HEIGHT" value="454"/>
 		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>

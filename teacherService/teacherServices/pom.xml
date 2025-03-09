@@ -30,6 +30,7 @@
 		    <artifactId>mysql-connector-java</artifactId>
 		    <version>8.0.33</version>
 		</dependency>
+	
 
 		<dependency>
     		<groupId>com.zaxxer</groupId>
@@ -85,6 +86,18 @@
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>2.2.0</version>
         </dependency>
+        
+        <!-- Micrometer Tracing -->
+	    <dependency>
+	        <groupId>io.micrometer</groupId>
+	        <artifactId>micrometer-tracing</artifactId>
+	    </dependency>
+	
+	    <!-- Brave for context propagation -->
+	    <dependency>
+	        <groupId>io.micrometer</groupId>
+	        <artifactId>micrometer-tracing-bridge-brave</artifactId>
+	    </dependency>
 
         <!-- Jackson Databind -->
         <dependency>
@@ -115,6 +128,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+               
     </dependencies>
 
     <dependencyManagement>

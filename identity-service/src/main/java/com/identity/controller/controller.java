@@ -91,9 +91,14 @@ public class controller {
 		Map<String, Object> userInformation = null;
 		try {
 			System.out.println("User is " + user);
+			
+			//authenticationManager is responsible to check user is authenticate or not 
+			//authenticationManager manager take UsernamePasswordAuthenticationToken which contain username and password
+			
 			Authentication authenticate = authenticationManager
 					.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
 
+			//if user is authenticate then generate the token
 			if (authenticate.isAuthenticated()) {
 				UserCredential userInfo = serviceDaoImpl.getUserInfo(user.getUsername());
 				response = this.authService.generateToken(user.getUsername(),userInfo);
