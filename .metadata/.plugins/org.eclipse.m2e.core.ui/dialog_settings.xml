@@ -14,8 +14,8 @@
 	</section>
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
-			<item value="C:\Users\Sangita\Institute Management System\teacherService"/>
 			<item value="C:\Users\Sangita\Institute Management System\teacherService\teacherServices"/>
+			<item value="C:\Users\Sangita\Institute Management System\teacherService"/>
 			<item value="C:\Users\Sangita\Institute Management System\course_service"/>
 			<item value="C:\Users\Sangita\Institute Management System\student_service"/>
 			<item value="C:\Users\Sangita\Institute Management System\e_server"/>

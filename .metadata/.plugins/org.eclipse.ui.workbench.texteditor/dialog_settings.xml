@@ -8,6 +8,7 @@
 		<item key="isRegEx" value="false"/>
 		<item key="selection" value=""/>
 		<list key="findhistory">
+			<item value="Teacher"/>
 			<item value="Micrometer"/>
 			<item value="Spring-Cloud-Sleuth"/>
 			<item value="Spring-Cloud-Sleuth-3"/>
@@ -22,7 +23,6 @@
 			<item value="CustomeUserDetails"/>
 			<item value="CustomeUserDetailsService"/>
 			<item value="User"/>
-			<item value="loggin"/>
 		</list>
 		<list key="replacehistory">
 			<item value="mockDto"/>
