@@ -1,0 +1,12 @@
+server:
+  port: 9003
+  
+spring:
+  application:
+    name: teacher-service
+    
+eureka:
+  instance:
+    hostname: localhost
+  main:
+    web-application-type: reactive
