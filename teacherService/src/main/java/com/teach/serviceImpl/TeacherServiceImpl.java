@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.teach.dto.BatchDto;
 import com.teach.dto.TeacherDto;
 import com.teach.entities.Teacher;
@@ -39,7 +41,9 @@ public class TeacherServiceImpl implements TeacherService{
 		teacherDto.setLastName(teacher.getLastName());
 		teacherDto.setEmail(teacher.getEmail());
 		teacherDto.setEducation(teacher.getEducation());
-		teacherDto.setContact(teacher.getContact());					 
+		teacherDto.setContact(teacher.getContact());	
+		teacherDto.setInstituteId(teacher.getInstituteId());
+		teacherDto.setCredentiatlId(teacher.getCredentialId());		
 		
 		return teacherDto;
 	}
@@ -76,5 +80,17 @@ public class TeacherServiceImpl implements TeacherService{
 			status=true;
 		}		
 		return status;
+	}
+	@Override
+	public long teacherCount(long instituteId) {
+
+		return this.repository.countTeacherByInstituteId(instituteId);
+	
+	}
+	@Override
+	public List<Teacher> getTeacherByInstituteId(long instituteId) throws ResourceNotFoundException {
+
+		return this.repository.findByInstituteId(instituteId);
+		
 	}
 }

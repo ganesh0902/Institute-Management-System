@@ -14,4 +14,6 @@ public interface TeacherService {
 	public TeacherDto getTeacherById(int id) throws ResourceNotFoundException;
 	public List<TeacherDto> getAll();
 	public boolean delete(int id) throws ResourceNotFoundException;	
+	public long teacherCount(long instituteId);
+	public List<Teacher>  getTeacherByInstituteId(long instituteId) throws ResourceNotFoundException;
 }

@@ -28,5 +28,6 @@ public class Teacher {
 	private String education;
 	private String contact;
 	private String email;
-	
+	private Long instituteId;
+	private int credentialId;		
 }

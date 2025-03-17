@@ -6,8 +6,10 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value=""/>
+		<item key="selection" value="spring-boot-starter-web"/>
 		<list key="findhistory">
+			<item value="spring-boot-starter-web"/>
+			<item value="student-service"/>
 			<item value="Teacher"/>
 			<item value="Micrometer"/>
 			<item value="Spring-Cloud-Sleuth"/>
@@ -21,8 +23,6 @@
 			<item value="sle"/>
 			<item value="zipkin"/>
 			<item value="CustomeUserDetails"/>
-			<item value="CustomeUserDetailsService"/>
-			<item value="User"/>
 		</list>
 		<list key="replacehistory">
 			<item value="mockDto"/>

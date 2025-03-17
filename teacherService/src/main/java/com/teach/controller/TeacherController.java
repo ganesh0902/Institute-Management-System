@@ -1,8 +1,11 @@
 package com.teach.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,5 +46,20 @@ public class TeacherController {
 		
 		return new ResponseEntity<TeacherDto>(teacherDto,HttpStatus.OK); 		
 	}
+	
+	@GetMapping("/teacherCount/{instituteId}")
+	public ResponseEntity<Long> teacherCount(@PathVariable("instituteId") long instituteId) throws ResourceNotFoundException
+	{
+		long teacherCount = this.teacherServiceImpl.teacherCount(instituteId);							
 		
+		return new ResponseEntity<Long>(teacherCount,HttpStatus.OK); 		
+	}
+	
+	@GetMapping("/institute/{instituteId}")
+	public ResponseEntity<List<Teacher>> getTeacherByInstitute(@PathVariable("instituteId") long instituteId) throws ResourceNotFoundException
+	{
+		List<Teacher> teacherByInstituteId = this.teacherServiceImpl.getTeacherByInstituteId(instituteId);
+		
+		return new ResponseEntity<List<Teacher>>(teacherByInstituteId, HttpStatus.OK);
+	}
 }

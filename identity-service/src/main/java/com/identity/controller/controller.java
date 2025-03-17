@@ -29,7 +29,7 @@ import com.identity.serviceImpl.ServiceDaoImpl;
 
 @RequestMapping("/auth")
 @RestController																							
-@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:9001", "http://192.168.0.120:3000", "http://192.168.0.114:3000" })
+@CrossOrigin(origins = { "http://localhost:3000"})
 //@CrossOrigin(origins = "*")
 public class controller {
 
@@ -117,12 +117,11 @@ public class controller {
 		
 		UserCredential user = this.service.getUser(email);		
 		return new ResponseEntity<UserCredential>(user,HttpStatus.OK);				
-	}	
+	}		
 	@GetMapping("/teacher/{instituteId}")
 	public ResponseEntity<List<TeacherDto>> getAllTeacher(@PathVariable("instituteId") int instituteId)
 	{		
-		List<TeacherDto> allTeacher = this.serviceDaoImpl.getAllTeacher(instituteId);
-		
+		List<TeacherDto> allTeacher = this.serviceDaoImpl.getAllTeacher(instituteId);		
 		return new ResponseEntity<List<TeacherDto>>(allTeacher, HttpStatus.OK);
 	}
 }

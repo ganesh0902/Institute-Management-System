@@ -18,6 +18,8 @@ public class TeacherDto {
 	private String contact;
 	private String email;
 	private BatchDto batchDto;
+	private Long instituteId;
+	private int credentiatlId;
 		
 	public TeacherDto() {
 		super();
