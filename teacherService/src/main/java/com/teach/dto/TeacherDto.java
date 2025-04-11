@@ -1,8 +1,7 @@
 package com.teach.dto;
 
-import lombok.AllArgsConstructor;
+import java.util.List;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -17,9 +16,8 @@ public class TeacherDto {
 	private String education;
 	private String contact;
 	private String email;
-	private BatchDto batchDto;
-	private Long instituteId;
-	private int credentiatlId;
+	private List<BatchDto> batchDto;
+	private String image;
 		
 	public TeacherDto() {
 		super();
@@ -27,7 +25,7 @@ public class TeacherDto {
 	}
 
 	public TeacherDto(int tId, String firstName, String lastName, String education, String contact, String email,
-			BatchDto batchDto) {
+			List<BatchDto> batchDto) {
 		super();
 		this.tId = tId;
 		this.firstName = firstName;

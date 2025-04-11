@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.teach.dto.TeacherDto;
+import com.teach.dto.TeacherIdAndName;
 import com.teach.entities.Teacher;
 import com.teach.exception.ResourceNotFoundException;
 
@@ -12,8 +13,10 @@ public interface TeacherService {
 
 	public Teacher saveTeacher(Teacher teacher);	
 	public TeacherDto getTeacherById(int id) throws ResourceNotFoundException;
-	public List<TeacherDto> getAll();
+	public List<TeacherDto> getAll(long instituteId);
 	public boolean delete(int id) throws ResourceNotFoundException;	
-	public long teacherCount(long instituteId);
-	public List<Teacher>  getTeacherByInstituteId(long instituteId) throws ResourceNotFoundException;
+	public List<TeacherIdAndName> getTeacherIdAndName(long instituteId);
+	public long getTeacherCount(Long instituteId);
+	public Teacher updateTeacher(int tId, Teacher teacher) throws ResourceNotFoundException;
+	public Teacher getTeacherByCredential(int cId);
 }

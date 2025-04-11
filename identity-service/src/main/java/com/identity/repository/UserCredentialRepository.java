@@ -13,8 +13,7 @@ import com.identity.entity.UserCredential;
 public interface UserCredentialRepository extends JpaRepository<UserCredential,Integer>{
 
 	Optional<UserCredential> findByEmail(String username);
-	
-	
+		
 	@Query("SELECT new com.identity.entity.UserCredential(uc.id, uc.name, uc.email, uc.role, uc.instituteId) "
 			+ "from UserCredential uc where uc.role = 'TEACHER' and uc.instituteId =:instituteId")
 	List<UserCredential> getAllTeacher(@RequestParam("instituteId") int instituteId);	

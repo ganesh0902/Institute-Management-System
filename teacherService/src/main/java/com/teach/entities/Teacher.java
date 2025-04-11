@@ -13,7 +13,7 @@ import lombok.ToString;
 
 @Setter
 @Getter
-@ToString
+@ToString 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -28,6 +28,7 @@ public class Teacher {
 	private String education;
 	private String contact;
 	private String email;
+	private String image;
 	private Long instituteId;
-	private int credentialId;		
+	private int credentialId;
 }
