@@ -6,8 +6,12 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value=""/>
+		<item key="selection" value="Jwts.parser()"/>
 		<list key="findhistory">
+			<item value="Jwts.parser()"/>
+			<item value="jwt.parse"/>
+			<item value="claim"/>
+			<item value="zip"/>
 			<item value="jenkin"/>
 			<item value="spring-boot-starter-web"/>
 			<item value="student-service"/>
@@ -16,13 +20,9 @@
 			<item value="Spring-Cloud-Sleuth"/>
 			<item value="Spring-Cloud-Sleuth-3"/>
 			<item value="Spring-Cloud-Sleuth-3."/>
-			<item value="zip"/>
 			<item value="info"/>
 			<item value="S"/>
 			<item value="Sl"/>
-			<item value="Sle"/>
-			<item value="sle"/>
-			<item value="zipkin"/>
 		</list>
 		<list key="replacehistory">
 			<item value="mockDto"/>
