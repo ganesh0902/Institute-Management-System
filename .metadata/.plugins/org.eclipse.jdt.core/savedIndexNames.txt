@@ -69,7 +69,6 @@ INDEX VERSION 1.132+C:\Users\Sangita\Institute Management System\.metadata\.plug
 2337520528.index
 850465384.index
 1460700423.index
-3765338093.index
 3394508627.index
 3095831937.index
 2494117227.index
@@ -322,7 +321,6 @@ INDEX VERSION 1.132+C:\Users\Sangita\Institute Management System\.metadata\.plug
 3473254974.index
 3884995373.index
 3566823357.index
-3407859998.index
 3967903400.index
 2674425110.index
 587022139.index
@@ -366,7 +364,6 @@ INDEX VERSION 1.132+C:\Users\Sangita\Institute Management System\.metadata\.plug
 1215971285.index
 3177757022.index
 147876312.index
-1978810049.index
 1560022338.index
 63374331.index
 2882214926.index
