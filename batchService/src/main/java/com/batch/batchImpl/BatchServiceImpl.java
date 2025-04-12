@@ -2,13 +2,20 @@ package com.batch.batchImpl;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 
 import org.modelmapper.internal.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.batch.common.GetTokenFromHeader;
 import com.batch.dto.BatchDto;
 import com.batch.dto.BatchTitleAndDate;
 import com.batch.dto.StudentDto;
@@ -22,6 +29,8 @@ import com.batch.repository.BatchRepository;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
+import org.springframework.http.HttpMethod;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Service
 public class BatchServiceImpl implements com.batch.service.batchService {
@@ -34,7 +43,7 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 
 	@Autowired
 	private BatchFallBack fallBack;
-
+	
 	@Override
 	@CircuitBreaker(name = "getBatchFallBack", fallbackMethod = "getBatchFallBack")
 	public BatchDto getBatch(int bId) throws ResourceNotFoundException {
@@ -65,9 +74,18 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 		}
 
 		try {
-			TeacherDto teacherDto = this.restTemplate
-					.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(), TeacherDto.class);
-			batchDto.setTeacherDto(teacherDto);
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", getToken());
+			HttpEntity<String> entity = new HttpEntity<>(headers);									
+			
+			ResponseEntity<TeacherDto> teacherResponse = restTemplate.exchange(
+				    "http://teacher-service/teacher/" + batch.getTeacherId(),
+				    HttpMethod.GET,
+				    entity,
+				    TeacherDto.class
+				);
+				batchDto.setTeacherDto(teacherResponse.getBody());			
+			
 		} catch (Exception e) {
 			throw new ServiceFailureException("Teacher Service is failed");
 		}
@@ -292,4 +310,17 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 
 		return this.repository.findAllByTeacherId(tId);
 	}
+	
+	private String getToken() {
+	    ServletRequestAttributes attributes = 
+	        (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+
+	    if (attributes != null) {
+	        HttpServletRequest request = attributes.getRequest();
+	        String authHeader = request.getHeader("Authorization");
+	        return authHeader; // e.g., "Bearer eyJhbGciOiJIUzI1NiIs..."
+	    }
+	    return null;
+	}
+
 }

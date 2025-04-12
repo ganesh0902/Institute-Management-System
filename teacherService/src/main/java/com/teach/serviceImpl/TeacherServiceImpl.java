@@ -10,8 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
 import com.teach.dto.BatchDto;
 import com.teach.dto.TeacherDto;
 import com.teach.dto.TeacherIdAndName;
@@ -21,6 +28,7 @@ import com.teach.repository.TeacherRepository;
 import com.teach.service.TeacherService;
 
 import io.github.resilience4j.retry.annotation.Retry;
+import jakarta.servlet.http.HttpServletRequest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -66,11 +74,16 @@ public class TeacherServiceImpl implements TeacherService {
 		teacherDto.setImage(teacher.getImage());
 
 		String url = "http://batch-service/batch/teacherId/" + teacher.getTId();
-
-		String jsonResponse = restTemplate.getForObject(url, String.class);
+		
+		ResponseEntity<String> jsonResponse = restTemplate.exchange(
+				url,
+				HttpMethod.GET,
+				getToken(),
+				String.class
+				);		
 
 		try {
-			List<BatchDto> batchList = objectMapper.readValue(jsonResponse,
+			List<BatchDto> batchList = objectMapper.readValue(jsonResponse.getBody(),
 					new com.fasterxml.jackson.core.type.TypeReference<List<BatchDto>>() {
 					});
 
@@ -177,6 +190,22 @@ public class TeacherServiceImpl implements TeacherService {
 
 		System.out.println(cId);
 		return this.repository.getTeacherByCredential(cId);
+	}
+	
+	private HttpEntity<String> getToken() {
+	    ServletRequestAttributes attributes = 
+	        (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 
+	    if (attributes != null) {
+	        HttpServletRequest request = attributes.getRequest();
+	        String authHeader = request.getHeader("Authorization");
+	        
+	        HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", authHeader);
+			HttpEntity<String> entity = new HttpEntity<>(headers);
+			
+	        return entity;
+	    }
+	    return null;
 	}
 }
