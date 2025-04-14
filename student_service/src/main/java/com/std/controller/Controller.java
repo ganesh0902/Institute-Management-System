@@ -129,7 +129,7 @@ public class Controller {
 	@CircuitBreaker(name="handleStudentCircuiteBreaker",fallbackMethod = "studentAllDetailsBreaker")
 	public ResponseEntity<StudentDto> getStudentDetails(@PathVariable("sdtId") int stdId)
 			throws ResourceNotFoundException {
-		StudentDto studentDetails = this.service.getStudentDetails(stdId);
+		StudentDto studentDetails =  this.service.getStudentDetails(stdId);
 		return new ResponseEntity<StudentDto>(studentDetails, HttpStatus.OK);
 	}
 	

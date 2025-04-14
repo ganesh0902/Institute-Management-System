@@ -2,6 +2,8 @@ package com.std.serviceImpl;
 
 import org.springframework.cache.annotation.*;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
@@ -11,6 +13,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
 import com.std.dto.BatchDto;
 import com.std.dto.CourseDto;
 import com.std.dto.StudentDto;
@@ -20,6 +25,8 @@ import com.std.exception.ResourceNotFoundException;
 import com.std.exception.ServiceFailureException;
 import com.std.repository.StudentRepository;
 import com.std.service.Service;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @org.springframework.stereotype.Service
 public class StudentImpl implements Service {
@@ -37,10 +44,26 @@ public class StudentImpl implements Service {
 		BatchDto batch;
 		CourseDto course;
 		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Authorization", getToken());
+		HttpEntity<String> entity = new HttpEntity<>(headers);	
+		
+		
 		try
 		{
-		batch = this.restTemplate.getForObject("http://batch-service/batch/" + std.getBatchId(),
-				BatchDto.class);
+//		batch = this.restTemplate.getForObject("http://batch-service/batch/" + std.getBatchId(),			
+//				BatchDto.class);
+			
+		String batchUrl = "http://batch-service/batch/" + std.getBatchId();
+		
+		batch  = this.restTemplate.exchange(
+				batchUrl,
+				HttpMethod.GET,
+				entity,
+				BatchDto.class).getBody();
+		
+		
+		
 		}
 		catch(Exception e)
 		{
@@ -49,8 +72,16 @@ public class StudentImpl implements Service {
 		
 		try
 		{
-			course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
-					CourseDto.class);
+//			course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
+//					CourseDto.class);
+			
+//			String courseUrl = "http://course-service/course/" + batch.getCourseId();
+//			
+//			course = this.restTemplate.exchange(
+//					courseUrl,
+//					HttpMethod.GET,
+//					entity,
+//					CourseDto.class).getBody();
 		}
 		catch(Exception e)
 		{
@@ -58,10 +89,10 @@ public class StudentImpl implements Service {
 		}
 		
 
-		String fees = course.getFees();
-		std.setCourseName(course.getCourseName());
-		Long totalFees = Long.parseLong(fees);
-		std.setTotalFees(totalFees);
+		//String fees = course.getFees();
+		//std.setCourseName(course.getCourseName());
+		//Long totalFees = Long.parseLong(fees);
+		//std.setTotalFees(totalFees);
 		return this.repo.save(std);
 	}	
 	
@@ -134,12 +165,24 @@ public class StudentImpl implements Service {
 				
 		Student student = this.repo.findById(stdId)
 				.orElseThrow(() -> new ResourceNotFoundException("Student", "Id", String.valueOf(stdId)));
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Authorization", getToken());
+		HttpEntity<String> entity = new HttpEntity<>(headers);	
 				
 		try
 		{
-			// get batch details from it's service by batchId
-			batch = this.restTemplate.getForObject("http://batch-service/batch/" + student.getBatchId(),
-					BatchDto.class);
+			
+			
+			String batchURl="http://batch-service/batch/" + student.getBatchId();
+//			// get batch details from it's service by batchId
+
+			batch = this.restTemplate.exchange(
+					batchURl,
+					HttpMethod.GET,
+					entity,
+					BatchDto.class).getBody();
+			
 		}
 		catch(Exception e)
 		{
@@ -150,8 +193,13 @@ public class StudentImpl implements Service {
 		try
 		{
 			// get teacher details from it's service by teacherId			
-			teacher = this.restTemplate.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(),
-					TeacherDto.class);
+			String teacherUrl = "http://teacher-service/teacher/" + batch.getTeacherId();
+						
+			teacher = this.restTemplate.exchange(
+					teacherUrl,
+					HttpMethod.GET,
+					entity, 
+					TeacherDto.class).getBody();
 		}
 		catch(Exception e)
 		{
@@ -159,17 +207,17 @@ public class StudentImpl implements Service {
 			throw new ServiceFailureException("Failed to fetch teacher information");
 		}
 
-		try
-		{
-			// get course details from it's service by course Id			
-			course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
-					CourseDto.class);
-		}
-		catch(Exception e)
-		{
-			System.out.println("Error occurred while calling course-service: {}: "+ e.getMessage());
-			throw new ServiceFailureException("Failed to fetch course information");
-		}
+//		try
+//		{
+//			// get course details from it's service by course Id			
+//			course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
+//					CourseDto.class);
+//		}
+//		catch(Exception e)
+//		{
+//			System.out.println("Error occurred while calling course-service: {}: "+ e.getMessage());
+//			throw new ServiceFailureException("Failed to fetch course information");
+//		}
 
 		studentDto.setStdId(student.getStdId());
 		studentDto.setFirstName(student.getFirstName());
@@ -179,7 +227,7 @@ public class StudentImpl implements Service {
 		studentDto.setCourseName(student.getCourseName());
 		studentDto.setImage(student.getImage());
 		studentDto.setTeacherDto(teacher);
-		batch.setCourseDto(course);
+		//batch.setCourseDto(course);
 		studentDto.setBatchDto(batch);
 		return studentDto;
 	}
@@ -219,15 +267,19 @@ public class StudentImpl implements Service {
 	public List<Student> getStudentByTeacherId(int tId) {
 
 		List<Student> studentList = new ArrayList<>();
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Authorization", getToken());
+		HttpEntity<String> entity = new HttpEntity<>(headers);	
+		
 		String url = "http://batch-service/batch/batchByTeacherId/" + tId;
 
-		ResponseEntity<List<BatchDto>> responseEntity = restTemplate.exchange(url, HttpMethod.GET, null,
+		List<BatchDto> batchList = this.restTemplate.exchange(
+				url,
+				HttpMethod.GET,
+				entity,
 				new ParameterizedTypeReference<List<BatchDto>>() {
-				});
-
-		System.out.println("Batch");
-		System.out.println(responseEntity.getBody());
-		List<BatchDto> batchList = responseEntity.getBody();
+				}).getBody();
+					
 
 		for (BatchDto batch : batchList) {
 			List<Student> findByTeacherId = this.repo.findByTeacherId(batch.getBid());
@@ -236,5 +288,15 @@ public class StudentImpl implements Service {
 
 		return studentList;
 	}
+	private String getToken() {
+	    ServletRequestAttributes attributes = 
+	        (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 
+	    if (attributes != null) {
+	        HttpServletRequest request = attributes.getRequest();
+	        String authHeader = request.getHeader("Authorization");
+	        return authHeader; // e.g., "Bearer eyJhbGciOiJIUzI1NiIs..."
+	    }
+	    return null;
+	}
 }
