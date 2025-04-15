@@ -6,19 +6,19 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="studentByT"/>
+		<item key="selection" value="getStudentDetails"/>
 		<list key="findhistory">
+			<item value="getStudentDetails"/>
+			<item value="getToken"/>
+			<item value="studentByTeacherId"/>
 			<item value="studentByT"/>
 			<item value="studentBy"/>
-			<item value="studentByTeacherId"/>
 			<item value="parameter"/>
-			<item value="getToken"/>
 			<item value="getStudentByTeacherId"/>
 			<item value="Error occurred while calling batch-service"/>
 			<item value="Fall Back Error"/>
 			<item value="Fall Back Error: Failed to"/>
 			<item value="Fall Back Error: Failed to fetch batch information"/>
-			<item value="getStudentDetails"/>
 			<item value="getAllBatch"/>
 			<item value="getBatch"/>
 			<item value="toek"/>

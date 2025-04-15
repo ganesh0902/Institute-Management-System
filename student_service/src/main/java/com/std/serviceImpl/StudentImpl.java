@@ -183,16 +183,7 @@ public class StudentImpl implements Service {
 					entity,
 					BatchDto.class).getBody();
 			
-		}
-		catch(Exception e)
-		{
-			System.out.println("Error occurred while calling batch-service: {}: "+ e.getMessage());
-			throw new ServiceFailureException("Failed to fetch batch information");
-		}
-
-		try
-		{
-			// get teacher details from it's service by teacherId			
+					// get teacher details from it's service by teacherId			
 			String teacherUrl = "http://teacher-service/teacher/" + batch.getTeacherId();
 						
 			teacher = this.restTemplate.exchange(
@@ -200,24 +191,22 @@ public class StudentImpl implements Service {
 					HttpMethod.GET,
 					entity, 
 					TeacherDto.class).getBody();
+		
+			String courseUrl ="http://course-service/course/" + batch.getCourseId();
+			
+			course = this.restTemplate.exchange(
+					courseUrl,
+					HttpMethod.GET,
+					entity,
+					CourseDto.class).getBody();
+			
+			System.out.println("Course is "+course);
 		}
 		catch(Exception e)
 		{
-			System.out.println("Error occurred while calling teacher-service: {}: "+ e.getMessage());
-			throw new ServiceFailureException("Failed to fetch teacher information");
+			System.out.println("Error occurred In Student details service: {}: "+ e.getMessage());
+			throw new ServiceFailureException("Failed to fetch course information");
 		}
-
-//		try
-//		{
-//			// get course details from it's service by course Id			
-//			course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
-//					CourseDto.class);
-//		}
-//		catch(Exception e)
-//		{
-//			System.out.println("Error occurred while calling course-service: {}: "+ e.getMessage());
-//			throw new ServiceFailureException("Failed to fetch course information");
-//		}
 
 		studentDto.setStdId(student.getStdId());
 		studentDto.setFirstName(student.getFirstName());
@@ -227,7 +216,7 @@ public class StudentImpl implements Service {
 		studentDto.setCourseName(student.getCourseName());
 		studentDto.setImage(student.getImage());
 		studentDto.setTeacherDto(teacher);
-		//batch.setCourseDto(course);
+		batch.setCourseDto(course);
 		studentDto.setBatchDto(batch);
 		return studentDto;
 	}

@@ -128,8 +128,8 @@ public class Controller {
 	@GetMapping("/studentDetails/{sdtId}")
 	@CircuitBreaker(name="handleStudentCircuiteBreaker",fallbackMethod = "studentAllDetailsBreaker")
 	public ResponseEntity<StudentDto> getStudentDetails(@PathVariable("sdtId") int stdId)
-			throws ResourceNotFoundException {
-		StudentDto studentDetails =  this.service.getStudentDetails(stdId);
+			throws ResourceNotFoundException {		
+		StudentDto studentDetails =  this.service.getStudentDetails(stdId);		
 		return new ResponseEntity<StudentDto>(studentDetails, HttpStatus.OK);
 	}
 	
