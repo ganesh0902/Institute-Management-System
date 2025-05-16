@@ -168,5 +168,11 @@ public class Controller {
 		students.add(s1);
 		return new ResponseEntity<>(students, HttpStatus.OK);
 	}
-
+	@GetMapping("/callFunction")
+	public ResponseEntity<Integer> getTotalMarks()
+	{
+		int totalStudent = this.service.getTotalStudent();
+		
+		return new ResponseEntity<>(totalStudent,HttpStatus.OK);
+	}
 }

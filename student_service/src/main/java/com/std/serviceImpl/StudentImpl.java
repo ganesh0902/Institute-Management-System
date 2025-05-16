@@ -43,38 +43,27 @@ public class StudentImpl implements Service {
 
 		BatchDto batch;
 		CourseDto course;
-		
+
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Authorization", getToken());
-		HttpEntity<String> entity = new HttpEntity<>(headers);	
-		
-		
-		try
-		{
+		HttpEntity<String> entity = new HttpEntity<>(headers);
+
+		try {
 //		batch = this.restTemplate.getForObject("http://batch-service/batch/" + std.getBatchId(),			
 //				BatchDto.class);
-			
-		String batchUrl = "http://batch-service/batch/" + std.getBatchId();
-		
-		batch  = this.restTemplate.exchange(
-				batchUrl,
-				HttpMethod.GET,
-				entity,
-				BatchDto.class).getBody();
-		
-		
-		
-		}
-		catch(Exception e)
-		{
+
+			String batchUrl = "http://batch-service/batch/" + std.getBatchId();
+
+			batch = this.restTemplate.exchange(batchUrl, HttpMethod.GET, entity, BatchDto.class).getBody();
+
+		} catch (Exception e) {
 			throw new ServiceFailureException("Failed to fetch batch information");
 		}
-		
-		try
-		{
+
+		try {
 //			course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
 //					CourseDto.class);
-			
+
 //			String courseUrl = "http://course-service/course/" + batch.getCourseId();
 //			
 //			course = this.restTemplate.exchange(
@@ -82,20 +71,17 @@ public class StudentImpl implements Service {
 //					HttpMethod.GET,
 //					entity,
 //					CourseDto.class).getBody();
+		} catch (Exception e) {
+			throw new ServiceFailureException("Failed to fetch Course information");
 		}
-		catch(Exception e)
-		{
-			throw new ServiceFailureException("Failed to fetch Course information"); 
-		}
-		
 
-		//String fees = course.getFees();
-		//std.setCourseName(course.getCourseName());
-		//Long totalFees = Long.parseLong(fees);
-		//std.setTotalFees(totalFees);
+		// String fees = course.getFees();
+		// std.setCourseName(course.getCourseName());
+		// Long totalFees = Long.parseLong(fees);
+		// std.setTotalFees(totalFees);
 		return this.repo.save(std);
-	}	
-	
+	}
+
 	@Override
 	@CachePut(cacheNames = "student", key = "#std.stdId")
 	public Student updateStudent(int stdId, Student std) throws ResourceNotFoundException {
@@ -121,7 +107,7 @@ public class StudentImpl implements Service {
 	}
 
 	@Override
-	//@Cacheable(cacheNames = "teacher", key = "#instituteId")
+	// @Cacheable(cacheNames = "teacher", key = "#instituteId")
 	public List<Student> getAll(long instituteId) {
 
 		System.out.println("Getting student by instituteId");
@@ -161,50 +147,34 @@ public class StudentImpl implements Service {
 		StudentDto studentDto = new StudentDto();
 		BatchDto batch = null;
 		TeacherDto teacher = null;
-		CourseDto course =null;
-				
+		CourseDto course = null;
+
 		Student student = this.repo.findById(stdId)
 				.orElseThrow(() -> new ResourceNotFoundException("Student", "Id", String.valueOf(stdId)));
-		
+
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Authorization", getToken());
-		HttpEntity<String> entity = new HttpEntity<>(headers);	
-				
-		try
-		{
-			
-			
-			String batchURl="http://batch-service/batch/" + student.getBatchId();
+		HttpEntity<String> entity = new HttpEntity<>(headers);
+
+		try {
+
+			String batchURl = "http://batch-service/batch/" + student.getBatchId();
 //			// get batch details from it's service by batchId
 
-			batch = this.restTemplate.exchange(
-					batchURl,
-					HttpMethod.GET,
-					entity,
-					BatchDto.class).getBody();
-			
-					// get teacher details from it's service by teacherId			
+			batch = this.restTemplate.exchange(batchURl, HttpMethod.GET, entity, BatchDto.class).getBody();
+
+			// get teacher details from it's service by teacherId
 			String teacherUrl = "http://teacher-service/teacher/" + batch.getTeacherId();
-						
-			teacher = this.restTemplate.exchange(
-					teacherUrl,
-					HttpMethod.GET,
-					entity, 
-					TeacherDto.class).getBody();
-		
-			String courseUrl ="http://course-service/course/" + batch.getCourseId();
-			
-			course = this.restTemplate.exchange(
-					courseUrl,
-					HttpMethod.GET,
-					entity,
-					CourseDto.class).getBody();
-			
-			System.out.println("Course is "+course);
-		}
-		catch(Exception e)
-		{
-			System.out.println("Error occurred In Student details service: {}: "+ e.getMessage());
+
+			teacher = this.restTemplate.exchange(teacherUrl, HttpMethod.GET, entity, TeacherDto.class).getBody();
+
+			String courseUrl = "http://course-service/course/" + batch.getCourseId();
+
+			course = this.restTemplate.exchange(courseUrl, HttpMethod.GET, entity, CourseDto.class).getBody();
+
+			System.out.println("Course is " + course);
+		} catch (Exception e) {
+			System.out.println("Error occurred In Student details service: {}: " + e.getMessage());
 			throw new ServiceFailureException("Failed to fetch course information");
 		}
 
@@ -258,17 +228,13 @@ public class StudentImpl implements Service {
 		List<Student> studentList = new ArrayList<>();
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Authorization", getToken());
-		HttpEntity<String> entity = new HttpEntity<>(headers);	
-		
+		HttpEntity<String> entity = new HttpEntity<>(headers);
+
 		String url = "http://batch-service/batch/batchByTeacherId/" + tId;
 
-		List<BatchDto> batchList = this.restTemplate.exchange(
-				url,
-				HttpMethod.GET,
-				entity,
-				new ParameterizedTypeReference<List<BatchDto>>() {
+		List<BatchDto> batchList = this.restTemplate
+				.exchange(url, HttpMethod.GET, entity, new ParameterizedTypeReference<List<BatchDto>>() {
 				}).getBody();
-					
 
 		for (BatchDto batch : batchList) {
 			List<Student> findByTeacherId = this.repo.findByTeacherId(batch.getBid());
@@ -277,15 +243,21 @@ public class StudentImpl implements Service {
 
 		return studentList;
 	}
-	private String getToken() {
-	    ServletRequestAttributes attributes = 
-	        (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 
-	    if (attributes != null) {
-	        HttpServletRequest request = attributes.getRequest();
-	        String authHeader = request.getHeader("Authorization");
-	        return authHeader; // e.g., "Bearer eyJhbGciOiJIUzI1NiIs..."
-	    }
-	    return null;
+	private String getToken() {
+		ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+
+		if (attributes != null) {
+			HttpServletRequest request = attributes.getRequest();
+			String authHeader = request.getHeader("Authorization");
+			return authHeader; // e.g., "Bearer eyJhbGciOiJIUzI1NiIs..."
+		}
+		return null;
+	}
+
+	@Override
+	public int getTotalStudent() {
+
+		return this.repo.getTotalStudents();
 	}
 }

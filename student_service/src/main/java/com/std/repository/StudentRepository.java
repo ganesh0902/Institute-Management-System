@@ -27,4 +27,7 @@ public interface StudentRepository extends JpaRepository<Student,Integer>{
 	 
 	 @Query("select s from from Student s where s.batchId = :batchId")
 	 public List<Student> findByTeacherId(@Param("batchId") int batchId);
+	 
+	 @Query(value = "SELECT get_students()", nativeQuery = true)
+	    Integer getTotalStudents();
 }

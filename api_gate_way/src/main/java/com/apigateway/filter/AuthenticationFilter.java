@@ -29,8 +29,8 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 
 			// Temporary bypass for debugging
 			// If the request is to /course/getCourseIdAndName/2 or other open paths, no
-			// need to check for token
-			if (path.equals("/course/getCourseIdAndName/**")) {
+			// need to check for token 			
+			if (path.equals("/course/getCourseIdAndName/**") || path.equals("/batch/institute/**") ) {
 				return chain.filter(exchange); // No token check for this endpoint
 			}
 

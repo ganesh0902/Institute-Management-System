@@ -20,4 +20,5 @@ public interface Service {
 	public List<Student> getAllStudentByBatch(int batchId);
 	public List<Student> getAllStudent();	
 	public List<Student> getStudentByTeacherId(int tId);	
+	public int getTotalStudent();
 }
