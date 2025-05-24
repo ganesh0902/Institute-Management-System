@@ -10,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.google.common.net.HttpHeaders;
@@ -20,36 +21,50 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Component
-public class JwtAuthenticationFilter extends OncePerRequestFilter{
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 	@Autowired
 	private JwtService jwtService;
+
+	final List<String> PUBLIC_URLS = List.of("/batch/institute/**");
 	
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-			throws ServletException, IOException {
+			throws ServletException, IOException {		
 
-		 String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
-	        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-	            String token = authHeader.substring(7);
-	            try {
-	                String username = jwtService.extractUsername(token);
-	                List<String> roles = jwtService.extractRoles(token); // get from "roles" claim
+		String path = request.getRequestURI();
 
-	                List<GrantedAuthority> authorities = roles.stream()
-	                        .map(SimpleGrantedAuthority::new)
-	                        .collect(Collectors.toList());
+		System.out.println("Path is " + path);
+		if (isPublicEndpoint(path)) {
+			filterChain.doFilter(request, response);
+			System.out.println("Request is in teacher");
+			return;
+		}
 
-	                UsernamePasswordAuthenticationToken auth =
-	                        new UsernamePasswordAuthenticationToken(username, null, authorities);
+		String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+		if (authHeader != null && authHeader.startsWith("Bearer ")) {
+			String token = authHeader.substring(7);
+			try {
+				String username = jwtService.extractUsername(token);
+				List<String> roles = jwtService.extractRoles(token); // get from "roles" claim
 
-	                SecurityContextHolder.getContext().setAuthentication(auth);
+				List<GrantedAuthority> authorities = roles.stream().map(SimpleGrantedAuthority::new)
+						.collect(Collectors.toList());
 
-	            } catch (Exception e) {
-	                throw new RuntimeException("Invalid Token");
-	            }
-	        }
+				UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(username, null,
+						authorities);
 
-	        filterChain.doFilter(request, response);	
+				SecurityContextHolder.getContext().setAuthentication(auth);
+
+			} catch (Exception e) {
+				throw new RuntimeException("Invalid Token");
+			}
+		}
+		filterChain.doFilter(request, response);
 	}
+	 private final AntPathMatcher pathMatcher = new AntPathMatcher();
+
+		private boolean isPublicEndpoint(String path) {
+		    return PUBLIC_URLS.stream().anyMatch(pattern -> pathMatcher.match(pattern, path));
+		}
 }

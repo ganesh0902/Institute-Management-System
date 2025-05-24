@@ -55,9 +55,9 @@ public class CourseController {
 	}
 	@GetMapping("/getCourseIdAndName/{instituteId}")
 	public ResponseEntity<List<CourseIdAndName>> getAllCourseIdAndName(@PathVariable("instituteId") long instituteId)
-	{
+	{				
 		 List<CourseIdAndName> allCourseIdAndName = this.courseService.getAllCourseIdAndName(instituteId);
-		
+		 		 
 		return new ResponseEntity<List<CourseIdAndName>>(allCourseIdAndName,allCourseIdAndName.isEmpty() ? HttpStatus.NOT_FOUND :HttpStatus.OK);
 	}
 	@GetMapping("/getCourseByName/{courseName}")

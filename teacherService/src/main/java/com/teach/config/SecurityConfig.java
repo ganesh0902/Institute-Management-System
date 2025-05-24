@@ -29,11 +29,11 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, CustomAuthenticationEntryPoint entryPoint, CustomAccessDeniedHandler deniedException) throws Exception {
-        http.cors().and().csrf().disable()
+        http.csrf().disable()
             .authorizeHttpRequests()
-            .requestMatchers("/teacher/public/**").permitAll()
+            .requestMatchers("/teacher/**").permitAll()
             .requestMatchers("/teacher/admin/**").hasRole("ADMIN")
-            .requestMatchers("/teacher/**").hasAnyRole("TEACHER","ADMIN")
+            //.requestMatchers("/teacher/**").hasAnyRole("TEACHER","ADMIN")
             .anyRequest().authenticated()
             .and()
             .sessionManagement()
@@ -45,17 +45,5 @@ public class SecurityConfig {
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
-    }
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:3000"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("*"));
-        config.setAllowCredentials(true);
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-        return source;
-    }
+    }   
 }

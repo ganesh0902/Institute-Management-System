@@ -23,8 +23,8 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 				
-		http.cors().and().csrf().disable().authorizeHttpRequests()
-		.requestMatchers("/batch/public/**").permitAll()
+		http.csrf().disable().authorizeHttpRequests()
+		.requestMatchers("/batch/institute/**").permitAll()
 		.requestMatchers("/batch/admin/**").hasRole("ADMIN")
 		.requestMatchers("/batch/**").hasAnyRole("TEACHER","ADMIN","STUDENT")
 		.anyRequest().authenticated()
@@ -33,18 +33,6 @@ public class SecurityConfig {
 		.sessionCreationPolicy(SessionCreationPolicy.STATELESS);			
 		http.addFilterBefore(jwtFilter,UsernamePasswordAuthenticationFilter.class);
 		return http.build();		
-	}
-	
-	@Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:3000"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("*"));
-        config.setAllowCredentials(true);
+	}		
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-        return source;
-    }
 }

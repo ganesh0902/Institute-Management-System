@@ -10,16 +10,21 @@ import java.util.function.Predicate;
 public class RouteValidator {
 
 	public static final List<String> openApiEndpoints = List.of("/auth/register", "/auth/token", "/eureka",
-			"/course/getCourseIdAndName/2", "/batch/institute/**");
-
+			"/course/getCourseIdAndName/2", "/batch/institute/**", "/teacher/**");
+	
 	public Predicate<ServerHttpRequest> isSecured = request -> {
-		String path = request.getURI().getPath();
+        String path = request.getURI().getPath();
 
-		// Check for exact match or prefix match with the open endpoints
-		boolean secured = openApiEndpoints.stream().noneMatch(
-				uri -> path.equals(uri) || path.startsWith(uri.replace("**", "/course/getCourseIdAndName/**")));
+        boolean secured = openApiEndpoints.stream().noneMatch(uri -> {
+            if (uri.endsWith("/**")) {
+                String prefix = uri.substring(0, uri.length() - 3);
+                return path.startsWith(prefix);
+            } else {
+                return path.equals(uri);
+            }
+        });
 
-		System.out.println("Request path: " + path + ", isSecured: " + secured);
-		return secured;
-	};
+        System.out.println("Request path: " + path + ", isSecured: " + secured);
+        return secured;
+    };
 }

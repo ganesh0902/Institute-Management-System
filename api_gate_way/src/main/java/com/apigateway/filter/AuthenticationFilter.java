@@ -26,11 +26,13 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 	public GatewayFilter apply(Config config) {
 		return (exchange, chain) -> {
 			String path = exchange.getRequest().getURI().getPath();
-
+						
 			// Temporary bypass for debugging
 			// If the request is to /course/getCourseIdAndName/2 or other open paths, no
-			// need to check for token 			
-			if (path.equals("/course/getCourseIdAndName/**") || path.equals("/batch/institute/**") ) {
+			// need to check for token 	
+			
+			System.out.println("-----------------------------------"+path);
+			if (path.equals("/course/**") || path.equals("/batch/institute/**") || path.equals("/teacher/902")) {					
 				return chain.filter(exchange); // No token check for this endpoint
 			}
 
@@ -42,6 +44,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 				String authHeader = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
 				if (authHeader != null && authHeader.startsWith("Bearer ")) {
 					authHeader = authHeader.substring(7);
+					System.out.println("++++++++++++ Token Validate Successfully +++++++++++++++++");
 				}
 				try {
 					jwtUtil.validateToken(authHeader);

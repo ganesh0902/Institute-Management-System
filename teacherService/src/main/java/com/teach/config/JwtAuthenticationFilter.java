@@ -10,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.google.common.net.HttpHeaders;
@@ -24,14 +25,26 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtService jwtService;
+    
+	final List<String> PUBLIC_URLS = List.of("/teacher/teacherCount/**");
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+        
+        String path = request.getRequestURI();
+        
+        System.out.println("Path is "+path);
+        if (isPublicEndpoint(path)) {
+			filterChain.doFilter(request, response);
+			System.out.println("Request is in teacher");	
+			return;
+		}		
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
+                        
             try {
                 String username = jwtService.extractUsername(token);
                 List<String> roles = jwtService.extractRoles(token); // get from "roles" claim
@@ -51,5 +64,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request, response);
-    }
+    }    
+    private final AntPathMatcher pathMatcher = new AntPathMatcher();
+
+	private boolean isPublicEndpoint(String path) {
+	    return PUBLIC_URLS.stream().anyMatch(pattern -> pathMatcher.match(pattern, path));
+	}
 }

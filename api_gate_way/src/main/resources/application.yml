@@ -59,9 +59,7 @@ spring:
         - id: institute-service
           uri: lb://institute-service
           predicates:
-            - Path=/institute/**
-          filters:
-            - AuthenticationFilter       
+            - Path=/institute/**                 
         - id: payment-service
           uri: lb://payment-service
           predicates:

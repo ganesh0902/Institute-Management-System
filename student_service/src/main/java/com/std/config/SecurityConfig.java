@@ -33,7 +33,7 @@ public class SecurityConfig {
             CustomAuthenticationEntryPoint entryPoint,
             CustomAccessDeniedHandler accessDeniedHandler) throws Exception {
 
-		 http.cors().and().csrf().disable().authorizeHttpRequests().requestMatchers("/student/public").permitAll()
+		 http.csrf().disable().authorizeHttpRequests().requestMatchers("/student/public").permitAll()
 				.requestMatchers("/student/public/**").permitAll()
 				.requestMatchers("/student/admin/**").hasRole("ADMIN")
 				.requestMatchers("/student/**").hasAnyRole("STUDENT", "ADMIN")
@@ -46,24 +46,8 @@ public class SecurityConfig {
 				.exceptionHandling()
 				.authenticationEntryPoint(entryPoint) //handle 401
 				.accessDeniedHandler(accessDeniedHandler);//handle 403
-		 
-		 
-		 
-		
+		 		 		 		
 		 http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 		return http.build();		 		 
-	}
-	
-	@Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:3000"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("*"));
-        config.setAllowCredentials(true);
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-        return source;
-    }
+	}	
 }

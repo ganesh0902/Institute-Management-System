@@ -149,6 +149,7 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 
 			Course course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
 					Course.class);
+			System.out.println("Course of "+course +batch.getCourseId());
 
 			batchDto.setBId(batch.getBId());
 			batchDto.setBatchTitle(batch.getBatchTitle());
@@ -161,10 +162,10 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 			batchDto.setCourse(course);
 			batchDto.setImage(batch.getImage());
 			
-			TeacherDto teacher = this.restTemplate
-					.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(), TeacherDto.class);
+			//TeacherDto teacher = this.restTemplate
+				//	.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(), TeacherDto.class);
 
-			batchDto.setTeacherDto(teacher);
+			batchDto.setTeacherDto(null);
 
 			batchDtoList.add(batchDto);
 
