@@ -26,7 +26,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	@Autowired
 	private JwtService jwtService;
 
-	final List<String> PUBLIC_URLS = List.of("/batch/institute/**");
+	final List<String> PUBLIC_URLS = List.of("/batch/institute/**","/batch/course/**");
 	
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -62,6 +62,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		}
 		filterChain.doFilter(request, response);
 	}
+	
+	
+	
+	
+	
+	
 	 private final AntPathMatcher pathMatcher = new AntPathMatcher();
 
 		private boolean isPublicEndpoint(String path) {
