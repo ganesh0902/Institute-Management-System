@@ -21,7 +21,7 @@ public class SecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http, com.batch.securityException.CustomAuthenticationEntryPoint entryPoint, com.batch.securityException.CustomAccessDeniedHandler accessDeniedHandler) throws Exception
 	{
 		http.csrf(csrf->csrf.disable())
-		.authorizeHttpRequests(auth-> auth.requestMatchers("/batch/**").permitAll()
+		.authorizeHttpRequests(auth-> auth.requestMatchers("/batch/public/**").permitAll()
 				.requestMatchers("/batch/institute/**").permitAll()
 				.requestMatchers("/batch/admin/**").hasRole("ADMIN")
 				.requestMatchers("/batch/**").hasAnyRole("TEACHER","ADMIN","STUDENT")

@@ -61,13 +61,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			}
 		}
 		filterChain.doFilter(request, response);
-	}
-	
-	
-	
-	
-	
-	
+	}		
 	 private final AntPathMatcher pathMatcher = new AntPathMatcher();
 
 		private boolean isPublicEndpoint(String path) {

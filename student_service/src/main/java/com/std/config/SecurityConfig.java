@@ -36,7 +36,7 @@ public class SecurityConfig {
 		 http.csrf().disable().authorizeHttpRequests().requestMatchers("/student/public").permitAll()
 				.requestMatchers("/student/public/**").permitAll()
 				.requestMatchers("/student/admin/**").hasRole("ADMIN")
-				.requestMatchers("/student/**").hasAnyRole("STUDENT", "ADMIN")
+				.requestMatchers("/student/**").hasAnyRole("STUDENT", "ADMIN","TEACHER")
 				.anyRequest()
 				.authenticated()
 				.and()
