@@ -27,13 +27,11 @@ import com.teach.serviceImpl.TeacherServiceImpl;
 
 @RestController
 @RequestMapping("/teacher")
-//@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:9002" })
 public class TeacherController {
 
 	@Autowired
 	private TeacherServiceImpl teacherServiceImpl;
 	
-
 	@PostMapping("/")
 	public ResponseEntity<Teacher> saveTeacher(@RequestBody Teacher teacher) {
 		Teacher saveTeacher = this.teacherServiceImpl.saveTeacher(teacher);

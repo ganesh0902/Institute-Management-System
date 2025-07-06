@@ -27,6 +27,8 @@ import com.identity.service.AuthService;
 import com.identity.service.UserService;
 import com.identity.serviceImpl.ServiceDaoImpl;
 
+import jakarta.ws.rs.GET;
+
 @RequestMapping("/auth")
 @RestController																							
 @CrossOrigin(origins = { "http://localhost:3000"})
@@ -121,7 +123,14 @@ public class controller {
 	@GetMapping("/teacher/{instituteId}")
 	public ResponseEntity<List<TeacherDto>> getAllTeacher(@PathVariable("instituteId") int instituteId)
 	{		
-		List<TeacherDto> allTeacher = this.serviceDaoImpl.getAllTeacher(instituteId);		
+		List<TeacherDto> allTeacher = this.serviceDaoImpl.getAllTeacher(instituteId);	
+		
+		System.out.println(allTeacher);
 		return new ResponseEntity<List<TeacherDto>>(allTeacher, HttpStatus.OK);
+	}
+	@GetMapping("/")
+	public String get()
+	{
+		return "Hello Java";
 	}
 }

@@ -188,10 +188,11 @@ public class TeacherServiceImpl implements TeacherService {
 	@Override
 	public Teacher getTeacherByCredential(int cId) {
 
-		System.out.println(cId);
+		System.out.println("In Teacher Service"+cId);
+		
+		
 		return this.repository.getTeacherByCredential(cId);
-	}
-	
+	}	
 	private HttpEntity<String> getToken() {
 	    ServletRequestAttributes attributes = 
 	        (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();

@@ -8,6 +8,12 @@ spring:
   zipkin:
     base-url: http://localhost:9411/
   
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
     
 eureka:
   instance:
@@ -52,6 +58,6 @@ resilience4j:
         sliding-window-size: 10
         sliding-window-type: count-based
       
-    
+
     
         

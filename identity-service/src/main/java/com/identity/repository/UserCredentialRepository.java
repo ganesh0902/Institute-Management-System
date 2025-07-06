@@ -15,6 +15,6 @@ public interface UserCredentialRepository extends JpaRepository<UserCredential,I
 	Optional<UserCredential> findByEmail(String username);
 		
 	@Query("SELECT new com.identity.entity.UserCredential(uc.id, uc.name, uc.email, uc.role, uc.instituteId) "
-			+ "from UserCredential uc where uc.role = 'TEACHER' and uc.instituteId =:instituteId")
+			+ "from UserCredential uc where uc.role = 'ROLE_TEACHER' and uc.instituteId =:instituteId")
 	List<UserCredential> getAllTeacher(@RequestParam("instituteId") int instituteId);	
 }

@@ -298,6 +298,7 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 	@Override
 	public List<Batch> getBatchesByTeacherId(int tId) {
 
+		System.out.println("In teacher");
 		return this.repository.findAllByTeacherId(tId);
 	}
 

@@ -48,7 +48,14 @@ spring:
           predicates:
             - Path=/student/**
           filters:
-            - AuthenticationFilter	         
+            - AuthenticationFilter
+            
+        - id: student-service
+          uri: lb://student-service
+          predicates:
+            - Path=/newStudent/**
+          filters:
+            - AuthenticationFilter            
             
         - id: identity-service
           uri: lb://identity-service

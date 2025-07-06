@@ -20,12 +20,17 @@ public class AssignmentImpl implements AssignmentService {
 		if(assignment.getTaskId()==0)
 		{
 			assignment.setStatus("active");
-		}
+		}		
+		System.out.println("Assignment");
+		System.out.println(assignment);
 		LocalDateTime localDateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 		assignment.setStartDate(localDateTime.format(formatter));
 		Assignment save = this.repository.save(assignment);
+		
+		System.out.println("Save");
+		System.out.println(save);
 		return save;
 	}
 
@@ -34,7 +39,6 @@ public class AssignmentImpl implements AssignmentService {
 
 		return this.repository.findById(taskId)
 				.orElseThrow(() -> new ResourceNotFoundException("Task", "Id", String.valueOf(taskId)));
-
 	}
 
 	@Override
