@@ -1,24 +1,19 @@
 package com.batch.batchImpl;
 
 import java.util.ArrayList;
-
-
 import java.util.List;
-
-import org.modelmapper.internal.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.batch.common.GetTokenFromHeader;
 import com.batch.dto.BatchDto;
 import com.batch.dto.BatchTitleAndDate;
-import com.batch.dto.StudentDto;
 import com.batch.dto.TeacherDto;
 import com.batch.entities.Batch;
 import com.batch.entities.Course;
@@ -29,7 +24,6 @@ import com.batch.repository.BatchRepository;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
-import org.springframework.http.HttpMethod;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Service
@@ -43,7 +37,7 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 
 	@Autowired
 	private BatchFallBack fallBack;
-	
+
 	@Override
 	@CircuitBreaker(name = "getBatchFallBack", fallbackMethod = "getBatchFallBack")
 	public BatchDto getBatch(int bId) throws ResourceNotFoundException {
@@ -74,18 +68,13 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 		}
 
 		try {
-			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", getToken());
-			HttpEntity<String> entity = new HttpEntity<>(headers);									
-			
-			ResponseEntity<TeacherDto> teacherResponse = restTemplate.exchange(
-				    "http://teacher-service/teacher/" + batch.getTeacherId(),
-				    HttpMethod.GET,
-				    entity,
-				    TeacherDto.class
-				);
-				batchDto.setTeacherDto(teacherResponse.getBody());			
-			
+
+			String teacherUrl = "http://teacher-service/teacher/" + batch.getTeacherId();
+
+			ResponseEntity<TeacherDto> teacherResponse = restTemplate.exchange(teacherUrl, HttpMethod.GET, getToken(),
+					TeacherDto.class);
+			batchDto.setTeacherDto(teacherResponse.getBody());
+
 		} catch (Exception e) {
 			throw new ServiceFailureException("Teacher Service is failed");
 		}
@@ -148,7 +137,8 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 			BatchDto batchDto = new BatchDto();
 
 			Course course = this.restTemplate.getForObject("http://course-service/course/" + batch.getCourseId(),
-					Course.class);
+					Course.class);						
+			
 			System.out.println("Course of "+course +batch.getCourseId());
 
 			batchDto.setBId(batch.getBId());
@@ -162,13 +152,12 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 			batchDto.setCourse(course);
 			batchDto.setImage(batch.getImage());
 			
-			//TeacherDto teacher = this.restTemplate
-				//	.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(), TeacherDto.class);
-
-			batchDto.setTeacherDto(null);
-
+			TeacherDto teacher = this.restTemplate
+					.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(), TeacherDto.class);
+						
+			System.out.println(teacher);
+			batchDto.setTeacherDto(teacher);
 			batchDtoList.add(batchDto);
-
 		}
 		return batchDtoList;
 	}
@@ -225,7 +214,6 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 	public List<BatchDto> getBatchByTIdFallBack(int teacherId, Throwable throwable) {
 		return this.fallBack.getAllBatchByTeacherId(teacherId);
 	}
-
 	@Override
 	@Retry(name = "findByTitleFallBack", fallbackMethod = "findByTitleFallBack")
 	public List<BatchDto> findByBatchTitleContaining(String batchTitle) {
@@ -313,17 +301,20 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 
 		return this.repository.findAllByTeacherId(tId);
 	}
-	
-	private String getToken() {
-	    ServletRequestAttributes attributes = 
-	        (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 
-	    if (attributes != null) {
-	        HttpServletRequest request = attributes.getRequest();
-	        String authHeader = request.getHeader("Authorization");
-	        return authHeader; // e.g., "Bearer eyJhbGciOiJIUzI1NiIs..."
-	    }
-	    return null;
+	private HttpEntity<String> getToken() {
+		ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+
+		if (attributes != null) {
+			HttpServletRequest request = attributes.getRequest();
+			String authHeader = request.getHeader("Authorization");
+
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", authHeader);
+			HttpEntity<String> entity = new HttpEntity<>(headers);
+
+			return entity;
+		}
+		return null;
 	}
-
 }

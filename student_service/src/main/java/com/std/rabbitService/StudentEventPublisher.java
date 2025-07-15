@@ -11,17 +11,18 @@ import com.std.rabbitConfig.RabbitMQConfig;
 public class StudentEventPublisher {
 
 	 private final RabbitTemplate rabbitTemplate;
-	 
-	 
+	 	 
 	 public StudentEventPublisher(RabbitTemplate rabbitTemplate) {
 	        this.rabbitTemplate = rabbitTemplate;
 	    }
 
 	    public void publishEnrolled(StudentEnrolledEvent event) {
+	    	System.out.println("Student Enrolled Event published: " + event);
 	        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE, RabbitMQConfig.ENROLED_ROUTING_KEY, event);
 	    }
 
 	    public void publishDropped(StudentDroppedEvent event) {
+	    	System.out.println("Student Dropped Event published: " + event);
 	        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE, RabbitMQConfig.DROPED_ROUTING_KEY, event);
 	    }
 }
