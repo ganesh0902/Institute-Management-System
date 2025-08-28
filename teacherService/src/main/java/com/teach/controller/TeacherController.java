@@ -3,10 +3,10 @@ package com.teach.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
@@ -19,10 +19,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.teach.dto.MessageBody;
 import com.teach.dto.TeacherDto;
 import com.teach.dto.TeacherIdAndName;
+import com.teach.entities.Conversation;
+import com.teach.entities.Message;
 import com.teach.entities.Teacher;
 import com.teach.exception.ResourceNotFoundException;
+import com.teach.repository.ConversationRepository;
+import com.teach.repository.MessageRepository;
+import com.teach.repository.TeacherRepository;
+import com.teach.serviceImpl.ChatsServiceImpl;
 import com.teach.serviceImpl.TeacherServiceImpl;
 
 @RestController
@@ -31,6 +39,19 @@ public class TeacherController {
 
 	@Autowired
 	private TeacherServiceImpl teacherServiceImpl;
+	
+	@Autowired
+	private ChatsServiceImpl chatsServiceImp;
+	
+
+	@Autowired
+	private ConversationRepository conversationRepo;
+
+	@Autowired
+	private TeacherRepository userRepo;
+		
+	@Autowired
+	private ChatsServiceImpl chatsServiceImpl;
 	
 	@PostMapping("/")
 	public ResponseEntity<Teacher> saveTeacher(@RequestBody Teacher teacher) {
@@ -101,4 +122,21 @@ public class TeacherController {
 		
 		return new ResponseEntity<Teacher>(teacherByCredential,HttpStatus.OK);
 	}
-}
+	
+	@PostMapping("/conversation")
+    public Message createConversation(@RequestParam int teacherId, @RequestParam int studentId,@RequestParam String msg) {
+        
+        Teacher teacher = userRepo.findById(teacherId).orElseThrow();
+      
+        Conversation createConversation = chatsServiceImp.createConversation(teacherId, studentId);
+		
+        System.out.println("Conversation id"+createConversation);
+		MessageBody messageBody = new MessageBody();
+		messageBody.setContent(msg);
+		messageBody.setConversation(createConversation);
+		messageBody.setTeacher(teacher);
+		
+	   return chatsServiceImp.saveConversation(messageBody);
+        
+    }
+	}

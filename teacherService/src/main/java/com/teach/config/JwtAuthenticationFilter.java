@@ -36,7 +36,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         
         String path = request.getRequestURI();
         
-        System.out.println("Path is "+path);
+        System.out.println("Path is in Teacher "+path);
         if (isPublicEndpoint(path)) {
 			filterChain.doFilter(request, response);
 			System.out.println("Request is in teacher");	
@@ -44,7 +44,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		}		
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
-                        
+                    
+            System.out.print("Request is authorized");
             try {
                 String username = jwtService.extractUsername(token);
                 List<String> roles = jwtService.extractRoles(token); // get from "roles" claim

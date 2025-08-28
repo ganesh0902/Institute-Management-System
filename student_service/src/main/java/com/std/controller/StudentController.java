@@ -22,7 +22,7 @@ public class StudentController {
     @PostMapping("/enroll")
     public String enroll(@RequestParam int studentId, @RequestParam Long courseId, @RequestParam Long batchId) {
     	
-        publisher.publishEnrolled(new StudentEnrolledEvent(courseId, studentId, batchId));
+       // publisher.publishEnrolled(new StudentEnrolledEvent(courseId, studentId, batchId));
         return "Student enrolled event sent!";
     }
 

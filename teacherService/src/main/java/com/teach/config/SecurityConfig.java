@@ -32,6 +32,7 @@ public class SecurityConfig {
         http.csrf().disable()
             .authorizeHttpRequests()
             .requestMatchers("/teacher/**").permitAll()
+            .requestMatchers("/api/chat/**").hasAnyRole("TEACHER","ADMIN")
             .requestMatchers("/teacher/admin/**").hasRole("ADMIN")
             //.requestMatchers("/teacher/**").hasAnyRole("TEACHER","ADMIN")
             .anyRequest().authenticated()
