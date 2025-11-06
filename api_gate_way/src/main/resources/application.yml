@@ -84,8 +84,8 @@ spring:
           predicates:
           - Path=/batch/course
         
-        - id: teacher-services
-          uri: lb://teacher-service
+        - id: chat-service
+          uri: lb://chat-service
           predicates:
             - Path=/api/chat/**
           filters:

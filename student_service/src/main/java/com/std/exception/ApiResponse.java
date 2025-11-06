@@ -14,6 +14,5 @@ import lombok.ToString;
 public class ApiResponse {
 
 	private String message;
-	private boolean status;
-	
+	private boolean status;	
 }

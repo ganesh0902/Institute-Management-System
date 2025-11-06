@@ -9,4 +9,9 @@ import com.identity.exception.ResourceNotFoundException;
 public interface ServiceDao {
 	public List<TeacherDto> getAllTeacher(int instituteId);
 	public UserCredential getUserInfo(String email) throws ResourceNotFoundException;
+	
+	public UserCredential getUserById(int userId);
+	
+	public List<UserCredential> getAllUser();
+	
 }

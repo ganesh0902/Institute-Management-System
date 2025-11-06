@@ -197,12 +197,24 @@ public class BatchServiceImpl implements com.batch.service.batchService {
 			batchDto.setImage(batch.getImage());
 
 			try {
-				TeacherDto teacher = this.restTemplate
-						.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(), TeacherDto.class);
-				batchDto.setTeacherDto(teacher);
+//				TeacherDto teacher = this.restTemplate
+//						.getForObject("http://teacher-service/teacher/" + batch.getTeacherId(), TeacherDto.class);
+//				batchDto.setTeacherDto(teacher);
+				
+				String teacherURL = "http://teacher-service/teacher/" + batch.getTeacherId();
+				
+				 TeacherDto teacher = restTemplate.exchange(
+						teacherURL,
+						HttpMethod.GET,
+						getToken(),
+						TeacherDto.class
+						).getBody();	
+				
+				 batchDto.setTeacherDto(teacher);
 			} catch (Exception e) {
 
 				throw new ServiceFailureException("Teacher Service is down");
+			} finally {
 			}
 
 			batchDtoList.add(batchDto);

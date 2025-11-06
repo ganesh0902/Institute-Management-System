@@ -147,16 +147,19 @@ public class Controller {
 
 	@GetMapping("/studentByBatch/{batchId}")
 	public ResponseEntity<List<Student>> getStudentByBatchId(@PathVariable("batchId") int batchId) {
-		List<Student> allStudentByBatch = this.service.getAllStudentByBatch(batchId);
-
-		return new ResponseEntity<List<Student>>(allStudentByBatch, HttpStatus.OK);
+		
+		List<Student> allStudentByBatch2 = this.service.getAllStudentByBatch(batchId);
+		return new ResponseEntity<List<Student>>(allStudentByBatch2, HttpStatus.OK);
 	}
 
 	@GetMapping("/studentByTeacherId/{tId}")
 	@CircuitBreaker(name = "teacherCircuitBreaker", fallbackMethod = "teacherServiceBreaker")
 	public ResponseEntity<List<Student>> getStudentByTeacherId(@PathVariable("tId") int tId) {
-		List<Student> students = this.service.getStudentByTeacherId(tId);
+		//List<Student> students;
+		List<Student> studentByTeacherId = this.service.getStudentByTeacherId(tId);
 
+		System.out.println(studentByTeacherId);
+		List<Student> students = List.of();
 		return new ResponseEntity<List<Student>>(students, HttpStatus.OK);
 	}
 

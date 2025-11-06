@@ -98,12 +98,15 @@ public class StudentImpl implements Service {
 	}
 
 	@Override
-	@Cacheable(cacheNames = "student", key = "#stdId")
+	//@Cacheable(cacheNames = "student", key = "#stdId")
 	public Student findById(int stdId) throws ResourceNotFoundException {
 
 		System.out.println("Getting student record from dataBase");
-		return this.repo.findById(stdId)
-				.orElseThrow(() -> new ResourceNotFoundException("Student", "Id", String.valueOf(stdId)));
+		 Student student = this.repo.findById(stdId)
+			.orElseThrow(() -> new ResourceNotFoundException("Student", "Id", String.valueOf(stdId)));
+		 
+		 System.out.println(student);
+		return student;
 	}
 
 	@Override
@@ -199,18 +202,24 @@ public class StudentImpl implements Service {
 	}
 
 	@Override
-	@Cacheable(cacheNames = "student", key = "#batchId")
+	//@Cacheable(cacheNames = "student", key = "#batchId")
 	public List<Student> getAllStudentByBatch(int batchId) {
 
 		System.out.println("Getting student by batch Id from database");
 		Optional<List<Student>> allStudentByBatchId = this.repo.getAllStudentByBatchId(batchId);
-		List<Student> students = null;
-		if (allStudentByBatchId.isPresent()) {
-			students = allStudentByBatchId.get();
-		} else {
-			System.out.println("Record not found");
-		}
-		return students;
+		
+		System.out.println("SSTDStudent"+allStudentByBatchId);
+		//System.out.println(allStudentByBatchId);
+		
+//		List<Student> students = null;
+//		if (allStudentByBatchId.isPresent()) {
+//			students = allStudentByBatchId.get();
+//		} else {
+//			System.out.println("Record not found");
+//		}
+		
+		
+		return allStudentByBatchId.get();
 	}
 
 	@Override
@@ -236,6 +245,7 @@ public class StudentImpl implements Service {
 				.exchange(url, HttpMethod.GET, entity, new ParameterizedTypeReference<List<BatchDto>>() {
 				}).getBody();
 
+		System.out.println("BatchList"+batchList);
 		for (BatchDto batch : batchList) {
 			List<Student> findByTeacherId = this.repo.findByTeacherId(batch.getBid());
 			studentList.addAll(findByTeacherId);

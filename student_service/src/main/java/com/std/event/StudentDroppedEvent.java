@@ -18,6 +18,19 @@ public class StudentDroppedEvent {
 	public String toString() {
 		return "StudentDroppedEvent [studentId=" + studentId + ", reason=" + reason + "]";
 	}
+	public Long getStudentId() {
+		return studentId;
+	}
+	public void setStudentId(Long studentId) {
+		this.studentId = studentId;
+	}
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
 	 
+	
 	 
 }

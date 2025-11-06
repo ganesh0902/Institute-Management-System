@@ -21,5 +21,6 @@ public class StudentDto {
 	private String courseName;	
 	private String image;	
 	private TeacherDto teacherDto;
-	private BatchDto batchDto;
+	private BatchDto batchDto;			
+	 	
 }

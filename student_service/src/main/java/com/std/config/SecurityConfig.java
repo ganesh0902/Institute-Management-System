@@ -11,16 +11,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.std.securityException.CustomAccessDeniedHandler;
 import com.std.securityException.CustomAuthenticationEntryPoint;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import java.util.List;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -37,7 +27,7 @@ public class SecurityConfig {
 				.requestMatchers("/student/public/**").permitAll()
 				.requestMatchers("/student/admin/**").hasRole("ADMIN")
 				.requestMatchers("/student/**").hasAnyRole("STUDENT", "ADMIN","TEACHER")
-				.requestMatchers("/newStudent/**").permitAll()
+				.requestMatchers("/newStudent/**").hasAnyRole("STUDENT", "ADMIN","TEACHER")
 				.anyRequest()
 				.authenticated()
 				.and()

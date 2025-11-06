@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,8 +25,6 @@ import com.identity.exception.ResourceNotFoundException;
 import com.identity.service.AuthService;
 import com.identity.service.UserService;
 import com.identity.serviceImpl.ServiceDaoImpl;
-
-import jakarta.ws.rs.GET;
 
 @RequestMapping("/auth")
 @RestController																							
@@ -128,9 +125,19 @@ public class controller {
 		System.out.println(allTeacher);
 		return new ResponseEntity<List<TeacherDto>>(allTeacher, HttpStatus.OK);
 	}
-	@GetMapping("/")
-	public String get()
+	@GetMapping("/userId/{userId}")
+	public ResponseEntity<UserCredential> get(@PathVariable("userId") int userId)
 	{
-		return "Hello Java";
+		UserCredential user = this.serviceDaoImpl.getUserById(userId);
+		
+		return new ResponseEntity<UserCredential>(user, HttpStatus.OK);
+	}
+	
+	@GetMapping("/userById")
+	public ResponseEntity<List<UserCredential>> getAll()
+	{
+		List<UserCredential> allUser = this.serviceDaoImpl.getAllUser();
+		
+		return new ResponseEntity<List<UserCredential>>(allUser, HttpStatus.OK);
 	}
 }
