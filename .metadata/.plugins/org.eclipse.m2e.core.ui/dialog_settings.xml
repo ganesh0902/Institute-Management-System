@@ -14,16 +14,21 @@
 	</section>
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\Users\Ganesh\Institute management System\Institute-Management-System\paymentGateWay"/>
+			<item value="C:\Users\Ganesh\Institute management System\Institute-Management-System\institute"/>
+			<item value="C:\Users\Ganesh\Institute management System\Institute-Management-System\e_server"/>
+			<item value="C:\Users\Ganesh\Institute management System\Institute-Management-System\course_service"/>
+			<item value="C:\Users\Ganesh\Institute management System\Institute-Management-System\chat"/>
+			<item value="C:\Users\Ganesh\Institute management System\Institute-Management-System\api_gate_way"/>
+			<item value="C:\Users\Ganesh\Institute management System\Institute-Management-System\batchService"/>
+			<item value="C:\Users\Ganesh\Institute management System\Institute-Management-System\student_service"/>
+			<item value="C:\Users\Ganesh\Institute management System\Institute-Management-System\teacherService"/>
+			<item value="C:\Users\Ganesh\Institute management System\Institute-Management-System\identity-service"/>
 			<item value="C:\Users\Sangita\Institute Management System\teacherService"/>
 			<item value="C:\Users\Sangita\Institute Management System\teacherService\teacherServices"/>
 			<item value="C:\Users\Sangita\Institute Management System\course_service"/>
 			<item value="C:\Users\Sangita\Institute Management System\student_service"/>
 			<item value="C:\Users\Sangita\Institute Management System\e_server"/>
-			<item value="C:\Users\Sangita\Institute Management System\api_gate_way"/>
-			<item value="C:\Users\Sangita\Institute Management System\batchService"/>
-			<item value="C:\Users\Sangita\Institute Management System\identity-service"/>
-			<item value="C:\Users\Sangita\Institute Management System\institute"/>
-			<item value="C:\Users\Sangita\Institute Management System\paymentGateWay"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>

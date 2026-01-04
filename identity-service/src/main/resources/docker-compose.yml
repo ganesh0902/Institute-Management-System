@@ -1,0 +1,32 @@
+version: "3.9"
+# Use a valid OpenJDK 17 image
+FROM openjdk:17-jdk-slim
+
+services:
+  zipkin:
+    image: openzipkin/zipkin:latest
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - my-network
+
+  identity-service:
+    build: ./identity-service
+    container_name: identity-service
+    ports:
+      - "9096:9096"
+    networks:
+      - my-network
+    environment:
+      # Spring Boot 3.x micrometer tracing
+      MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: http://zipkin:9411/api/v2/spans
+      MANAGEMENT_TRACING_ENABLED: "true"
+
+      # For older Sleuth (if used)
+      SPRING_ZIPKIN_BASE_URL: http://zipkin:9411
+      SPRING_SLEUTH_SAMPLER_PROBABILITY: "1.0"
+
+networks:
+  my-network:
+    driver: bridge

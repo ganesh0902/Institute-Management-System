@@ -4,7 +4,12 @@ server:
 spring:
   application:
     name: institute-service
-    
+
+management:
+  tracing:
+    sampling:
+      probability: 0.1  
+  
 eureka:
   instance:
     hostname: localhost

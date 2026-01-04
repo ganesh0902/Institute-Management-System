@@ -1,7 +1,7 @@
 spring:
   application:
     name: batch-service
-    
+
 eureka:
   instance:
     hostname: localhost
@@ -17,8 +17,13 @@ management:
   endpoint:
     health:
       show-details: always      
-  
-        
+  tracing:
+    sampling:
+      probability: 0.1
+#  zipkin:
+#    tracing:
+#      endpoint: http://zipkin:9411/api/v2/spans
+
 #configuration for circuit breaker
 resilience4j:
   circuitbreaker:

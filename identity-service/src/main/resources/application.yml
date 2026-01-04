@@ -1,11 +1,18 @@
 server:
   port: 9096
-  
+
 spring:
   application:
     name: identity-service
-    
-    
+
+management:
+  tracing:
+    sampling:
+      probability: 0.1
+#  zipkin:
+#    tracing:
+#      endpoint: http://localhost:9411/api/v2/spans
+
 eureka:
   instance:
     hostname: localhost

@@ -64,11 +64,6 @@
 		    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		    <version>3.0.2</version>
 		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>			
-		</dependency>
 				
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -132,6 +127,37 @@
 	        <groupId>io.micrometer</groupId>
 	        <artifactId>micrometer-tracing-bridge-brave</artifactId>
 	    </dependency>
+	    
+	    
+	    		<!-- Actuator (REQUIRED for tracing properties) -->
+	<dependency>
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-starter-actuator</artifactId>
+	</dependency>
+	
+	<!-- Micrometer Tracing (API) -->
+	<dependency>
+	    <groupId>io.micrometer</groupId>
+	    <artifactId>micrometer-tracing</artifactId>
+	</dependency>
+	
+	<!-- Brave Bridge (Zipkin compatible) -->
+	<dependency>
+	    <groupId>io.micrometer</groupId>
+	    <artifactId>micrometer-tracing-bridge-brave</artifactId>
+	</dependency>
+	
+	<!-- Zipkin Reporter -->
+	<dependency>
+	    <groupId>io.zipkin.reporter2</groupId>
+	    <artifactId>zipkin-reporter-brave</artifactId>
+	</dependency>
+	
+	<dependency>
+	    <groupId>io.github.openfeign</groupId>
+	    <artifactId>feign-micrometer</artifactId>
+	</dependency>
+	
 	
 	</dependencies>
 

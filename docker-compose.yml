@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  eureka-server:
+    build: ./eureka-server
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+      - ims-network
+
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "8999:8999"
+    networks:
+      - ims-network
+    depends_on:
+      - eureka-server
+
+  identity-service:
+    build: ./identity-service
+    container_name: identity-service
+    ports:
+      - "9096:9096"
+    networks:
+      - ims-network
+    depends_on:
+      - eureka-server
+      - zipkin
+
+  zipkin:
+    image: openzipkin/zipkin:latest
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - ims-network
+
+networks:
+  ims-network:
+    driver: bridge

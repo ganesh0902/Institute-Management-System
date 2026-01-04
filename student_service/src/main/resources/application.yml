@@ -20,6 +20,9 @@ eureka:
     hostname: localhost
     
 management:
+  tracing:
+    sampling:
+      probability: 0.1
   health:
     circuitbreakers:
       enabled: true

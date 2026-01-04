@@ -5,6 +5,11 @@ spring:
   application:
     name: chat-service
 
+management:
+  tracing:
+    sampling:
+      probability: 0.1
+
 eureka:
   instance:
     hostname: localhost
